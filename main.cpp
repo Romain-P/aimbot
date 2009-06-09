@@ -2,7 +2,7 @@
  * main.cpp
  *
  *  Created on: Jun 8, 2009
- *      Author: Scott
+ *      Author: Corey
  */
 
 #define GLUT_DISABLE_ATEXIT_HACK
