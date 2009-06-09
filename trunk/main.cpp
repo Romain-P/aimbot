@@ -1,4 +1,10 @@
 
+/*
+ * @author Corey Ferguson, and Corey Ferguson only.
+ *
+ *
+ */
+
 #define GLUT_DISABLE_ATEXIT_HACK
 #include <windows.h>
 #include <GL/glut.h>
