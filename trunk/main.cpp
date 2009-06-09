@@ -1,17 +1,5 @@
 #include "Curves.h"
 
-<<<<<<< .mine
-=======
-/*
- * @author Corey Ferguson, and Corey Ferguson only.
- *
- *
- */
-
-#define GLUT_DISABLE_ATEXIT_HACK
-#include <windows.h>
-#include <GL/glut.h>
->>>>>>> .r5
 
 int main(int c, char**argv)
 {
