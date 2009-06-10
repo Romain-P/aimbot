@@ -19,5 +19,7 @@ void reshape(int x, int y);
 void keyboard(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 
+void drawEnvironment();
+
 
 #endif

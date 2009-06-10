@@ -5,21 +5,21 @@ void initLight()
 {
 	glEnable(GL_LIGHTING);
 
-	float light0_Position[] = { 0, 0, -1, 1.0 };
-	float light0_ambient[] = { 0.5, 0.5, 0.7, 1.0 };
-	float light0_diffuse[] = { 0.8, 1.0, 0.5, 1.0 };
-	float light0_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	float l0Position[] = { 0, 0, -1, 1.0 };
+	float l0Ambient[] = { 0.5, 0.5, 0.7, 1.0 };
+	float l0Diffuse[] = { 0.8, 1.0, 0.5, 1.0 };
+	float l0Specular[] = { 1.0, 1.0, 1.0, 1.0 };
 
-	float light1_position[] = { 0, 0, 1, 1.0 };
-	float light1_diffuse[] = { 0.8, 0.2, 0.2, 1.0 };
+	float l1Position[] = { 0, 0, 1, 1.0 };
+	float l1Diffuse[] = { 0.8, 0.2, 0.2, 1.0 };
 
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_Position);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light0_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light0_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, l0Position);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, l0Ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, l0Ambient);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, l0Specular);
 
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1_diffuse);
-	glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
+	glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
 
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
@@ -45,10 +45,14 @@ void init(int n, char** argv)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+
 	glLineWidth(1.0);
 	glPointSize(2.0);
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_FALSE);
+
+	//initLight();
+
 	glutMainLoop();
 }
 
@@ -60,8 +64,17 @@ void display()
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 
+	drawEnvironment();
+
 	glPopMatrix();
 	glutSwapBuffers();
+}
+
+void drawEnvironment()
+{
+	//only a big cube for now
+	glColor3f(0.8, 0.2, 0.7);
+	glutSolidCube(1);
 }
 
 void motion(int x, int y)
@@ -77,8 +90,8 @@ void reshape(int w, int h)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(5, glutGet(GLUT_SCREEN_WIDTH) / (float) glutGet(GLUT_SCREEN_HEIGHT), 0.1, 1000);
-	gluLookAt(0, 0, 0, 0, 1, 0, 0, 1, 0);
+	gluPerspective(45, glutGet(GLUT_SCREEN_WIDTH) / (float) glutGet(GLUT_SCREEN_HEIGHT), 0.1, 10);
+	gluLookAt(3, 0, 3, 0, 1, 0, 0, 1, 0);
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_MODELVIEW);
 }
