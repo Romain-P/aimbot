@@ -1,6 +1,10 @@
 #include "Curves.h"
 using namespace std;
 
+float xdist = 3;
+float ydist = 0;
+float zdist = 3;
+
 void initLight()
 {
 	glEnable(GL_LIGHTING);
@@ -91,7 +95,7 @@ void reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, glutGet(GLUT_SCREEN_WIDTH) / (float) glutGet(GLUT_SCREEN_HEIGHT), 0.1, 10);
-	gluLookAt(3, 0, 3, 0, 1, 0, 0, 1, 0);
+	gluLookAt(xdist, ydist, zdist, 0, 1, 0, 0, 1, 0);
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -100,6 +104,15 @@ void keyboard(unsigned char key, int x, int y)
 {
 	if(key == 27)
 		exit(0);
+
+	else if(key == 'w')
+		xdist = xdist + 0.1;
+	else if(key == 's')
+		xdist = xdist - 0.1;
+	else if(key == 'a')
+		zdist = zdist + 0.1;
+	else if(key == 'd')
+		zdist = zdist - 0.1;
 
 	glutPostRedisplay();
 }
