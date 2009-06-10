@@ -19,7 +19,7 @@ void initLight()
 
 	glLightfv(GL_LIGHT0, GL_POSITION, l0Position);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, l0Ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, l0Ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, l0Diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, l0Specular);
 
 	glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
@@ -78,7 +78,82 @@ void drawEnvironment()
 {
 	//only a big cube for now
 	glColor3f(0.8, 0.2, 0.7);
-	glutSolidCube(1);
+
+	Vector3 faces[] = {
+			Vector3( 1,  1,  1),
+			Vector3( 1, -1,  1),
+			Vector3( 1, -1, -1),
+			Vector3( 1,  1, -1),
+			Vector3(-1,  1,  1),
+			Vector3(-1, -1,  1),
+			Vector3(-1, -1, -1),
+			Vector3(-1,  1, -1)
+	};
+
+	int indices[6][4] = {
+			{ 6, 1, 2, 3 },
+			{ 3, 2, 6, 7 },
+			{ 7, 4, 5, 6 },
+			{ 4, 0, 1, 5 },
+			{ 0, 3, 7, 4 },
+			{ 1, 2, 6, 5 }
+	};
+
+	glBegin(GL_QUADS);
+	for(int i = 0; i < 6; i++)
+	{
+		glColor3f(i / float(6), i * i / float(36), (36 - i * i)/float(36));
+		for(int j = 0; j < 4; j++)
+		{
+			glVertex3f(faces[indices[i][j]].x, faces[indices[i][j]].y, faces[indices[i][j]].z);
+		}
+	}
+	glEnd();
+
+	/*
+	glBegin(GL_QUADS);
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+	glColor3f(1, 0, 0);
+	glVertex3f(-1, 1, -1);
+	glVertex3f();
+	glVertex3f();
+	glVertex3f();
+
+
+
+	glEnd();
+
+	*/
 }
 
 void motion(int x, int y)
@@ -137,4 +212,5 @@ void idle()
 {
 	glutPostRedisplay();
 }
+
 

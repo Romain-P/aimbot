@@ -9,6 +9,8 @@
 #include <vector>
 #include <math.h>
 
+#include "Vector3.h"
+
 void init(int c, char** argv);
 void initLight();
 void display();
