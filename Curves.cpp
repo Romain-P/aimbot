@@ -1,9 +1,12 @@
 #include "Curves.h"
 using namespace std;
 
-float xdist = 3;
-float ydist = 0;
-float zdist = 3;
+// camera position
+Vector3 c(3, 0, 3);
+Vector3 u;
+Vector3 v;
+Vector3 n(0, 1, 0);
+
 
 void initLight()
 {
@@ -52,7 +55,7 @@ void init(int n, char** argv)
 
 	glLineWidth(1.0);
 	glPointSize(2.0);
-	glDepthFunc(GL_LESS);
+	//glDepthFunc(GL_LESS);
 	glDepthMask(GL_FALSE);
 	glEnable(GL_DEPTH_TEST);
 
@@ -106,55 +109,12 @@ void drawEnvironment()
 		for(int j = 0; j < 4; j++)
 		{
 			glColor3f(i / float(12) + j / float(8), i*j / float(24), (20 - 2*i * j)/float(24));
-			glVertex3f(faces[indices[i][j]].x, faces[indices[i][j]].y, faces[indices[i][j]].z);
+			glVertex3f(faces[indices[i][j]].x * 2,
+					faces[indices[i][j]].y * 2,
+					faces[indices[i][j]].z * 2);
 		}
 	}
 	glEnd();
-
-	/*
-	glBegin(GL_QUADS);
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-	glColor3f(1, 0, 0);
-	glVertex3f(-1, 1, -1);
-	glVertex3f();
-	glVertex3f();
-	glVertex3f();
-
-
-
-	glEnd();
-
-	*/
 }
 
 void motion(int x, int y)
@@ -171,7 +131,7 @@ void reshape(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45, glutGet(GLUT_SCREEN_WIDTH) / (float) glutGet(GLUT_SCREEN_HEIGHT), 0.1, 10);
-	gluLookAt(xdist, ydist, zdist, 0, 1, 0, 0, 1, 0);
+	gluLookAt(c.x, c.y, c.z, 0, 1, 0, 0, 1, 0);
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -182,13 +142,15 @@ void keyboard(unsigned char key, int x, int y)
 		exit(0);
 
 	else if(key == 'w')
-		xdist = xdist + 0.1;
+		c.x += 1;
 	else if(key == 's')
-		xdist = xdist - 0.1;
+		c.x -= 1;
 	else if(key == 'a')
-		zdist = zdist + 0.1;
+		c.z += 1;
 	else if(key == 'd')
-		zdist = zdist - 0.1;
+		c.z -= 1;
+	else if(key == ' ')
+		c.y += 1;
 
 	glutPostRedisplay();
 }
@@ -211,6 +173,10 @@ void specialKey(int key, int x, int y)
 
 void idle()
 {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(45, glutGet(GLUT_SCREEN_WIDTH)/float(glutGet(GLUT_SCREEN_HEIGHT)), 0.01, 1000);
+	gluLookAt(c.x, c.y, c.z, n.x - c.x, n.y - c.y, n.z - c.y, 0, 1, 0);
 	glutPostRedisplay();
 }
 
