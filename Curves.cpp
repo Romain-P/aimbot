@@ -54,6 +54,7 @@ void init(int n, char** argv)
 	glPointSize(2.0);
 	glDepthFunc(GL_LESS);
 	glDepthMask(GL_FALSE);
+	glEnable(GL_DEPTH_TEST);
 
 	//initLight();
 
@@ -102,9 +103,9 @@ void drawEnvironment()
 	glBegin(GL_QUADS);
 	for(int i = 0; i < 6; i++)
 	{
-		glColor3f(i / float(6), i * i / float(36), (36 - i * i)/float(36));
 		for(int j = 0; j < 4; j++)
 		{
+			glColor3f(i / float(12) + j / float(8), i*j / float(24), (20 - 2*i * j)/float(24));
 			glVertex3f(faces[indices[i][j]].x, faces[indices[i][j]].y, faces[indices[i][j]].z);
 		}
 	}
