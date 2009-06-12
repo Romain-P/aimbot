@@ -17,7 +17,8 @@ public:
 
 	void addSound(Sound* sound)
 	{
-		sounds.push_back(
+		sounds.push_back(sound);
+	}
 };
 
 #endif
