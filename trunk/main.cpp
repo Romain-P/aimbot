@@ -1,10 +1,9 @@
 #include "Graphics/WindowInitializer.h"
 using namespace std;
 
-int main(int c, char**argv)
+int main(int c, char** argv)
 {
-	WindowInitializer window;
-	window.initialize(c, argv);
+	WindowInitializer window(c, argv);
 
 	return 0;
 }
