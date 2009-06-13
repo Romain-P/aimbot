@@ -8,12 +8,17 @@
 
 class WindowInitializer
 {
+private:
+	GlutDisplay* display;
+	GameState* gameState;
+	InputHandler* inputHandler;
+
 public:
 	WindowInitializer(int n, char** argv)
 	{
-		GlutDisplay* display = new GlutDisplay();
-		GameState* gameState = new GameState();
-		InputHandler* inputHandler = new InputHandler();
+		display = new GlutDisplay();
+		gameState = new GameState();
+		inputHandler = new InputHandler();
 
 		initializeWindow(n, argv);
 		setFunctionCallbacks();
