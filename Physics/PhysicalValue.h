@@ -4,17 +4,18 @@
 #include <iostream>
 #include "PhysicsExceptions.h"
 
-class PhysicalValue
+template <class T>
+class PhysicalValue<T>
 {
 private:
-	float value;
+	T value;
 	int lengthExponent;
 	int massExponent;
 	int timeExponent;
 	int chargeExponent;
 
 public:
-	PhysicalValue(float value, int length, int mass, int time) :
+	PhysicalValue(T value, int length, int mass, int time) :
 		lengthExponent(length),
 		massExponent(mass),
 		timeExponent(time)
@@ -22,7 +23,7 @@ public:
 		chargeExponent = 0;
 	}
 
-	PhysicalValue(float value, int length, int mass, int time, int charge) :
+	PhysicalValue(T value, int length, int mass, int time, int charge) :
 		lengthExponent(length),
 		massExponent(mass),
 		timeExponent(time),
@@ -57,7 +58,7 @@ public:
 		{
 			cout << e.what() << endl;
 		}
-		return null;
+		return NULL;
 	}
 
 
@@ -83,7 +84,7 @@ public:
 		{
 			cout << e.what() << endl;
 		}
-		return null;
+		return NULL;
 	}
 
 	PhysicalValue operator-(const PhysicalValue& other)
@@ -108,7 +109,7 @@ public:
 		{
 			cout << e.what() << endl;
 		}
-		return null;
+		return NULL;
 	}
 
 };
