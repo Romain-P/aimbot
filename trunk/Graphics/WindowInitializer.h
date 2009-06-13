@@ -4,6 +4,7 @@
 #include "GraphicIncludes.h"
 #include "GlutDisplay.h"
 #include "../Input/InputHandler.h"
+#include "../Gameplay/GameState.h"
 
 class WindowInitializer
 {
@@ -11,10 +12,12 @@ public:
 	WindowInitializer(int n, char** argv)
 	{
 		GlutDisplay* display = new GlutDisplay();
+		GameState* gameState = new GameState();
+		InputHandler* inputHandler = new InputHandler();
 
 		initializeWindow(n, argv);
 		setFunctionCallbacks();
-		initGlutParameters();
+		initGraphicsOptions();
 		glutMainLoop();
 	}
 
@@ -26,7 +29,7 @@ public:
 		glutFullScreen();
 	}
 
-	void initGlutParameters()
+	void initGraphicsOptions()
 	{
 		glEnable(GL_POINT_SMOOTH);
 		glEnable(GL_LINE_SMOOTH);
