@@ -23,6 +23,11 @@ public:
 
 	}
 
+	void specialKeyFunction(unsigned char key)
+	{
+
+	}
+
 	void mouseFunction(int button, int state, int x, int y)
 	{
 		glutPostRedisplay();
@@ -31,11 +36,6 @@ public:
 	void motionFunction(int x, int y)
 	{
 		glutPostRedisplay();
-	}
-
-	void specialKeyFunction(unsigned char key)
-	{
-
 	}
 };
 #endif

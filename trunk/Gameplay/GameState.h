@@ -27,7 +27,8 @@ public:
 		return state;
 	}
 
-
+	static void updateDelegate();
+	void updateState();
 
 };
 

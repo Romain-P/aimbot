@@ -6,3 +6,13 @@ GameState::GameState()
 {
 	gameState = this;
 }
+
+inline void updateDelegate()
+{
+	gameState->updateState();
+}
+
+void GameState::updateState()
+{
+
+}

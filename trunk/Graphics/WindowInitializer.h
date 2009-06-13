@@ -43,11 +43,14 @@ public:
 	{
 		glutDisplayFunc(&GlutDisplay::displayDelegate);
 		glutReshapeFunc(&GlutDisplay::reshapeDelegate);
+
 		glutMouseFunc(&InputHandler::mouseDelegate);
-		glutMotionFunc(motion);
-		glutIdleFunc(idle);
-		glutKeyboardFunc(keyboard);
-		glutSpecialFunc(specialKey);
+		glutMotionFunc(&InputHandler::motionDelegate);
+		glutKeyboardFunc(&InputHandler::keyboardDelegate);
+		glutKeyboardUpFunc(&InputHandler::keyUpDelegate);
+		glutSpecialFunc(&InputHandler::specialKeyDelegate);
+
+		glutIdleFunc(&GameState::updateDelegate);
 	}
 };
 
