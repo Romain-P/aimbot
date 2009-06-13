@@ -17,7 +17,7 @@ inline void InputHandler::keyUpDelegate(unsigned char key, int x, int y)
 	inputHandler->keyUpFunction(key);
 }
 
-inline void InputHandler::specialKeyDelegate(unsigned char key, int x, int y)
+inline void InputHandler::specialKeyDelegate(int key, int x, int y)
 {
 	inputHandler->specialKeyFunction(key);
 }

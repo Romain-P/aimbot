@@ -1,6 +1,8 @@
 #ifndef glutdisplay_h
 #define glutdisplay_h
 
+#include "GraphicIncludes.h"
+
 class GlutDisplay
 {
 private:
