@@ -2,7 +2,7 @@
 #define physicalvalue_h
 
 #include <iostream>
-#include "IncompatibleUnitsException.h"
+#include "PhysicsExceptions.h"
 
 class PhysicalValue
 {
@@ -29,10 +29,22 @@ public:
 
 	PhysicalValue operator/(const PhysicalValue& other)
 	{
-		return PhysicalValue(this->value / other.value,
-				this->lengthExponent - other.lengthExponent,
-				this->massExponent - other.massExponent,
-				this->timeExponent - other.timeExponent);
+		try
+		{
+			if(std::abs(other.value) < 0.000001f)
+			{
+				throw new DivisionByZeroException();
+			}
+			return PhysicalValue(this->value / other.value,
+					this->lengthExponent - other.lengthExponent,
+					this->massExponent - other.massExponent,
+					this->timeExponent - other.timeExponent);
+		}
+		catch(Exception& e)
+		{
+			cout << e.what() << endl;
+		}
+		return null;
 	}
 
 
