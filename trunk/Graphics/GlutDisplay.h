@@ -12,8 +12,8 @@ private:
 public:
 	GlutDisplay();
 
-	static inline void displayDelegate();
-	static inline void reshapeDelegate(int w, int h);
+	static void displayDelegate();
+	static void reshapeDelegate(int w, int h);
 
 	void displayFunction()
 	{

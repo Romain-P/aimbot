@@ -1,7 +1,7 @@
 #ifndef openglincludes_h
 #define openglincludes_h
 
-	#ifdef WIN32 || _WIN32
+	#ifdef WIN32
 		#define GLUT_DISABLE_ATEXIT_HACK
 		#include <windows.h>
 	#endif

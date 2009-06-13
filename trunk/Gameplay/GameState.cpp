@@ -7,7 +7,16 @@ GameState::GameState()
 	gameState = this;
 }
 
-inline void updateDelegate()
+/*
+ * causing some undefined reference errors
+ *
+void updateDelegate()
 {
 	gameState->updateState();
 }
+
+void GameState::updateState()
+{
+
+}
+*/
