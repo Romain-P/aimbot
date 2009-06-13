@@ -11,8 +11,3 @@ inline void updateDelegate()
 {
 	gameState->updateState();
 }
-
-void GameState::updateState()
-{
-
-}
