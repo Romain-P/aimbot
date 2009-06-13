@@ -18,6 +18,7 @@ public:
 		initializeWindow(n, argv);
 		setFunctionCallbacks();
 		initGraphicsOptions();
+
 		glutMainLoop();
 	}
 

@@ -5,6 +5,9 @@ GlutDisplay* glutDisplay;
 GlutDisplay::GlutDisplay()
 {
 	glutDisplay = this;
+
+	screenAspect = double(glutGet(GLUT_SCREEN_WIDTH)) / glutGet(GLUT_SCREEN_HEIGHT);
+	fieldOfView = 80;
 }
 
 inline void GlutDisplay::displayDelegate()
