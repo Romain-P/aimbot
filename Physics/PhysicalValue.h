@@ -11,11 +11,22 @@ private:
 	int lengthExponent;
 	int massExponent;
 	int timeExponent;
+	int chargeExponent;
+
 public:
 	PhysicalValue(float value, int length, int mass, int time) :
 		lengthExponent(length),
 		massExponent(mass),
 		timeExponent(time)
+	{
+		chargeExponent = 0;
+	}
+
+	PhysicalValue(float value, int length, int mass, int time, int charge) :
+		lengthExponent(length),
+		massExponent(mass),
+		timeExponent(time),
+		chargeExponent(charge)
 	{
 	}
 
@@ -24,7 +35,8 @@ public:
 		return PhysicalValue(this->value * other.value,
 				this->lengthExponent + other.lengthExponent,
 				this->massExponent + other.massExponent,
-				this->timeExponent + other.timeExponent);
+				this->timeExponent + other.timeExponent,
+				this->chargeExponent + other.chargeExponent);
 	}
 
 	PhysicalValue operator/(const PhysicalValue& other)
@@ -38,7 +50,8 @@ public:
 			return PhysicalValue(this->value / other.value,
 					this->lengthExponent - other.lengthExponent,
 					this->massExponent - other.massExponent,
-					this->timeExponent - other.timeExponent);
+					this->timeExponent - other.timeExponent,
+					this->chargeExponent - other.chargeExponent);
 		}
 		catch(Exception& e)
 		{
@@ -54,7 +67,8 @@ public:
 		{
 			if(this->lengthExponent != other.lengthExponent ||
 					this->massExponent != other.massExponent ||
-					this->timeExponent != other.timeExponent)
+					this->timeExponent != other.timeExponent ||
+					this->chargeExponent != other.chargeExponent)
 			{
 				throw new IncompatibleUnitsException();
 			}
@@ -62,7 +76,8 @@ public:
 			return PhysicalValue(this->value + other.value,
 				this->lengthExponent,
 				this->massExponent,
-				this->timeExponent);
+				this->timeExponent,
+				this->chargeExponent);
 		}
 		catch(Exception& e)
 		{
@@ -77,7 +92,8 @@ public:
 		{
 			if(this->lengthExponent != other.lengthExponent ||
 					this->massExponent != other.massExponent ||
-					this->timeExponent != other.timeExponent)
+					this->timeExponent != other.timeExponent ||
+					this->chargeExponent != other.chargeExponent)
 			{
 				throw new IncompatibleUnitsException();
 			}
@@ -85,7 +101,8 @@ public:
 			return PhysicalValue(this->value - other.value,
 				this->lengthExponent,
 				this->massExponent,
-				this->timeExponent);
+				this->timeExponent,
+				this->chargeExponent);
 		}
 		catch(Exception& e)
 		{
@@ -93,8 +110,6 @@ public:
 		}
 		return null;
 	}
-
-
 
 };
 

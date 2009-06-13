@@ -1,14 +1,16 @@
 #ifndef environmentupdater_h
 #define environmentupdater_h
 
+#include "PhysicalValue.h"
+
 class EnvironmentUpdater
 {
 private:
-	const float g;
+	PhysicalValue* g;
 public:
 	EnvironmentUpdater()
 	{
-		g = -9.807;
+		g = new PhysicalValue(-9.807, 1, 0, -2);
 	}
 };
 
