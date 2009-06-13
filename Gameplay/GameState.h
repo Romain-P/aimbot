@@ -21,17 +21,16 @@ public:
 
 	GameState();
 
+	/*
+	static void updateDelegate();
+	void updateState();
+	*/
+
 	int getGameState()
 	{
 		return state;
 	}
 
-	static inline void updateDelegate();
-
-	void updateState()
-	{
-
-	}
 };
 
 #endif

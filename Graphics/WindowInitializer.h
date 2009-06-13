@@ -59,7 +59,7 @@ public:
 		glutKeyboardUpFunc(&InputHandler::keyUpDelegate);
 		glutSpecialFunc(&InputHandler::specialKeyDelegate);
 
-		glutIdleFunc(&GameState::updateDelegate);
+		//glutIdleFunc(&GameState::updateDelegate);
 	}
 };
 

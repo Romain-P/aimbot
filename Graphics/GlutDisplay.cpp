@@ -10,12 +10,12 @@ GlutDisplay::GlutDisplay()
 	fieldOfView = 80;
 }
 
-inline void GlutDisplay::displayDelegate()
+void GlutDisplay::displayDelegate()
 {
 	glutDisplay->displayFunction();
 }
 
-inline void GlutDisplay::reshapeDelegate(int w, int h)
+void GlutDisplay::reshapeDelegate(int w, int h)
 {
 	glutDisplay->reshapeFunction(w, h);
 }
