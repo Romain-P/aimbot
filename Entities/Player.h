@@ -1,37 +1,30 @@
 #ifndef player_h
 #define player_h
 
-#include <iostream>
 #include <vector>
 
-#include "../Utils/Vector3.h"
-#include "../Utils/Position3.h"
+#include "Entity.h"
 #include "../Weapons/Weapon.h"
-#include "../Meshes/Mesh.h"
-#include "../Meshes/Hitbox.h"
+#include "../SceneObjects/Mesh.h"
+#include "../SceneObjects/Hitbox.h"
 
-
-using namespace std;
-
-class Player
+class Player : public Entity
 {
 private:
-	string name;
 	float health;
 
-	vector<Weapon*> weapons;
-
-	Position3 position;
-	Vector3 lookDirection;
-	Vector3 velocity;
-
+	std::vector<Weapon*> weapons;
 	Mesh* playerMesh;
 	Hitbox* hitbox;
 
-public:
-	Player(string name)
+	void initializeMesh()
 	{
-		this->name = name;
+		//do it
+	}
+
+public:
+	Player(string name) : Entity(name)
+	{
 		health = 100;
 
 		playerMesh = new Mesh();
@@ -41,46 +34,14 @@ public:
 		hitbox = new Hitbox(playerMesh);
 	}
 
-	void initializeMesh()
+	void addWeapon(Weapon* weapon)
 	{
-		//do it
+		weapons.add(weapon);
 	}
 
-
-	string getName()
-	{
-		return name;
-	}
-
-	float getHealth()
-	{
-		return health;
-	}
-
-	vector<Weapon*>& getWeapons()
+	std::vector<Weapon*>& getWeapons()
 	{
 		return weapons;
-	}
-
-	Position3 getPosition()
-	{
-		return position;
-	}
-
-	Vector3 getLookDirection()
-	{
-		return lookDirection;
-	}
-
-	Vector3 getMovement()
-	{
-		return movement;
-	}
-
-	//Set methods
-	void setName(string n)
-	{
-		name = n;
 	}
 
 	void setHealth(float h)
@@ -88,24 +49,9 @@ public:
 		health = h;
 	}
 
-	void addWeapon(Weapon* weapon)
+	float getHealth()
 	{
-		weapons.add(weapon);
-	}
-
-	void setPosition(Position3 p)
-	{
-		position = p;
-	}
-
-	void setLookDirection(Vector3 l)
-	{
-		lookDirection = l;
-	}
-
-	void setVelocity(Vector3 v)
-	{
-		velocity = v;
+		return health;
 	}
 
 };

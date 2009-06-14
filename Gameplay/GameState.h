@@ -1,6 +1,8 @@
 #ifndef gamestate_h
 #define gamestate_h
 
+#include
+
 class GameState
 {
 private:
@@ -21,16 +23,17 @@ public:
 
 	GameState();
 
-	/*
 	static void updateDelegate();
-	void updateState();
-	*/
+
+	void updateFunction()
+	{
+		// update physics and stuff
+	}
 
 	int getGameState()
 	{
 		return state;
 	}
-
 };
 
 #endif
