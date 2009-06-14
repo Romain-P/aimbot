@@ -8,11 +8,12 @@
 
 class Entity
 {
-private:
+protected:
 	string name;
 	Position3 position;
 	Vector3 velocity;
 	Vector3 lookDirection;
+
 public:
 	Entity()
 	{
