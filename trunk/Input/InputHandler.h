@@ -14,10 +14,14 @@ public:
 	static void specialKeyDelegate(int key, int x, int y);
 	static void mouseDelegate(int button, int state, int x, int y);
 	static void motionDelegate(int x, int y);
+	static void updateDelegate();
 
 	void keyboardFunction(unsigned char key)
 	{
-
+		switch(key)
+		{
+		case 27: exit(0); break;
+		}
 	}
 
 	void keyUpFunction(unsigned char key)
