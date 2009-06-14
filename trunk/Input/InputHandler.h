@@ -2,11 +2,15 @@
 #define inputhandler_h
 
 #include "../Graphics/GraphicIncludes.h"
+#include "../Physics/EnvironmentUpdater.h"
 
 class InputHandler
 {
 private:
+	EnvironmentUpdater* updater;
 public:
+	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
+
 	InputHandler();
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
@@ -20,7 +24,11 @@ public:
 	{
 		switch(key)
 		{
-		case 27: exit(0); break;
+		case 27:
+			exit(0);
+			break;
+		case 'a':
+		case 'A':
 		}
 	}
 

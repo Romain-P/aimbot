@@ -22,6 +22,11 @@ public:
 	void pushMessage(const string& message)
 	{
 		messages.push(message);
+
+		if(messages.size() > numMessages)
+		{
+			messages.pop();
+		}
 	}
 };
 
