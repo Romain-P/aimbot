@@ -1,8 +1,6 @@
 #ifndef gamestate_h
 #define gamestate_h
 
-#include
-
 class GameState
 {
 private:
