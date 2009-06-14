@@ -23,6 +23,12 @@ public:
 		for(int i = 0; i < vertices.length(); i++)
 			*vertices.at(i) *= size;
 
+		faces.push_back(PrimitiveFace(6, 1, 2, 3));
+		faces.push_back(PrimitiveFace(3, 2, 6, 7));
+		faces.push_back(PrimitiveFace(7, 4, 5, 6));
+		faces.push_back(PrimitiveFace(4, 0, 1, 5));
+		faces.push_back(PrimitiveFace(0, 3, 7, 4));
+		faces.push_back(PrimitiveFace(1, 2, 6, 5));
 	}
 };
 

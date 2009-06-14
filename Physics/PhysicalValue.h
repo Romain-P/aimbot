@@ -46,7 +46,7 @@ public:
 		{
 			if(std::abs(other.value) < 0.000001f)
 			{
-				throw new DivisionByZeroException();
+				throw DivisionByZeroException();
 			}
 			return PhysicalValue(this->value / other.value,
 					this->lengthExponent - other.lengthExponent,
@@ -71,7 +71,7 @@ public:
 					this->timeExponent != other.timeExponent ||
 					this->chargeExponent != other.chargeExponent)
 			{
-				throw new IncompatibleUnitsException();
+				throw IncompatibleUnitsException();
 			}
 
 			return PhysicalValue(this->value + other.value,
@@ -96,7 +96,7 @@ public:
 					this->timeExponent != other.timeExponent ||
 					this->chargeExponent != other.chargeExponent)
 			{
-				throw new IncompatibleUnitsException();
+				throw IncompatibleUnitsException();
 			}
 
 			return PhysicalValue(this->value - other.value,

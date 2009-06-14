@@ -46,7 +46,7 @@ public:
 		glutKeyboardUpFunc(&InputHandler::keyUpDelegate);
 		glutSpecialFunc(&InputHandler::specialKeyDelegate);
 
-		//glutIdleFunc(&GameState::updateDelegate);
+		glutIdleFunc(&Updater::updateDelegate);
 	}
 
 	void initGraphicsOptions()
