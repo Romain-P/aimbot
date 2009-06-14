@@ -143,7 +143,13 @@ public:
 	 */
 	std::string print()
 	{
-		float nums[] = { int(1000*x+0.5f)/1000.f, int(1000*y+0.5f)/1000.f, int(1000*z+0.5f)/1000.f };
+		float nums[] =
+		{
+			int(1000*x+0.5f)/1000.f,
+			int(1000*y+0.5f)/1000.f,
+			int(1000*z+0.5f)/1000.f
+		};
+
 		std::string s[3];
 		std::string final = "";
 		std::stringstream ss;
