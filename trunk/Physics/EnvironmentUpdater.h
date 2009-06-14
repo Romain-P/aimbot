@@ -3,13 +3,13 @@
 
 #include <vector>
 #include "PhysicalValue.h"
-#include "../Entities/Player.h"
+#include "../Entities/Entity.h"
 
 class EnvironmentUpdater
 {
 private:
 	PhysicalValue* g;
-	vector<Player*> players;
+	vector<Entity*> entities;
 public:
 	EnvironmentUpdater()
 	{
@@ -18,7 +18,7 @@ public:
 
 	void updateEntities()
 	{
-		for(int i = 0; i < players.length(); i++)
+		for(int i = 0; i < entities.length(); i++)
 		{
 
 		}
