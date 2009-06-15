@@ -3,6 +3,8 @@
 
 #include <exception>
 
+using namespace std;
+
 class IncompatibleUnitsException : public exception
 {
 	virtual const char* what() const throw()
