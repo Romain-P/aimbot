@@ -18,9 +18,12 @@ public:
 
 	void showFPS()
 	{
-		ss << updater->getFps();
-		drawText(ss.str(), 40, 40);
-		ss.clear();
+		if(updater->getFrames() % 5 == 0)
+		{
+			ss << updater->getFps();
+			drawText(ss.str(), 40, 40);
+			ss.clear();
+		}
 	}
 
 	void drawText(string& text, int leftX, int topY)

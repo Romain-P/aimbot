@@ -6,16 +6,19 @@
 class Updater
 {
 private:
+	long frames;
 	float deltaTime;
 	MicroTimer microTimer;
 
 public:
+
 	Updater();
 
 	static void updateDelegate();
 
 	void updateFunction()
 	{
+		frames++;
 		microTimer.stopMicroTimer();
 		deltaTime = microTimer.getDeltaTime();
 		microTimer.startMicroTimer();
@@ -26,6 +29,11 @@ public:
 	float getFps()
 	{
 		return 1 / deltaTime;
+	}
+
+	long getFrames()
+	{
+		return frames;
 	}
 };
 
