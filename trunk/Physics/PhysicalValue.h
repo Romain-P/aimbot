@@ -57,7 +57,7 @@ public:
 					this->timeExponent - other.timeExponent,
 					this->chargeExponent - other.chargeExponent);
 		}
-		catch(Exception& e)
+		catch(exception& e)
 		{
 			cout << e.what() << endl;
 		}
@@ -83,7 +83,7 @@ public:
 				this->timeExponent,
 				this->chargeExponent);
 		}
-		catch(Exception& e)
+		catch(exception& e)
 		{
 			cout << e.what() << endl;
 		}
@@ -108,7 +108,7 @@ public:
 				this->timeExponent,
 				this->chargeExponent);
 		}
-		catch(Exception& e)
+		catch(exception& e)
 		{
 			cout << e.what() << endl;
 		}
