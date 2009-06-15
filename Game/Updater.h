@@ -6,8 +6,8 @@
 class Updater
 {
 private:
-	long frames;
 	float deltaTime;
+	long frames;
 	MicroTimer microTimer;
 
 public:
