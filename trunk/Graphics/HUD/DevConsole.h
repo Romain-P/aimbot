@@ -6,6 +6,9 @@
 #include "PlayerHUD.h"
 #include "../../Utils/Tokenizer.h"
 
+using std::string;
+using std::queue;
+
 class DevConsole
 {
 private:
@@ -43,7 +46,7 @@ public:
 			case "stat": {
 				switch(onWhat) {
 				case "fps":
-					playerHud->showFPS();
+					playerHud->showFPS(true);
 					break;
 				}
 				break;
