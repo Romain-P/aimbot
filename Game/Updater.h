@@ -1,10 +1,12 @@
 #ifndef updater_h
 #define updater_h
 
+#include "../Utils/MicroTimer.h"
+
 class Updater
 {
 private:
-	float fps;
+	float deltaTime;
 	MicroTimer microTimer;
 
 public:
@@ -15,7 +17,7 @@ public:
 	void updateFunction()
 	{
 		microTimer.stopMicroTimer();
-		fps = 1 / microTimer.getDeltaTime();
+		deltaTime = microTimer.getDeltaTime();
 		microTimer.startMicroTimer();
 
 		// update physics and stuff
@@ -23,7 +25,7 @@ public:
 
 	float getFps()
 	{
-		return fps;
+		return 1 / deltaTime;
 	}
 };
 

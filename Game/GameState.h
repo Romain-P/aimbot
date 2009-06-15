@@ -1,8 +1,6 @@
 #ifndef gamestate_h
 #define gamestate_h
 
-#include "../Utils/MicroTimer.h"
-
 class GameState
 {
 private:
@@ -23,7 +21,6 @@ public:
 	};
 
 	GameState();
-
 
 	int getGameState()
 	{
