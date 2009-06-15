@@ -38,25 +38,24 @@ public:
 		string action = tokenizer.nextToken();
 		string onWhat = tokenizer.nextToken();
 
-		// have to declare martial law on regular brace-line formatting here
+		// sadly, have to declare martial law on regular brace-line formatting here
 		switch(action) {
 			case "stat": {
 				switch(onWhat) {
 				case "fps":
 					playerHud->showFPS();
+					break;
 				}
 				break;
 			}
 			case "set": {
 				switch(onWhat) {
-				case "fps":
-
+				case "fov":
 				}
 				break;
 			}
 			case "enable": {
 				switch(onWhat) {
-				case "fps":
 
 				}
 				break;
@@ -66,6 +65,11 @@ public:
 	}
 
 	void setActive()
+	{
+
+	}
+
+	void draw()
 	{
 
 	}

@@ -35,6 +35,11 @@ public:
 	{
 		return frames;
 	}
+
+	float getDeltaTime()
+	{
+		return deltaTime;
+	}
 };
 
 

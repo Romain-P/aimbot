@@ -18,9 +18,12 @@ public:
 
 	void updateEntities()
 	{
+		float delta = updater->getDeltaTime();
+
 		for(int i = 0; i < entities.length(); i++)
 		{
-
+			entities.at(i)->velocity.z += g * delta;
+			entities.at(i)->position += entities.at(i)->velocity * delta;
 		}
 	}
 

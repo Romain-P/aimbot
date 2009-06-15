@@ -17,7 +17,7 @@ public:
 		this->z = z;
 	}
 
-	void operator=(const Position& other)
+	void operator=(const Position3& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
