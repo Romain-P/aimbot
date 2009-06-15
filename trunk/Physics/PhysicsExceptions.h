@@ -3,7 +3,7 @@
 
 #include <exception>
 
-using namespace std;
+using std::exception;
 
 class IncompatibleUnitsException : public exception
 {
