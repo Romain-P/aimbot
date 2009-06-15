@@ -14,7 +14,6 @@ public:
 		LOADING_MAP,
 		CHANGING_SETTINGS,
 		GAME_IN_SESSION,
-
 	};
 
 	enum ingameStates
