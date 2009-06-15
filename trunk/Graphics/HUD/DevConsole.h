@@ -3,13 +3,15 @@
 
 #include <string>
 #include <queue>
+
 #include "PlayerHUD.h"
+#include "../Drawable.h"
 #include "../../Utils/Tokenizer.h"
 
 using std::string;
 using std::queue;
 
-class DevConsole
+class DevConsole : public Drawable
 {
 private:
 	float size;
@@ -54,6 +56,9 @@ public:
 			case "set": {
 				switch(onWhat) {
 				case "fov":
+					glutDisplay->setFOV(tokenizer.nextToken());
+					glutDisplay->reshape();
+					break;
 				}
 				break;
 			}
@@ -61,6 +66,10 @@ public:
 				switch(onWhat) {
 
 				}
+				break;
+			}
+			case "add": {
+
 				break;
 			}
 		}

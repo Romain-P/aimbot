@@ -2,10 +2,12 @@
 #define playerhud_h
 
 #include <sstream>
+
+#include "../Drawable.h"
 #include "../GraphicIncludes.h"
 #include "../../Game/Updater.h"
 
-class PlayerHUD
+class PlayerHUD : public Drawable
 {
 private:
 	bool showFPS;
