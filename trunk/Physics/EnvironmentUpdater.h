@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "PhysicalValue.h"
-#include "../Entities/Entity.h"
+#include "../SceneObjects/Entities/Entity.h"
 
 class EnvironmentUpdater
 {

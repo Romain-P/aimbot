@@ -1,10 +1,13 @@
 #ifndef glutdisplay_h
 #define glutdisplay_h
 
+#include <string>
 #include <sstream>
+
 #include "GraphicIncludes.h"
 
 using std::stringstream;
+using std::string;
 
 class GlutDisplay
 {
