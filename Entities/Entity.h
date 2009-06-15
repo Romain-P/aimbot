@@ -6,15 +6,18 @@
 #include "../Utils/Vector3.h"
 #include "../Utils/Position3.h"
 
+using std::string;
+
 class Entity
 {
 protected:
 	string name;
-	Position3 position;
-	Vector3 velocity;
 	Vector3 lookDirection;
 
 public:
+	Position3 position;
+	Vector3 velocity;
+
 	Entity()
 	{
 		this->name = name;

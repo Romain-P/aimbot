@@ -8,16 +8,17 @@
 class EnvironmentUpdater
 {
 private:
-	PhysicalValue* g;
-	vector<Entity*> entities;
+	PhysicalValue<float>* g;
+	std::vector<Entity*> entities;
 public:
 	EnvironmentUpdater()
 	{
-		g = new PhysicalValue(-9.807, 1, 0, -2);
+		g = new PhysicalValue<float>(-9.807, 1, 0, -2);
 	}
 
 	void updateEntities()
 	{
+		/*
 		float delta = updater->getDeltaTime();
 
 		for(int i = 0; i < entities.length(); i++)
@@ -25,6 +26,7 @@ public:
 			entities.at(i)->velocity.z += g * delta;
 			entities.at(i)->position += entities.at(i)->velocity * delta;
 		}
+		*/
 	}
 
 	void fallForTime(Entity* entity, float timeSlice)

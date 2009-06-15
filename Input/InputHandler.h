@@ -33,7 +33,7 @@ public:
 		case 'A':
 
 		case '`':
-
+			break;
 		}
 	}
 
