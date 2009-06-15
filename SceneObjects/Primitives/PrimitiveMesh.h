@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include "../../Utils/Vector3.h"
 
+using std::vector;
+
 /*
  * Holds the index of each defining vertex of the face
  */
@@ -32,15 +34,15 @@ public:
 class PrimitiveMesh
 {
 protected:
-	std::vector<Vector3*> vertices;
-	std::vector<PrimitiveFace> faces;
+	vector<Vector3*> vertices;
+	vector<PrimitiveFace> faces;
 public:
-	std::vector<Vector3*>& getVertices()
+	vector<Vector3*>& getVertices()
 	{
 		return vertices;
 	}
 
-	std::vector<PrimitiveFace>& getFaces()
+	vector<PrimitiveFace>& getFaces()
 	{
 		return faces;
 	}
