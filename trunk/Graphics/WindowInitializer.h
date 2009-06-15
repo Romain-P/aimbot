@@ -4,7 +4,7 @@
 #include "GraphicIncludes.h"
 #include "GlutDisplay.h"
 #include "../Input/InputHandler.h"
-#include "../Gameplay/GameState.h"
+#include "../Game/GameState.h"
 
 class WindowInitializer
 {

@@ -1,12 +1,15 @@
 #ifndef playerhud_h
 #define playerhud_h
 
+#include <sstream>
 #include "../GraphicIncludes.h"
+#include "../../Game/Updater.h"
 
 class PlayerHUD
 {
 private:
-	GameState* gameState;
+	Updater* updater;
+	stringstream ss;
 public:
 	PlayerHUD(GameState* state) : gameState(state)
 	{
@@ -15,7 +18,9 @@ public:
 
 	void showFPS()
 	{
-		drawText(gameState->getFps());
+		ss << updater->getFps();
+		drawText(ss.str(), 40, 40);
+		ss.clear();
 	}
 
 	void drawText(string& text, int leftX, int topY)
