@@ -34,14 +34,20 @@ public:
 
 	void executeCommand(const string& command)
 	{
+		string action = command.substring(0, command.firstOccurrenceOf
 		switch(command)
 		{
 		case "stat fps":
 			playerHud->showFPS();
+			break;
+		case "set fov"
 		}
 	}
 
+	void setActive()
+	{
 
+	}
 };
 
 
