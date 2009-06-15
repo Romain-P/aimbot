@@ -1,13 +1,17 @@
 #ifndef glutdisplay_h
 #define glutdisplay_h
 
+#include <sstream>
 #include "GraphicIncludes.h"
+
+using std::stringstream;
 
 class GlutDisplay
 {
 private:
 	double fieldOfView;
 	double screenAspect;
+	stringstream ss;
 
 public:
 	GlutDisplay();
@@ -31,6 +35,13 @@ public:
 		gluLookAt(0, 0, 2, 0, 0, 1, 0, 1, 0);
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_MODELVIEW);
+	}
+
+	void setFOV(string& fov)
+	{
+		ss << fov;
+		ss >> fieldOfView;
+		ss.clear();
 	}
 };
 

@@ -1,8 +1,9 @@
 #ifndef camera_h
 #define camera_h
 
-#include "GraphicIncludes.h"
 #include <iostream>
+
+#include "GraphicIncludes.h"
 #include "../Utils/Vector3.h"
 
 class Camera
