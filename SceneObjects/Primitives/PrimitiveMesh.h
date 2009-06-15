@@ -13,7 +13,7 @@ class PrimitiveFace
 public:
 	std::vector<int> indices;
 
-	void setIndices(int a, int b, ...)
+	void setIndices(int a, ...)
 	{
 		va_list listArgs;
 		va_start(listArgs, a);

@@ -4,27 +4,38 @@
 class GameState
 {
 private:
-	int state;
+	int macroState;
+	int ingameState;
 
 public:
 	enum macroStates
 	{
 		NEW_GAME,
+		LOADING_MAP,
 		CHANGING_SETTINGS,
 		GAME_IN_SESSION,
-		GAME_OVER
+
 	};
 
 	enum ingameStates
 	{
+		COUNTDOWN,
+		PLAYING,
+		IN_DEV_CONSOLE,
+
 		//I guess these sort of depend upon the specific game
 	};
 
 	GameState();
 
-	int getGameState()
+	int getMacroState()
 	{
-		return state;
+		return macroState;
+	}
+
+	int getIngameState()
+	{
+		return ingameState;
 	}
 };
 

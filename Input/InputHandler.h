@@ -25,10 +25,15 @@ public:
 		switch(key)
 		{
 		case 27:
+		{
 			exit(0);
 			break;
+		}
 		case 'a':
 		case 'A':
+
+		case '`':
+
 		}
 	}
 
