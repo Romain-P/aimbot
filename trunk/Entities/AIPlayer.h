@@ -8,7 +8,6 @@
 class AIPlayer : public Player
 {
 private:
-
 public:
 
 	AIPlayer()
