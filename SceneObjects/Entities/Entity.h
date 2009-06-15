@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "../Utils/Vector3.h"
-#include "../Utils/Position3.h"
+#include "../../Utils/Vector3.h"
+#include "../../Utils/Position3.h"
 
 using std::string;
 
