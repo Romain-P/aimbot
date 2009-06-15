@@ -2,11 +2,11 @@
 
 Updater* updater;
 
-Updater::Updater()
+Updater::Updater() :
+	deltaTime(0),
+	frames(0)
 {
 	updater = this;
-
-	fps = 1;
 	microTimer.startMicroTimer();
 }
 

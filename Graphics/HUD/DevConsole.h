@@ -4,7 +4,7 @@
 #include <string>
 #include <queue>
 #include "PlayerHUD.h"
-
+#include "../../Utils/Tokenizer.h"
 
 class DevConsole
 {
@@ -34,14 +34,35 @@ public:
 
 	void executeCommand(const string& command)
 	{
-		string action = command.substring(0, command.firstOccurrenceOf
-		switch(command)
-		{
-		case "stat fps":
-			playerHud->showFPS();
-			break;
-		case "set fov"
+		Tokenizer tokenizer(command);
+		string action = tokenizer.nextToken();
+		string onWhat = tokenizer.nextToken();
+
+		// have to declare martial law on regular brace-line formatting here
+		switch(action) {
+			case "stat": {
+				switch(onWhat) {
+				case "fps":
+					playerHud->showFPS();
+				}
+				break;
+			}
+			case "set": {
+				switch(onWhat) {
+				case "fps":
+
+				}
+				break;
+			}
+			case "enable": {
+				switch(onWhat) {
+				case "fps":
+
+				}
+				break;
+			}
 		}
+
 	}
 
 	void setActive()
