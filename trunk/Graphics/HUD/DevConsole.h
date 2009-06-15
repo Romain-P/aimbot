@@ -16,7 +16,7 @@ class DevConsole : public Drawable
 private:
 	float size;
 	int numMessages;
-	std::queue<std::string> messages;
+	queue<string> messages;
 	PlayerHUD* playerHud;
 
 public:
@@ -57,7 +57,8 @@ public:
 				switch(onWhat) {
 				case "fov":
 					glutDisplay->setFOV(tokenizer.nextToken());
-					glutDisplay->reshape();
+					glutDisplay->reshapeFunction(glutGet(GLUT_SCREEN_WIDTH),
+							glutGet(GLUT_SCREEN_WIDTH));
 					break;
 				}
 				break;
