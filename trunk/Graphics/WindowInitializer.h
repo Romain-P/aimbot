@@ -4,20 +4,20 @@
 #include "GraphicIncludes.h"
 #include "GlutDisplay.h"
 #include "../Input/InputHandler.h"
-#include "../Game/GameState.h"
+#include "../Game/Updater.h"
 
 class WindowInitializer
 {
 private:
 	GlutDisplay* display;
-	GameState* gameState;
+	Updater* updater;
 	InputHandler* inputHandler;
 
 public:
 	WindowInitializer(int n, char** argv)
 	{
 		display = new GlutDisplay();
-		gameState = new GameState();
+		updater = new Updater();
 		inputHandler = new InputHandler();
 
 		initializeWindow(n, argv);

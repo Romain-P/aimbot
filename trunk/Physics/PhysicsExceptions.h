@@ -3,7 +3,7 @@
 
 #include <exception>
 
-class IncompatibleUnitsException : public Exception
+class IncompatibleUnitsException : public exception
 {
 	virtual const char* what() const throw()
 	{
@@ -11,7 +11,7 @@ class IncompatibleUnitsException : public Exception
 	}
 };
 
-class DivisionByZeroException : public Exception
+class DivisionByZeroException : public exception
 {
 	virtual const char* what() const throw()
 	{

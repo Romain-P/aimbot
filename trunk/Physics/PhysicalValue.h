@@ -4,8 +4,11 @@
 #include <iostream>
 #include "PhysicsExceptions.h"
 
+using std::cout;
+using std::endl;
+
 template <class T>
-class PhysicalValue<T>
+class PhysicalValue
 {
 private:
 	T value;
