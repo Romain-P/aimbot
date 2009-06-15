@@ -1,7 +1,7 @@
 #ifndef collisiondetector_h
 #define collisiondetector_h
 
-#include "../Meshes/Mesh.h"
+#include "../SceneObjects/Mesh.h"
 
 class CollisionDetector
 {
