@@ -29,10 +29,6 @@ public:
 		*/
 	}
 
-	void fallForTime(Entity* entity, float timeSlice)
-	{
-
-	}
 };
 
 #endif
