@@ -7,7 +7,7 @@
 
 #include "SceneObject.h"
 
-Vector2 SceneObject::getMomentum()
+Vector2* SceneObject::getMomentum()
 {
 	//your momentum
 	Vector2 *yourMom = new Vector2(this->velocity.getX() * this->mass, this->velocity.getY());
