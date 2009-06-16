@@ -31,7 +31,7 @@ protected:
 public:
 
 
-	Vector2 SceneObject::getMomentum();
+	Vector2* SceneObject::getMomentum();
 	float SceneObject::getMass();
 	float SceneObject::getDensity();
 	Mesh SceneObject::getObjectMesh();
