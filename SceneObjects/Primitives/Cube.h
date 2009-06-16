@@ -3,7 +3,7 @@
 
 #include "PrimitiveMesh.h"
 
-class Cube : private PrimitiveMesh
+class Cube : public PrimitiveMesh
 {
 private:
 	float size;
@@ -11,17 +11,17 @@ public:
 	Cube(float sideLength) :
 		size(sideLength)
 	{
-		vertices.push_back(new Vector( 1,  1,  1));
-		vertices.push_back(new Vector( 1, -1,  1));
-		vertices.push_back(new Vector( 1, -1, -1));
-		vertices.push_back(new Vector( 1,  1, -1));
-		vertices.push_back(new Vector(-1,  1,  1));
-		vertices.push_back(new Vector(-1, -1,  1));
-		vertices.push_back(new Vector(-1, -1, -1));
-		vertices.push_back(new Vector(-1,  1, -1));
+		vertices.push_back(Vector3( 1,  1,  1));
+		vertices.push_back(Vector3( 1, -1,  1));
+		vertices.push_back(Vector3( 1, -1, -1));
+		vertices.push_back(Vector3( 1,  1, -1));
+		vertices.push_back(Vector3(-1,  1,  1));
+		vertices.push_back(Vector3(-1, -1,  1));
+		vertices.push_back(Vector3(-1, -1, -1));
+		vertices.push_back(Vector3(-1,  1, -1));
 
-		for(int i = 0; i < vertices.length(); i++)
-			*vertices.at(i) *= size;
+		for(unsigned int i = 0; i < vertices.size(); i++)
+			vertices.at(i) *= size;
 
 		faces.push_back(PrimitiveFace(6, 1, 2, 3));
 		faces.push_back(PrimitiveFace(3, 2, 6, 7));

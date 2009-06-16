@@ -77,11 +77,8 @@ public:
 				throw IncompatibleUnitsException();
 			}
 
-			return PhysicalValue(this->value + other.value,
-				this->lengthExponent,
-				this->massExponent,
-				this->timeExponent,
-				this->chargeExponent);
+			this->value += other.value;
+			return *this;
 		}
 		catch(exception& e)
 		{
@@ -102,17 +99,26 @@ public:
 				throw IncompatibleUnitsException();
 			}
 
-			return PhysicalValue(this->value - other.value,
-				this->lengthExponent,
-				this->massExponent,
-				this->timeExponent,
-				this->chargeExponent);
+			this->value -= other.value;
+			return *this;
 		}
 		catch(exception& e)
 		{
 			cout << e.what() << endl;
 		}
 		return NULL;
+	}
+
+	PhysicalValue operator*(const T value)
+	{
+		this->value *= value;
+		return *this;
+	}
+
+	PhysicalValue operator/(const T value)
+	{
+		this->value /= value;
+		return *this;
 	}
 
 };

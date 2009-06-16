@@ -2,12 +2,13 @@
 
 GlutDisplay* glutDisplay;
 
-GlutDisplay::GlutDisplay()
+GlutDisplay::GlutDisplay() :
+	fieldOfView(80)
 {
 	glutDisplay = this;
-
 	screenAspect = double(glutGet(GLUT_SCREEN_WIDTH)) / glutGet(GLUT_SCREEN_HEIGHT);
-	fieldOfView = 80;
+
+	cube = new Cube(2.4f);
 }
 
 void GlutDisplay::displayDelegate()
