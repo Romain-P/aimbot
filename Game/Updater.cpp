@@ -10,7 +10,7 @@ Updater::Updater() :
 	microTimer.startMicroTimer();
 }
 
-void updateDelegate()
+void Updater::updateDelegate()
 {
 	updater->updateFunction();
 }

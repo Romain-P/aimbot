@@ -57,8 +57,7 @@ public:
 				switch(onWhat) {
 				case "fov":
 					glutDisplay->setFOV(tokenizer.nextToken());
-					glutDisplay->reshapeFunction(glutGet(GLUT_SCREEN_WIDTH),
-							glutGet(GLUT_SCREEN_WIDTH));
+					glutDisplay->reshapeFunction(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_WIDTH));
 					break;
 				}
 				break;
