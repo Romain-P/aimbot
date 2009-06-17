@@ -55,7 +55,7 @@ public:
 		ss.clear();
 	}
 
-	void getGamma()
+	float getGamma()
 	{
 		return gamma;
 	}
