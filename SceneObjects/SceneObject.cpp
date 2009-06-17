@@ -10,8 +10,7 @@
 Vector2 SceneObject::getMomentum()
 {
 	//your momentum
-	Vector2 yourMom = Vector2(this->velocity.getX() * this->mass, this->velocity.getY());
-	return yourMom;
+	return Vector2(velocity.x * mass, velocity.y);
 }
 
 float SceneObject::getMass()

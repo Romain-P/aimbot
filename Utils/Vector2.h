@@ -44,16 +44,6 @@ public:
 		this-> y = y;
 	}
 
-	float getX()
-	{
-		return this->x;
-	}
-
-	float getY()
-	{
-		return this->y;
-	}
-
 
 };
 
