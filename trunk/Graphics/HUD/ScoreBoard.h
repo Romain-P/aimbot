@@ -5,6 +5,10 @@ class ScoreBoard : public Drawable
 {
 public:
 
+	void draw()
+	{
+
+	}
 };
 
 
