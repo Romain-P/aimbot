@@ -38,6 +38,7 @@ class Mesh
 {
 private:
 	bool useSmoothNormals;
+public:
 	int numVerts;
 	int numNormals;
 	int numFaces;
@@ -46,7 +47,6 @@ private:
 	Vector3* smoothNorms;
 	Face* faces;
 
-public:
 	Mesh();
 	~Mesh();
 	int readFile(string filename);

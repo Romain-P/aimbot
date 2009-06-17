@@ -59,6 +59,9 @@ public:
 					glutDisplay->setFOV(tokenizer.nextToken());
 					glutDisplay->reshapeFunction(glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_WIDTH));
 					break;
+				case "gamma":
+
+					break;
 				}
 				break;
 			}
