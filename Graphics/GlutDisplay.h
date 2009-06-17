@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "../SceneObjects/Primitives/Cube.h"
+#include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 
 using std::stringstream;
@@ -32,7 +33,7 @@ public:
 		glClearColor(0.5, 0.5, 0.5, 0.0);
 
 		glColor3f(1, 0, 0);
-		cube->draw();
+		MeshRenderer::draw(cube);
 
 		glutSwapBuffers();
 	}
