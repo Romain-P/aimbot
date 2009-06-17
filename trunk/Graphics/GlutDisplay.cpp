@@ -9,6 +9,7 @@ GlutDisplay::GlutDisplay() :
 	screenAspect = double(glutGet(GLUT_SCREEN_WIDTH)) / glutGet(GLUT_SCREEN_HEIGHT);
 
 	cube = new Cube(2.4f);
+	Camera = new Camera();
 }
 
 void GlutDisplay::displayDelegate()
