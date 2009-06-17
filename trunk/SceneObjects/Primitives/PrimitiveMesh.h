@@ -33,7 +33,7 @@ public:
 	}
 };
 
-class PrimitiveMesh : public Drawable
+class PrimitiveMesh
 {
 protected:
 	vector<Vector3> vertices;
@@ -50,23 +50,7 @@ public:
 	}
 
 
-	/*
-	 * Somewhat slow due to generality, may specialize to
-	 * GL_QUADS, or GL_TRIANGLES if needed
-	 */
-	void draw()
-	{
-		for(unsigned int face = 0; face < faces.size(); face++)
-		{
-			glBegin(GL_POLYGON);
-			for(unsigned int i = 0; i < faces.at(face).indices.size(); i++)
-			{
-				int index = faces.at(face).indices.at(i);
-				glVertex3f(vertices.at(index).x, vertices.at(index).y, vertices.at(index).z);
-			}
-			glEnd();
-		}
-	}
+
 };
 
 #endif

@@ -15,6 +15,7 @@ class GlutDisplay
 private:
 	double fieldOfView;
 	double screenAspect;
+	float gamma;
 	stringstream ss;
 	Cube* cube;
 
@@ -51,6 +52,11 @@ public:
 		ss << fov;
 		ss >> fieldOfView;
 		ss.clear();
+	}
+
+	void getGamma()
+	{
+		return gamma;
 	}
 };
 
