@@ -38,6 +38,10 @@ class Mesh
 {
 private:
 	bool useSmoothNormals;
+	std::vector<Face*>* getConnectedFaces(int vIndex);
+	Vector3 getSmoothNormal(std::vector<Face*>* vFaces);
+	Vector3 getNormal(vector<int>* indices, vector<Vector3*>* v);
+
 public:
 	int numVerts;
 	int numNormals;
@@ -50,15 +54,12 @@ public:
 	Mesh();
 	~Mesh();
 	int readFile(string filename);
-	Vector3 getSmoothNormal(std::vector<Face*>* vFaces);
-	std::vector<Face*>* getConnectedFaces(int vIndex);
 	void generateSmoothNormals();
 	void readSmoothNormals(string filename);
 	void writeMesh(string filename);
 	void writeNormFile(string filename);
 	void readRawFile(string filename);
 	int getVertIndex(Vector3* vertex, vector<Vector3*>* coords);
-	Vector3* getNormal(vector<int>* indices, vector<Vector3*>* v);
 	void print();
 };
 
