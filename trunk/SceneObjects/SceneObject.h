@@ -9,10 +9,6 @@
 #define SCENEOBJECT_H_
 
 #include <math.h>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include "../Graphics/GraphicIncludes.h"
 #include "../Utils/Vector2.h"
 #include "Mesh.h"
 
