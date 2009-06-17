@@ -40,7 +40,7 @@ private:
 	bool useSmoothNormals;
 	std::vector<Face*>* getConnectedFaces(int vIndex);
 	Vector3 getSmoothNormal(std::vector<Face*>* vFaces);
-	Vector3 getNormal(vector<int>* indices, vector<Vector3*>* v);
+	Vector3* getNormal(vector<int>* indices, vector<Vector3*>* v);
 
 public:
 	int numVerts;

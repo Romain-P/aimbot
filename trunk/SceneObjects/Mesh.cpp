@@ -217,18 +217,18 @@ int Mesh::getVertIndex(Vector3* vertex, vector<Vector3*>* coords)
 	return index;
 }
 
-Vector3 Mesh::getNormal(vector<int>* indices, vector<Vector3*>* v)
+Vector3* Mesh::getNormal(vector<int>* indices, vector<Vector3*>* v)
 {
 	int size = indices->size();
-	Vector3 normal;;
+	Vector3* normal = new Vector3();
 	for(int i = 0; i < size; i++) {
 		int a = indices->at(i);
 		int b = indices->at((i+1)%size);
-		normal.x += (v->at(a)->y - v->at(b)->y) * (v->at(a)->z + v->at(b)->z);
-		normal.y += (v->at(a)->z - v->at(b)->z) * (v->at(a)->x + v->at(b)->x);
-		normal.z += (v->at(a)->x - v->at(b)->x) * (v->at(a)->y + v->at(b)->y);
+		normal->x += (v->at(a)->y - v->at(b)->y) * (v->at(a)->z + v->at(b)->z);
+		normal->y += (v->at(a)->z - v->at(b)->z) * (v->at(a)->x + v->at(b)->x);
+		normal->z += (v->at(a)->x - v->at(b)->x) * (v->at(a)->y + v->at(b)->y);
 	}
-	normal.normalize();
+	normal->normalize();
 	return normal;
 }
 
