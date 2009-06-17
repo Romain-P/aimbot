@@ -18,23 +18,6 @@ Mesh::~Mesh()
 	if(smoothNorms) delete [] smoothNorms;
 }
 
-void Mesh::draw()
-{
-	for(int face = 0; face < numFaces; face++) {
-		glBegin(GL_POLYGON);
-		for(int vert = 0; vert < faces[face].nVerts; vert++) {
-	    	int nIndex = faces[face].verts[vert].normIndex;
-	    	int vIndex = faces[face].verts[vert].vertIndex;
-	    	if(useSmoothNormals)
-	    		glNormal3f(smoothNorms[vIndex].x, smoothNorms[vIndex].y, smoothNorms[vIndex].z);
-	    	else
-	    		glNormal3f(flatNorms[nIndex].x, flatNorms[nIndex].y, flatNorms[nIndex].z);
-	    	glVertex3f(points[vIndex].x, points[vIndex].y, points[vIndex].z);
-    	}
-    	glEnd();
-  	}
-}
-
 int Mesh::readFile(string filename)
 {
 	fstream infile;
