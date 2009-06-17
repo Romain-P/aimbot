@@ -50,7 +50,6 @@ public:
 	Mesh();
 	~Mesh();
 	int readFile(string filename);
-	void draw();
 	Vector3 getSmoothNormal(std::vector<Face*>* vFaces);
 	std::vector<Face*>* getConnectedFaces(int vIndex);
 	void generateSmoothNormals();
