@@ -7,6 +7,7 @@
 #include "../SceneObjects/Primitives/Cube.h"
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
+#include "Camera.h"
 
 using std::stringstream;
 using std::string;
@@ -19,7 +20,7 @@ private:
 	float gamma;
 	stringstream ss;
 	Cube* cube;
-
+	Camera* camera;
 
 public:
 	GlutDisplay();
@@ -43,9 +44,17 @@ public:
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(fieldOfView, screenAspect, 0.1, 10);
-		gluLookAt(0, 10, 0, 0, -1, 0, 0, 1, 0);
+		camera->setLookAt();
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_MODELVIEW);
+	}
+
+	void updateCamera()
+	{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(fieldOfView, screenAspect, 0.1, 10);
+		camera->setLookAt();
 	}
 
 	void setFOV(string& fov)

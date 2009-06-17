@@ -24,8 +24,6 @@ public:
 		return faces;
 	}
 
-
-
 };
 
 #endif
