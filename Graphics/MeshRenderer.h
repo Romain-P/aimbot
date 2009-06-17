@@ -42,7 +42,7 @@ public:
 			int isize = faces.at(face).indices.size();
 
 			glBegin(GL_POLYGON);
-			for (unsigned int i = 0; i < isize; i++)
+			for (int i = 0; i < isize; i++)
 			{
 				int index = faces.at(face).indices.at(i);
 				glVertex3f(vertices.at(index).x,
