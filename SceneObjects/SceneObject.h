@@ -31,13 +31,13 @@ protected:
 public:
 
 
-	Vector2 SceneObject::getMomentum();
-	float SceneObject::getMass();
-	float SceneObject::getDensity();
-	Mesh SceneObject::getObjectMesh();
+	Vector2 getMomentum();
+	float getMass();
+	float getDensity();
+	Mesh getObjectMesh();
 
-	void SceneObject::setMass(float m);
-	void SceneObject::setDensity(float d);
+	void setMass(float m);
+	void setDensity(float d);
 
 
 
