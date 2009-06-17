@@ -1,8 +1,13 @@
 #ifndef meshrenderer_h
 #define meshrenderer_h
 
+#include <vector>
+
 #include "../SceneObjects/Primitives/PrimitiveMesh.h"
+#include "../SceneObjects/Primitives/PrimitiveFace.h"
 #include "../SceneObjects/Mesh.h"
+
+using std::vector;
 
 class MeshRenderer
 {
@@ -29,17 +34,20 @@ public:
 
 	static void draw(PrimitiveMesh* mesh)
 	{
-		for (unsigned int face = 0; face < mesh->faces.size(); face++)
+		vector<PrimitiveFace> faces = mesh->getFaces();
+		vector<Vector3> vertices = mesh->getVertices();
+
+		for (unsigned int face = 0; face < faces.size(); face++)
 		{
-			int isize = mesh->faces.at(face).indices.size();
+			int isize = faces.at(face).indices.size();
 
 			glBegin(GL_POLYGON);
 			for (unsigned int i = 0; i < isize; i++)
 			{
-				int index = mesh->faces.at(face).indices.at(i);
-				glVertex3f(mesh->vertices.at(index).x,
-						mesh->vertices.at(index).y,
-						mesh->vertices.at(index).z);
+				int index = faces.at(face).indices.at(i);
+				glVertex3f(vertices.at(index).x,
+						vertices.at(index).y,
+						vertices.at(index).z);
 			}
 			glEnd();
 		}
