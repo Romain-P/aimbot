@@ -4,6 +4,7 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include "FileNameStore.h"
 
 using std::fstream;
 using std::string;
@@ -17,7 +18,7 @@ private:
 public:
 	ConfigMap()
 	{
-		file.open(filename, std::ios::in);
+		file.open(FileNameStore::config, std::ios::in);
 		int eqIndex;
 		string line;
 		string key;
@@ -32,6 +33,11 @@ public:
 
 			map[key] = value;
 		}
+	}
+
+	string getConfigValue(string key)
+	{
+		return map[key];
 	}
 };
 
