@@ -52,7 +52,7 @@ public:
 			Node.leftChild = KDTree(firstHalf, length/2, depth++);
 			Node.rightChild = KDTree(secondHalf, length/2, depth++);
 
-			return Node
+			return Node;
 		}
 	}
 
