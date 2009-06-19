@@ -3,7 +3,7 @@
 
 #include "PrimitiveMesh.h"
 
-class Box :
+class Box : public PrimitiveMesh
 {
 	float x;
 	float y;

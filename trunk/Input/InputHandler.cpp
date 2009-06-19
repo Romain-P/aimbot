@@ -2,7 +2,7 @@
 
 InputHandler* inputHandler;
 
-InputHandler::InputHandler()
+InputHandler::InputHandler(GameCoordinator* coordinator)
 {
 	inputHandler = this;
 }

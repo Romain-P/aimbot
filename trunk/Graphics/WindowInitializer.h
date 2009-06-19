@@ -18,7 +18,7 @@ public:
 	{
 		display = new GlutDisplay();
 		updater = new Updater();
-		inputHandler = new InputHandler();
+		inputHandler = new InputHandler(this);
 
 		initializeWindow(n, argv);
 		setFunctionCallbacks();

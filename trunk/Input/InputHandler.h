@@ -4,14 +4,17 @@
 #include "../Graphics/GraphicIncludes.h"
 #include "../Physics/EnvironmentUpdater.h"
 
+class WindowInitializer;
+
 class InputHandler
 {
 private:
 	EnvironmentUpdater* updater;
+
 public:
 	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
 
-	InputHandler();
+	InputHandler(WindowInitializer* initializer);
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
 	static void keyUpDelegate(unsigned char key, int x, int y);
@@ -31,9 +34,11 @@ public:
 		}
 		case 'a':
 		case 'A':
-
-		case '`':
 			break;
+		case '`':
+			console->toggleVisibility();
+			break;
+
 		}
 	}
 
