@@ -20,6 +20,16 @@ public:
 	{
 		pool.push_back(map);
 	}
+
+	void removeMapFromRotation(Map* map)
+	{
+		int i;
+		for(i = 0; i < pool.size(); i++)
+			if(map == pool.at(i) && i < pool.size() - 1)
+				break;
+		if(i < pool.size() - 1 || map == pool.at(i))
+			pool.erase(pool.begin() + i);
+	}
 };
 
 #endif

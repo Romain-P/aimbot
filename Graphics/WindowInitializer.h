@@ -27,6 +27,13 @@ public:
 		glutMainLoop();
 	}
 
+	~WindowInitializer()
+	{
+		delete display;
+		delete updater;
+		delete inputHandler;
+	}
+
 	void initializeWindow(int n, char** argv)
 	{
 		glutInit(&n, argv);
