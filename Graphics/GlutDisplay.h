@@ -5,6 +5,9 @@
 #include <sstream>
 
 #include "../SceneObjects/Primitives/Cube.h"
+#include "../SceneObjects/Primitives/Box.h"
+#include "HUD/PlayerHUD.h"
+#include "HUD/DevConsole.h"
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 #include "Camera.h"
@@ -19,8 +22,11 @@ private:
 	double screenAspect;
 	float gamma;
 	stringstream ss;
+	Box* box;
 	Cube* cube;
 	Camera* camera;
+	PlayerHUD* playerHud;
+	DevConsole* console;
 
 public:
 	GlutDisplay();
@@ -31,10 +37,13 @@ public:
 	void displayFunction()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.5, 0.5, 0.5, 0.0);
+		glClearColor(0.9, 0.2, 0.2, 0.0);
 
 		glColor3f(1, 0, 0);
 		MeshRenderer::draw(cube);
+
+		glTranslatef(3, 0, 0);
+		MeshRenderer::draw(box);
 
 		glutSwapBuffers();
 	}

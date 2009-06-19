@@ -52,7 +52,6 @@ public:
 
     void updateView()
     {
-    	setProjectionMatrix();
     }
 
     inline void setLookAt()
