@@ -20,8 +20,8 @@ protected:
 
 public:
 	Tokenizer(const string& str) :
-		text(str),
 		offset(0),
+		text(str),
 		delimiters(" \t\n\r")
     {
     }
@@ -50,7 +50,7 @@ public:
 		}
 
 		offset = end;
-		return text.substr(i, j - i);
+		return text.substr(start, end - start);
 
 	}
 

@@ -9,19 +9,11 @@
 class WindowInitializer
 {
 private:
-	GlutDisplay* display;
-	Updater* updater;
-	InputHandler* inputHandler;
 
 public:
 	WindowInitializer(int n, char** argv)
 	{
-		display = new GlutDisplay();
-		updater = new Updater();
-		inputHandler = new InputHandler(this);
-
 		initializeWindow(n, argv);
-		setFunctionCallbacks();
 		initGraphicsOptions();
 
 		glutMainLoop();
@@ -29,9 +21,6 @@ public:
 
 	~WindowInitializer()
 	{
-		delete display;
-		delete updater;
-		delete inputHandler;
 	}
 
 	void initializeWindow(int n, char** argv)
@@ -40,20 +29,6 @@ public:
 		glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 		glutCreateWindow(argv[0]);
 		glutFullScreen();
-	}
-
-	void setFunctionCallbacks()
-	{
-		glutDisplayFunc(&GlutDisplay::displayDelegate);
-		glutReshapeFunc(&GlutDisplay::reshapeDelegate);
-
-		glutMouseFunc(&InputHandler::mouseDelegate);
-		glutMotionFunc(&InputHandler::motionDelegate);
-		glutKeyboardFunc(&InputHandler::keyboardDelegate);
-		glutKeyboardUpFunc(&InputHandler::keyUpDelegate);
-		glutSpecialFunc(&InputHandler::specialKeyDelegate);
-
-		glutIdleFunc(&Updater::updateDelegate);
 	}
 
 	void initGraphicsOptions()

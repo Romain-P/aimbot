@@ -9,7 +9,7 @@
 #define SCENEOBJECT_H_
 
 #include <math.h>
-#include "../Utils/Vector2.h"
+#include "../Utils/Structures/Vector2.h"
 #include "Mesh.h"
 
 using namespace std;

@@ -1,23 +1,29 @@
 #ifndef playerhud_h
 #define playerhud_h
 
+#include <string>
 #include <sstream>
 
 #include "../Drawable.h"
 #include "../GraphicIncludes.h"
 #include "../../Game/Updater.h"
+#include "../../Game/GameState.h"
+
+using std::string;
+using std::stringstream;
 
 class PlayerHUD : public Drawable
 {
 private:
 	bool showFPS;
-
+	GameState* gameState;
 	Updater* updater;
 	stringstream ss;
 public:
-	PlayerHUD(GameState* state) : gameState(state)
+	PlayerHUD(GameState* state, Updater* gameUpdater) :
+		gameState(state),
+		updater(gameUpdater)
 	{
-
 	}
 
 	void setShowFPS(bool show)
@@ -30,7 +36,7 @@ public:
 		if(updater->getFrames() % 5 == 0)
 		{
 			ss << updater->getFps();
-			drawText(ss.str(), 40, 40);
+			//drawText(ss.str(), 40, 40);
 			ss.clear();
 		}
 	}

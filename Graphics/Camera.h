@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "GraphicIncludes.h"
-#include "../Utils/Vector3.h"
+#include "../Utils/Structures/Vector3.h"
 
 class Camera
 {

@@ -4,7 +4,7 @@
 #include <vector>
 #include "PrimitiveFace.h"
 #include "../../Graphics/Drawable.h"
-#include "../../Utils/Vector3.h"
+#include "../../Utils/Structures/Vector3.h"
 
 using std::vector;
 
