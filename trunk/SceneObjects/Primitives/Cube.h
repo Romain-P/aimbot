@@ -21,7 +21,7 @@ public:
 		vertices.push_back(Vector3(-1,  1, -1));
 
 		for(unsigned int i = 0; i < vertices.size(); i++)
-			vertices.at(i) *= size;
+			vertices.at(i) *= (0.5 * size);
 
 		faces.push_back(PrimitiveFace(6, 1, 2, 3));
 		faces.push_back(PrimitiveFace(3, 2, 6, 7));
