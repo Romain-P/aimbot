@@ -6,7 +6,7 @@
 #include <vector>
 #include <fstream>
 #include "../Graphics/GraphicIncludes.h"
-#include "../Utils/Vector3.h"
+#include "../Utils/Structures/Vector3.h"
 
 using namespace std;
 

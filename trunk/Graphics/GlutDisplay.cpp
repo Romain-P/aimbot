@@ -2,7 +2,7 @@
 
 GlutDisplay* glutDisplay;
 
-GlutDisplay::GlutDisplay() :
+GlutDisplay::GlutDisplay(PlayerHUD* hud) :
 	fieldOfView(80)
 {
 	glutDisplay = this;
@@ -11,7 +11,8 @@ GlutDisplay::GlutDisplay() :
 	cube = new Cube(2.4f);
 	box = new Box(1, 2, 3);
 	camera = new Camera();
-	console = new DevConsole();
+
+	console = new DevConsole(hud);
 }
 
 void GlutDisplay::displayDelegate()

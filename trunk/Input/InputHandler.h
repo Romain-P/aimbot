@@ -4,7 +4,7 @@
 #include "../Graphics/GraphicIncludes.h"
 #include "../Physics/EnvironmentUpdater.h"
 
-class WindowInitializer;
+class GameCoordinator;
 
 class InputHandler
 {
@@ -14,7 +14,7 @@ private:
 public:
 	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
 
-	InputHandler(WindowInitializer* initializer);
+	InputHandler(GameCoordinator* coordinator);
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
 	static void keyUpDelegate(unsigned char key, int x, int y);
@@ -36,7 +36,7 @@ public:
 		case 'A':
 			break;
 		case '`':
-			console->toggleVisibility();
+			//console->toggleVisibility();
 			break;
 
 		}

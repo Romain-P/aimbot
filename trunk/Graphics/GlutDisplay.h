@@ -25,11 +25,10 @@ private:
 	Box* box;
 	Cube* cube;
 	Camera* camera;
-	PlayerHUD* playerHud;
 	DevConsole* console;
 
 public:
-	GlutDisplay();
+	GlutDisplay(PlayerHUD* hud);
 
 	static void displayDelegate();
 	static void reshapeDelegate(int w, int h);

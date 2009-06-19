@@ -1,4 +1,5 @@
 #include "InputHandler.h"
+#include "../Game/GameCoordinator.h"
 
 InputHandler* inputHandler;
 

@@ -6,7 +6,7 @@
 
 #include "PlayerHUD.h"
 #include "../Drawable.h"
-#include "../../Utils/Tokenizer.h"
+#include "../../Utils/Misc/Tokenizer.h"
 
 using std::string;
 using std::queue;
@@ -44,6 +44,8 @@ public:
 		string onWhat = tokenizer.nextToken();
 
 		// sadly, have to declare martial law on regular brace-line formatting here
+		// and we can't switch on strings. sonomabitch.
+		/*
 		switch(action) {
 			case "stat": {
 				switch(onWhat) {
@@ -76,6 +78,7 @@ public:
 				break;
 			}
 		}
+		*/
 
 	}
 
