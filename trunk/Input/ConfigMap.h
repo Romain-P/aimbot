@@ -17,8 +17,10 @@ private:
 	map<string, string> config;
 	fstream file;
 
-public:
+	//private constructor forces use of ConfigMap::instance()
 	ConfigMap();
+
+public:
 	string getConfigValue(string key);
 };
 

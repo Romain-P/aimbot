@@ -14,6 +14,7 @@ private:
 	// Making these private prevents misuse of singleton
 	Singleton(const Singleton& other);
 	Singleton& operator=(const Singleton& other);
+
 public:
 	Singleton()	{}
 	static T& Instance()

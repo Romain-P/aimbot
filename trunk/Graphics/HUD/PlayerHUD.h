@@ -21,39 +21,12 @@ private:
 	stringstream ss;
 
 public:
-	PlayerHUD(GameState* gameState, Updater* gameUpdater)
-	{
-		state = gameState;
-		updater = gameUpdater;
-	}
-
-	virtual ~PlayerHUD()
-	{
-	}
-
-	void setShowFPS(bool show)
-	{
-		showFPS = show;
-	}
-
+	PlayerHUD(GameState* gameState, Updater* gameUpdater);
+	virtual ~PlayerHUD() {}
+	void setShowFPS(bool show);
 	void drawFPS();
-
-	void drawText(string& text, int leftX, int topY)
-	{
-		glPushMatrix();
-		glTranslatef(leftX, topY, 0);
-		for (unsigned int i = 0; i < text.length(); i++)
-			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, text.at(i));
-		glPopMatrix();
-	}
-
-	void draw()
-	{
-		if(showFPS)
-		{
-			drawFPS();
-		}
-	}
+	void drawText(string& text, int leftX, int topY);
+	void draw();
 };
 
 
