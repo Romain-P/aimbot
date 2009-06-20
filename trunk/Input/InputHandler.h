@@ -10,6 +10,7 @@ class InputHandler
 {
 private:
 	EnvironmentUpdater* updater;
+	GameCoordinator* coordinator;
 
 public:
 	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
@@ -23,24 +24,7 @@ public:
 	static void motionDelegate(int x, int y);
 	static void updateDelegate();
 
-	void keyboardFunction(unsigned char key)
-	{
-		switch(key)
-		{
-		case 27:
-		{
-			exit(0);
-			break;
-		}
-		case 'a':
-		case 'A':
-			break;
-		case '`':
-			//console->toggleVisibility();
-			break;
-
-		}
-	}
+	void keyboardFunction(unsigned char key);
 
 	void keyUpFunction(unsigned char key)
 	{
@@ -63,3 +47,9 @@ public:
 	}
 };
 #endif
+
+
+
+/*
+ * TODO: Should consider making this a singleton
+ */

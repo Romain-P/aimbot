@@ -5,6 +5,7 @@ InputHandler* inputHandler;
 
 InputHandler::InputHandler(GameCoordinator* coordinator)
 {
+	this->coordinator = coordinator;
 	inputHandler = this;
 }
 
@@ -31,4 +32,24 @@ void InputHandler::mouseDelegate(int button, int state, int x, int y)
 void InputHandler::motionDelegate(int x, int y)
 {
 	inputHandler->motionFunction(x, y);
+}
+
+
+void InputHandler::keyboardFunction(unsigned char key)
+{
+	switch(key)
+	{
+	case 27:
+	{
+		exit(0);
+		break;
+	}
+	case 'a':
+	case 'A':
+		break;
+	case '`':
+		coordinator->toggleConsoleVisibility();
+		break;
+
+	}
 }
