@@ -26,6 +26,10 @@ public:
 	{
 	}
 
+	virtual ~PlayerHUD()
+	{
+	}
+
 	void setShowFPS(bool show)
 	{
 		showFPS = show;

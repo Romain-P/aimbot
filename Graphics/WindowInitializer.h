@@ -3,8 +3,7 @@
 
 #include "GraphicIncludes.h"
 #include "GlutDisplay.h"
-#include "../Input/InputHandler.h"
-#include "../Game/Updater.h"
+#include "../Game/GameCoordinator.h"
 
 class WindowInitializer
 {
@@ -13,6 +12,9 @@ private:
 public:
 	WindowInitializer(int n, char** argv)
 	{
+		GameCoordinator* coordinator = new GameCoordinator();
+		coordinator->initialize();
+
 		initializeWindow(n, argv);
 		initGraphicsOptions();
 

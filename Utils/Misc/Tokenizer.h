@@ -35,14 +35,14 @@ public:
 
 	string nextToken()
 	{
-		int start = text.find_first_not_of(delimiters, offset);
+		unsigned int start = text.find_first_not_of(delimiters, offset);
 		if(start == string::npos)
 		{
 			offset = text.length();
 			return "";
 		}
 
-		int end = text.find_first_of(delimiters, start);
+		unsigned int end = text.find_first_of(delimiters, start);
 		if(end == string::npos)
 		{
 			offset = text.length();
@@ -56,8 +56,8 @@ public:
 
 	bool hasMoreTokens()
 	{
-		int start = text.find_first_not_of(delimiters, offset);
-		int end = text.find_first_of(delimiters, start);
+		unsigned int start = text.find_first_not_of(delimiters, offset);
+		unsigned int end = text.find_first_of(delimiters, start);
 		return start != string::npos && end != string::npos;
 	}
 };

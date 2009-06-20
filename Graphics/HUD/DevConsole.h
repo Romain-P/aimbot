@@ -14,8 +14,9 @@ using std::queue;
 class DevConsole : public Drawable
 {
 private:
+	bool visible;
 	float size;
-	int numMessages;
+	unsigned int numMessages;
 	queue<string> messages;
 	PlayerHUD* playerHud;
 
@@ -25,6 +26,11 @@ public:
 
 	DevConsole(PlayerHUD* hud) : playerHud(hud)
 	{
+	}
+
+	virtual ~DevConsole()
+	{
+
 	}
 
 	void pushMessage(const string& message)
@@ -80,6 +86,16 @@ public:
 		}
 		*/
 
+	}
+
+	void toggleVisibility()
+	{
+		visible = !visible;
+	}
+
+	bool isVisible()
+	{
+		return visible;
 	}
 
 	void setActive()

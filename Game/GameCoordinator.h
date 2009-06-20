@@ -6,6 +6,7 @@
 #include "../Input/InputHandler.h"
 #include "../Graphics/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
+#include "../Graphics/HUD/DevConsole.h"
 
 class GameCoordinator
 {
@@ -15,15 +16,19 @@ private:
 	InputHandler* inputHandler;
 
 	PlayerHUD* hud;
+	DevConsole* console;
 	GlutDisplay* display;
-
+public:
 	GameCoordinator()
 	{
-
 		hud = new PlayerHUD(&gameState, &updater);
 		display = new GlutDisplay(hud);
+		console = new DevConsole(hud);
 		inputHandler = new InputHandler(this);
+	}
 
+	void initialize()
+	{
 		setFunctionCallbacks();
 	}
 
@@ -47,7 +52,10 @@ private:
 		glutIdleFunc(&Updater::updateDelegate);
 	}
 
-
+	void toggleConsoleVisibility()
+	{
+		console->toggleVisibility();
+	}
 };
 
 #endif
