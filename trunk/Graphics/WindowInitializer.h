@@ -12,10 +12,11 @@ private:
 public:
 	WindowInitializer(int n, char** argv)
 	{
+		initializeWindow(n, argv);
+
 		GameCoordinator* coordinator = new GameCoordinator();
 		coordinator->initialize();
 
-		initializeWindow(n, argv);
 		glutMainLoop();
 	}
 

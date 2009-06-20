@@ -25,7 +25,9 @@ public:
 		//I guess these sort of depend upon the specific game
 	};
 
-	GameState();
+	GameState()
+	{
+	}
 
 	int getMacroState()
 	{

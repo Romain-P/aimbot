@@ -4,13 +4,15 @@
 #include <string>
 #include <sstream>
 
-#include "../SceneObjects/Primitives/Cube.h"
-#include "../SceneObjects/Primitives/Box.h"
-#include "HUD/PlayerHUD.h"
-#include "HUD/DevConsole.h"
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 #include "Camera.h"
+
+#include "HUD/PlayerHUD.h"
+#include "HUD/DevConsole.h"
+
+#include "../SceneObjects/Primitives/Cube.h"
+#include "../SceneObjects/Primitives/Box.h"
 
 using std::stringstream;
 using std::string;
