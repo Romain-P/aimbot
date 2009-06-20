@@ -1,3 +1,17 @@
+/*
+ * Algorithm from "Artificial Intelligence: A Modern Approach"
+ *
+ *
+ * Some internet reading suggests the following...
+ *
+ * Decision trees should be considered when:
+ * 	-instances describable by attribute-value pairs
+ * 	-target function is discrete valued
+ *  -disjunctive hypothesis may be required
+ *  -possible noisy training data
+ */
+
+
 #ifndef decisiontree_h
 #define decisiontree_h
 
