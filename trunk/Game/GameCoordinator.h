@@ -13,6 +13,7 @@
 class GameCoordinator
 {
 private:
+	Camera* camera;
 	GameState* gameState;
 	Updater* updater;
 	InputHandler* inputHandler;
@@ -20,13 +21,21 @@ private:
 	DevConsole* console;
 	GlutDisplay* display;
 public:
+	//I don't know how to untangle this mess, there must be cleaner ways of doing this
 	GameCoordinator()
 	{
+		camera = new Camera();
+		display = new GlutDisplay(camera);
+		updater = new Updater(display);
+
 		gameState = new GameState();
-		updater = new Updater();
 		hud = new PlayerHUD(gameState, updater);
 		console = new DevConsole(hud);
-		display = new GlutDisplay(hud);
+		display = new GlutDisplay(camera);
+
+		display->addDrawable((Drawable*)hud);
+		display->addDrawable((Drawable*)console);
+
 		inputHandler = new InputHandler(this);
 	}
 

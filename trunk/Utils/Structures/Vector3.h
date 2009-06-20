@@ -154,7 +154,8 @@ public:
 		std::string final = "";
 		std::stringstream ss;
 
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 3; i++)
+		{
 			ss << nums[i];
 			ss >> s[i];
 			ss.clear();

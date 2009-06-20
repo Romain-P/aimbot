@@ -5,7 +5,9 @@
 
 class Drawable
 {
+
 public:
+	int zIndex;
 	virtual void draw() = 0;
 };
 

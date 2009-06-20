@@ -3,9 +3,11 @@
 
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
+#include "Drawable.h"
 #include "Camera.h"
 
 #include "HUD/PlayerHUD.h"
@@ -16,21 +18,27 @@
 
 using std::stringstream;
 using std::string;
+using std::vector;
 
 class GlutDisplay
 {
 private:
+	float gamma;
 	double fieldOfView;
 	double screenAspect;
-	float gamma;
+
 	stringstream ss;
+	vector<Drawable*> drawables;
+
 	Box* box;
 	Cube* cube;
+
 	Camera* camera;
 	DevConsole* console;
+	PlayerHUD* hud;
 
 public:
-	GlutDisplay(PlayerHUD* hud);
+	GlutDisplay(Camera* cam);
 
 	static void displayDelegate();
 	static void reshapeDelegate(int w, int h);
@@ -53,11 +61,10 @@ public:
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.9, 0.2, 0.2, 0.0);
 
-		glColor3f(1, 0, 0);
-		MeshRenderer::draw(cube);
-
-		glTranslatef(3, 0, 0);
-		MeshRenderer::draw(box);
+		for(unsigned int i = 0; i < drawables.size(); i++)
+		{
+			drawables.at(i)->draw();
+		}
 
 		glutSwapBuffers();
 	}
@@ -77,7 +84,14 @@ public:
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(fieldOfView, screenAspect, 0.1, 10);
-		camera->setLookAt();
+		camera->updateView();
+	}
+
+	void addDrawable(Drawable* drawable)
+	{
+		drawables.push_back(drawable);
+
+		//sort by z-index?
 	}
 
 	void setFOV(string& fov)

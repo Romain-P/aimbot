@@ -4,16 +4,19 @@
 #include <vector>
 
 #include "Entity.h"
+#include "Hitbox.h"
+
 #include "../Weapons/Weapon.h"
 #include "../Mesh.h"
-#include "Hitbox.h"
+
+using std::vector;
 
 class Player : public Entity
 {
 private:
 	float health;
 
-	std::vector<Weapon*> weapons;
+	vector<Weapon*> weapons;
 	Mesh* playerMesh;
 	Hitbox* hitbox;
 
