@@ -4,6 +4,8 @@
 #include <vector>
 #include <utility>
 
+#include "../Structures/Vector2.h"
+
 using namespace std;
 
 class Line
