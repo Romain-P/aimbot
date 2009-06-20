@@ -7,8 +7,8 @@ using std::string;
 
 namespace FileNameStore
 {
-	static string baseInstall = "";
-	static string config = "config.ini";
+	//const static char* baseInstall = "";
+	const static char* config = "config.ini";
 }
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef updater_h
 #define updater_h
 
+#include "../Graphics/GlutDisplay.h"
 #include "../Utils/Misc/MicroTimer.h"
 
 class Updater
@@ -10,9 +11,11 @@ private:
 	long frames;
 	MicroTimer microTimer;
 
+	GlutDisplay* display;
+
 public:
 
-	Updater();
+	Updater(GlutDisplay* display);
 
 	static void updateDelegate();
 
@@ -23,6 +26,7 @@ public:
 		deltaTime = microTimer.getDeltaTime();
 		microTimer.startMicroTimer();
 
+		display->updateCamera();
 		// update physics and stuff
 	}
 

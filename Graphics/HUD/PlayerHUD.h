@@ -5,9 +5,9 @@
 #include <sstream>
 
 #include "../Drawable.h"
-#include "../GraphicIncludes.h"
-#include "../../Game/Updater.h"
 #include "../../Game/GameState.h"
+
+class Updater;
 
 using std::string;
 using std::stringstream;
@@ -16,14 +16,15 @@ class PlayerHUD : public Drawable
 {
 private:
 	bool showFPS;
-	GameState* gameState;
+	GameState* state;
 	Updater* updater;
 	stringstream ss;
+
 public:
-	PlayerHUD(GameState* state, Updater* gameUpdater) :
-		gameState(state),
-		updater(gameUpdater)
+	PlayerHUD(GameState* gameState, Updater* gameUpdater)
 	{
+		state = gameState;
+		updater = gameUpdater;
 	}
 
 	virtual ~PlayerHUD()
@@ -35,15 +36,7 @@ public:
 		showFPS = show;
 	}
 
-	void drawFPS()
-	{
-		if(updater->getFrames() % 5 == 0)
-		{
-			ss << updater->getFps();
-			//drawText(ss.str(), 40, 40);
-			ss.clear();
-		}
-	}
+	void drawFPS();
 
 	void drawText(string& text, int leftX, int topY)
 	{
