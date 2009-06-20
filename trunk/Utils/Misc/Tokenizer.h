@@ -27,8 +27,8 @@ public:
     }
 
 	Tokenizer(const string& str, const string& del) :
-		text(str),
 		offset(0),
+		text(str),
 		delimiters(del)
 	{
 	}

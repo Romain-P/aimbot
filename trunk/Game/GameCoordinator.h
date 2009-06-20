@@ -1,8 +1,8 @@
 #ifndef gamecoordinator_h
 #define gamecoordinator_h
 
-#include "Updater.h"
 #include "GameState.h"
+#include "Updater.h"
 #include "../Input/InputHandler.h"
 #include "../Graphics/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
@@ -13,8 +13,8 @@ class GameCoordinator
 private:
 	GameState gameState;
 	Updater updater;
-	InputHandler* inputHandler;
 
+	InputHandler* inputHandler;
 	PlayerHUD* hud;
 	DevConsole* console;
 	GlutDisplay* display;
@@ -22,18 +22,21 @@ public:
 	GameCoordinator()
 	{
 		hud = new PlayerHUD(&gameState, &updater);
-		display = new GlutDisplay(hud);
 		console = new DevConsole(hud);
+		display = new GlutDisplay(hud);
 		inputHandler = new InputHandler(this);
 	}
 
 	void initialize()
 	{
 		setFunctionCallbacks();
+		display->initGraphicsOptions();
 	}
 
 	~GameCoordinator()
 	{
+		delete hud;
+		delete console;
 		delete display;
 		delete inputHandler;
 	}

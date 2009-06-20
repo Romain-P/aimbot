@@ -22,7 +22,6 @@ private:
 
 public:
 	enum position { TOP, LEFT, BOTTOM, RIGHT };
-	string* commands;
 
 	DevConsole(PlayerHUD* hud) : playerHud(hud)
 	{
