@@ -20,6 +20,7 @@ using std::stringstream;
 using std::string;
 using std::vector;
 
+
 class GlutDisplay
 {
 private:
@@ -59,7 +60,7 @@ public:
 	void displayFunction()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.9, 0.2, 0.2, 0.0);
+		glClearColor(0.5, 0.5, 0.5, 0.0);
 
 		for(unsigned int i = 0; i < drawables.size(); i++)
 		{
@@ -91,7 +92,7 @@ public:
 	{
 		drawables.push_back(drawable);
 
-		//sort by z-index?
+		sort(drawables.begin(), drawables.end(), zSort);
 	}
 
 	void setFOV(string& fov)
@@ -104,6 +105,11 @@ public:
 	float getGamma()
 	{
 		return gamma;
+	}
+
+	static bool zSort(Drawable* a, Drawable* b)
+	{
+		return a->zIndex > b->zIndex;
 	}
 };
 
