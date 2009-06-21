@@ -3,6 +3,7 @@
 
 #include "../Graphics/GlutDisplay.h"
 #include "../Utils/Misc/MicroTimer.h"
+#include "../Physics/EnvironmentUpdater.h"
 
 class Updater
 {
@@ -11,13 +12,11 @@ private:
 	long frames;
 	MicroTimer microTimer;
 
+	EnvironmentUpdater* envUpdater;
 	GlutDisplay* display;
 
 public:
-
 	Updater(GlutDisplay* display);
-
-	static void updateDelegate();
 
 	void updateFunction()
 	{
@@ -27,6 +26,11 @@ public:
 		microTimer.startMicroTimer();
 
 		display->updateCamera();
+		envUpdater->updateEntities(deltaTime);
+
+		if(frames % 60 == 0)
+			std::cout << getFps() << std::endl;
+
 		glutPostRedisplay();
 	}
 
@@ -44,6 +48,8 @@ public:
 	{
 		return deltaTime;
 	}
+
+	static void updateDelegate();
 };
 
 

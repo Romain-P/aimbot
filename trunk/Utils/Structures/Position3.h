@@ -1,6 +1,8 @@
 #ifndef position3_h
 #define position3_h
 
+#include "Vector3.h"
+
 class Position3
 {
 public:
@@ -22,6 +24,18 @@ public:
 		this->x = other.x;
 		this->y = other.y;
 		this->z = other.z;
+	}
+
+	Position3 operator*(const float value)
+	{
+		return Position3(x * value, y * value, z * value);
+	}
+
+	void operator+=(const Vector3& vect)
+	{
+		x += vect.x;
+		y += vect.y;
+		z += vect.z;
 	}
 };
 

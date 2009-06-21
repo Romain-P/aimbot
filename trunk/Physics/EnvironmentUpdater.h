@@ -2,31 +2,41 @@
 #define environmentupdater_h
 
 #include <vector>
+#include "Movable.h"
 #include "PhysicalValue.h"
 #include "../SceneObjects/Entities/Entity.h"
+
+using std::vector;
 
 class EnvironmentUpdater
 {
 private:
 	PhysicalValue<float>* g;
-	std::vector<Entity*> entities;
+	//vector<Entity*> entities;
+	vector<Movable*> movables;
 public:
 	EnvironmentUpdater()
 	{
-		g = new PhysicalValue<float>(-9.807, 1, 0, -2);
+		g = new PhysicalValue<float>(-9.807f, 1, 0, -2);
 	}
 
-	void updateEntities()
+	~EnvironmentUpdater()
 	{
-		/*
-		float delta = updater->getDeltaTime();
+		delete g;
+	}
 
-		for(int i = 0; i < entities.length(); i++)
+	void updateEntities(float timeStep)
+	{
+		static vector<Movable*>::const_iterator it;
+		for(it = movables.begin(); it != movables.end(); ++it)
 		{
-			entities.at(i)->velocity.z += g * delta;
-			entities.at(i)->position += entities.at(i)->velocity * delta;
+			(*it)->move(timeStep);
 		}
-		*/
+	}
+
+	void addMovable(Movable* movable)
+	{
+		movables.push_back(movable);
 	}
 
 };
