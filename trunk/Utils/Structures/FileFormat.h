@@ -17,10 +17,17 @@ using std::fstream;
 
 class FileAttribute
 {
-	int fileOffset;
 	int numBytes;
 	bool bigEndian;
 	byte* data;
+
+public:
+	FileAttribute(int bytes, byte* dat, bool endian = false) :
+		numBytes(bytes),
+		data(dat),
+		bigEndian(endian)
+	{
+	}
 };
 
 class FileFormat

@@ -5,6 +5,11 @@
 
 class DemoFileFormat : public FileFormat
 {
+public:
+	DemoFileFormat()
+	{
+
+	}
 	void read()
 	{
 
