@@ -34,7 +34,6 @@ void InputHandler::motionDelegate(int x, int y)
 	inputHandler->motionFunction(x, y);
 }
 
-
 void InputHandler::keyboardFunction(unsigned char key)
 {
 	switch(key)
