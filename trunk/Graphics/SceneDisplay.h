@@ -18,7 +18,7 @@ private:
 public:
 	SceneDisplay() : Drawable(0)
 	{
-		cube = new Cube(0.1f);
+		cube = new Cube(2.0f);
 		box = new Box(1.5f, 2.f, 3.f);
 	}
 

@@ -5,7 +5,7 @@ class ScoreBoard : public Drawable
 {
 public:
 
-	void draw()
+	void draw() : Drawable(1000)
 	{
 
 	}
