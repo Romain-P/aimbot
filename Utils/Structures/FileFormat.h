@@ -2,8 +2,8 @@
  * Base class for objects that will need to be written to files
  */
 
-#ifndef gamefile_h
-#define gamefile_h
+#ifndef fileformat_h
+#define fileformat_h
 
 #include <vector>
 #include <string>
@@ -23,12 +23,12 @@ class FileAttribute
 	byte* data;
 };
 
-class GameFile
+class FileFormat
 {
 	string filename;
 	vector<FileAttribute> attributes;
 
-	GameFile(string& name) :
+	FileFormat(string& name) :
 		filename(name)
 	{
 	}
