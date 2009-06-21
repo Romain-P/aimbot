@@ -8,6 +8,8 @@ Updater::Updater(GlutDisplay* glutDisplay) :
 {
 	display = glutDisplay;
 	updater = this;
+	envUpdater = new EnvironmentUpdater();
+
 	microTimer.startMicroTimer();
 }
 
