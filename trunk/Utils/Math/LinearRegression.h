@@ -16,12 +16,15 @@ class Line
 
 class LinearRegression
 {
+	/*
 	static Line* getRegression(vector<pair<float, float>>* input)
 	{
 		Line* line = new Line();
 
 
 	}
+
+	*/
 
 
 	/*

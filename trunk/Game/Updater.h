@@ -21,6 +21,7 @@ public:
 	void updateFunction()
 	{
 		frames++;
+
 		microTimer.stopMicroTimer();
 		deltaTime = microTimer.getDeltaTime();
 		microTimer.startMicroTimer();
