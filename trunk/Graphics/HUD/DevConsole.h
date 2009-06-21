@@ -97,11 +97,6 @@ public:
 		return visible;
 	}
 
-	void setActive()
-	{
-
-	}
-
 	void draw()
 	{
 

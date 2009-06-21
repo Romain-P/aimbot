@@ -13,9 +13,6 @@
 #include "HUD/PlayerHUD.h"
 #include "HUD/DevConsole.h"
 
-#include "../SceneObjects/Primitives/Cube.h"
-#include "../SceneObjects/Primitives/Box.h"
-
 using std::stringstream;
 using std::string;
 using std::vector;
@@ -31,12 +28,7 @@ private:
 	stringstream ss;
 	vector<Drawable*> drawables;
 
-	Box* box;
-	Cube* cube;
-
 	Camera* camera;
-	DevConsole* console;
-	PlayerHUD* hud;
 
 public:
 	GlutDisplay(Camera* cam);
