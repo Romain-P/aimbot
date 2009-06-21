@@ -2,7 +2,7 @@
 #define movementpredictor_h
 
 #include <vector>
-#include "../Entities/Player.h"
+#include "../SceneObjects/Entities/Player.h"
 
 using std::vector;
 

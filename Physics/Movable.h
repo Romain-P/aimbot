@@ -1,8 +1,12 @@
 #ifndef movable_h
 #define movable_h
 
+#include "../Utils/Structures/Position3.h"
 #include "../Utils/Structures/Vector3.h"
 
+/*
+ * Base class for all movable objects
+ */
 class Movable
 {
 private:

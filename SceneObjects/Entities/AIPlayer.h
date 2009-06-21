@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Player.h"
-#include "../AI/MovementPredictor.h"
+#include "../../AI/MovementPredictor.h"
 
 using std::vector;
 
@@ -14,7 +14,11 @@ private:
 	vector<MovementPredictor*> predictors;
 public:
 
-	AIPlayer(vector<Player*>& opponents)
+	AIPlayer()
+	{
+	}
+
+	void addOpponentsToPredict(vector<Player*>& opponents)
 	{
 		for(int i = 0; i < opponents.size(); i++)
 		{

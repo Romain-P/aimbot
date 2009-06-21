@@ -2,68 +2,41 @@
 #define entity_h
 
 #include <iostream>
-
-#include "../../Utils/Structures/Vector3.h"
-#include "../../Utils/Structures/Position3.h"
+#include "../../Physics/Movable.h"
 
 using std::string;
 
-class Entity
+class Entity : public Movable
 {
 protected:
 	string name;
 	Vector3 lookDirection;
 
 public:
-	Position3 position;
-	Vector3 velocity;
-
-	Entity()
+	Entity(const string& nom) :
+		name(nom)
 	{
-		this->name = name;
 	}
 
-	string getName()
+	const string& getName()
 	{
 		return name;
 	}
 
-	Position3 getPosition()
-	{
-		return position;
-	}
-
-	Vector3 getLookDirection()
+	const Vector3& getLookDirection()
 	{
 		return lookDirection;
 	}
 
-	Vector3 getVelocity()
+	void setName(const string& nom)
 	{
-		return velocity;
+		name = nom;
 	}
 
-
-	void setName(string n)
+	void setLookDirection(const Vector3& look)
 	{
-		name = n;
+		lookDirection = look;
 	}
-
-	void setPosition(Position3 p)
-	{
-		position = p;
-	}
-
-	void setLookDirection(Vector3 l)
-	{
-		lookDirection = l;
-	}
-
-	void setVelocity(Vector3 v)
-	{
-		velocity = v;
-	}
-
 };
 
 #endif
