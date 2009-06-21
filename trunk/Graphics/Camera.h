@@ -5,10 +5,11 @@
 
 #include "GraphicIncludes.h"
 #include "../Utils/Structures/Vector3.h"
+#include "../Physics/Movable.h"
 
 class GlutDisplay;
 
-class Camera
+class Camera : public Movable
 {
 private:
 	GlutDisplay* display;

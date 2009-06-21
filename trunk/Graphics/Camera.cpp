@@ -3,9 +3,9 @@
 
 Camera::Camera()
 {
-	eye = Vector3(0, 2, 0);
+	eye = Vector3(0, 3, 0);
 	up  = Vector3(0, 1, 0);
-	n 	= Vector3(0, 1, 0);
+	n 	= Vector3(0, 2, 0);
 	nDest = n;
 	calcUV();
 	eyeDest = eye;
@@ -21,10 +21,6 @@ void Camera::updateView()
 	static float speed = 0.05f;
 	eye += (eyeDest - eye) * speed;
 	n += (nDest - n) * speed;
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(display->getFOV(), display->getScreenAspect(), 0.01, 1000);
 	gluLookAt(eye.x, eye.y, eye.z, eye.x - n.x, eye.y - n.y, eye.z - n.z, up.x, up.y, up.z);
 }
 

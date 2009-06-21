@@ -2,13 +2,13 @@
 
 Updater* updater;
 
-Updater::Updater(GlutDisplay* glutDisplay) :
+Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* eUpdater) :
 	deltaTime(0),
 	frames(0)
 {
 	display = glutDisplay;
 	updater = this;
-	envUpdater = new EnvironmentUpdater();
+	envUpdater = eUpdater;
 
 	microTimer.startMicroTimer();
 }

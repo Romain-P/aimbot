@@ -10,11 +10,11 @@
 class Movable
 {
 private:
+public:
 	Position3 position;
 	Vector3 velocity;
 	Vector3 acceleration;
 
-public:
 	Movable()
 	{
 	}

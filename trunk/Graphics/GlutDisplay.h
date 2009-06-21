@@ -52,12 +52,16 @@ public:
 	void displayFunction()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.5, 0.5, 0.5, 0.0);
+		glClearColor(0.1, 0.16, 0.26, 0);
+		glMatrixMode(GL_MODELVIEW);
 
-		for(unsigned int i = 0; i < drawables.size(); i++)
+		static vector<Drawable*>::const_iterator it;
+		for(it = drawables.begin(); it != drawables.end(); ++it)
 		{
-			drawables.at(i)->draw();
+			(*it)->draw();
 		}
+
+		glFlush();
 		glutSwapBuffers();
 	}
 
@@ -65,7 +69,7 @@ public:
 	{
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(fieldOfView, screenAspect, 0.1, 10);
+		gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
 		camera->setLookAt();
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_MODELVIEW);
@@ -75,16 +79,15 @@ public:
 	{
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(fieldOfView, screenAspect, 0.1, 10);
+		gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
 		camera->updateView();
+		glMatrixMode(GL_MODELVIEW);
 	}
 
 	void addDrawable(Drawable* drawable)
 	{
 		drawables.push_back(drawable);
 
-		// seems to be insertion sort, but we'll
-		// only be doing this occasionally
 		sort(drawables.begin(), drawables.end(), zSort);
 	}
 

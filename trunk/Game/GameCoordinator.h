@@ -10,6 +10,7 @@
 #include "../Graphics/HUD/PlayerHUD.h"
 #include "../Graphics/HUD/DevConsole.h"
 #include "../Graphics/SceneDisplay.h"
+#include "../Physics/EnvironmentUpdater.h"
 #include "../Utils/Structures/FileFormat.h"
 
 
@@ -24,26 +25,30 @@ private:
 	DevConsole* console;
 	GlutDisplay* display;
 	SceneDisplay* scene;
+	EnvironmentUpdater* envUpdater;
 
 public:
 	GameCoordinator()
 	{
 		camera = new Camera();
 		display = new GlutDisplay(camera);
+		inputHandler = new InputHandler(this, camera);
 		camera->setDisplay(display);
 
-		updater = new Updater(display);
+		envUpdater = new EnvironmentUpdater();
+		updater = new Updater(display, envUpdater);
 
 		gameState = new GameState();
 		hud = new PlayerHUD(gameState, updater);
 		console = new DevConsole(hud);
+
 		scene = new SceneDisplay();
 
 		//display->addDrawable((Drawable*)hud);
 		//display->addDrawable((Drawable*)console);
 		display->addDrawable((Drawable*)scene);
 
-		inputHandler = new InputHandler(this);
+		envUpdater->addMovable((Movable*)camera);
 	}
 
 	void initialize()
@@ -61,6 +66,8 @@ public:
 		delete hud;
 		delete console;
 		delete inputHandler;
+		delete envUpdater;
+		delete scene;
 	}
 
 	void setFunctionCallbacks()
