@@ -58,7 +58,6 @@ public:
 		{
 			drawables.at(i)->draw();
 		}
-
 		glutSwapBuffers();
 	}
 
@@ -84,6 +83,8 @@ public:
 	{
 		drawables.push_back(drawable);
 
+		// seems to be insertion sort, but we'll
+		// only be doing this occasionally
 		sort(drawables.begin(), drawables.end(), zSort);
 	}
 

@@ -27,7 +27,7 @@ public:
 		microTimer.startMicroTimer();
 
 		display->updateCamera();
-		// update physics and stuff
+		glutPostRedisplay();
 	}
 
 	float getFps()

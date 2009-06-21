@@ -1,7 +1,8 @@
 #include "PlayerHUD.h"
 #include "../../Game/Updater.h"
 
-PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater)
+PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
+	Drawable(300)
 {
 	state = gameState;
 	updater = gameUpdater;
