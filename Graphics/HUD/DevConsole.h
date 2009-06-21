@@ -23,7 +23,7 @@ private:
 public:
 	enum position { TOP, LEFT, BOTTOM, RIGHT };
 
-	DevConsole(PlayerHUD* hud) : playerHud(hud)
+	DevConsole(PlayerHUD* hud) : Drawable(1), playerHud(hud)
 	{
 	}
 
@@ -99,7 +99,7 @@ public:
 
 	void draw()
 	{
-
+		//
 	}
 };
 
