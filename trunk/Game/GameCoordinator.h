@@ -37,8 +37,8 @@ public:
 		console = new DevConsole(hud);
 		scene = new SceneDisplay();
 
-		display->addDrawable((Drawable*)hud);
-		display->addDrawable((Drawable*)console);
+		//display->addDrawable((Drawable*)hud);
+		//display->addDrawable((Drawable*)console);
 		display->addDrawable((Drawable*)scene);
 
 		inputHandler = new InputHandler(this);

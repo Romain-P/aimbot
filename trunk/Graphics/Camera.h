@@ -9,8 +9,6 @@
 class Camera
 {
 private:
-	float alpha;
-	float beta;
 
 public:
 	Vector3 eyeDest, eye, up;
@@ -19,11 +17,9 @@ public:
 
 	Camera()
 	{
-		alpha = 0.3;
-		beta = 0.7071;
-		eye = Vector3(0, 2.5, 1.5);
-		up =  Vector3(0, 0, 1);
-		n 	= Vector3(0, 0.707, 0.707);
+		eye = Vector3(0, 2, 0);
+		up =  Vector3(0, 1, 0);
+		n 	= Vector3(0, 1, 0);
 		nDest = n;
 		calcUV();
 		eyeDest = eye;
@@ -36,6 +32,8 @@ public:
 		n += (nDest - n) * speed;
 		u += (uDest - u) * speed;
 		v += (vDest - v) * speed;
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
 		gluLookAt(eye.x, eye.y, eye.z, eye.x - n.x, eye.y - n.y, eye.z - n.z, up.x, up.y, up.z);
 	}
 
