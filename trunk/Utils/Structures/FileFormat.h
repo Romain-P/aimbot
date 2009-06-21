@@ -42,7 +42,7 @@ class FileFormat
 
 	void read()
 	{
-		in.open(name.c_str(), std::ios::in);
+		in.open(filename.c_str(), std::ios::in);
 		for(unsigned int i = 0; i < attributes.size(); i++)
 		{
 			out.read(attributes.at(i).data, attributes.at(i).numBytes);
@@ -50,7 +50,7 @@ class FileFormat
 	}
 	void write()
 	{
-		out.open(name.c_str(), std::ios::out);
+		out.open(filename.c_str(), std::ios::out);
 		for(unsigned int i = 0; i < attributes.size(); i++)
 		{
 			out.write(attributes.at(i).data, attributes.at(i).numBytes);
