@@ -36,18 +36,16 @@ public:
 	{
 		vector<PrimitiveFace> faces = mesh->getFaces();
 		vector<Vector3> vertices = mesh->getVertices();
+		vector<PrimitiveFace>::const_iterator it;
 
-		for (unsigned int face = 0; face < faces.size(); face++)
+		for (it = faces.begin(); it != faces.end(); ++it)
 		{
-			int isize = faces.at(face).indices.size();
-
+			unsigned int isize = it->indices.size();
 			glBegin(GL_POLYGON);
-			for (int i = 0; i < isize; i++)
+			for(unsigned int i = 0; i < isize; i++)
 			{
-				int index = faces.at(face).indices.at(i);
-				glVertex3f(vertices.at(index).x,
-						vertices.at(index).y,
-						vertices.at(index).z);
+				Vector3& v = vertices.at(it->indices.at(i));
+				glVertex3f(v.x, v.y, v.z);
 			}
 			glEnd();
 		}

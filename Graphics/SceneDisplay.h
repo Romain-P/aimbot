@@ -8,7 +8,6 @@
 #include "../SceneObjects/Primitives/Box.h"
 #include "../SceneObjects/Maps/Map.h"
 
-
 class SceneDisplay : public Drawable
 {
 private:
@@ -27,11 +26,6 @@ public:
 	{
 		glColor3f(0, 1, 0);
 		glPushMatrix();
-
-			glBegin(GL_POINTS);
-			glVertex3f(0, 0, 0);
-			glEnd();
-
 			MeshRenderer::draw(cube);
 			glTranslatef(-5, 0, 0);
 			MeshRenderer::draw(box);

@@ -16,8 +16,6 @@ class ConfigMap : public Singleton<ConfigMap>
 private:
 	map<string, string> config;
 	fstream file;
-
-	//private constructor forces use of ConfigMap::instance()
 	ConfigMap();
 
 public:
