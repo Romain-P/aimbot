@@ -38,17 +38,17 @@ public:
 		vector<Vector3> vertices = mesh->getVertices();
 		vector<PrimitiveFace>::const_iterator it;
 
+		glBegin(GL_QUADS);
 		for (it = faces.begin(); it != faces.end(); ++it)
 		{
 			unsigned int isize = it->indices.size();
-			glBegin(GL_POLYGON);
 			for(unsigned int i = 0; i < isize; i++)
 			{
 				Vector3& v = vertices.at(it->indices.at(i));
 				glVertex3f(v.x, v.y, v.z);
 			}
-			glEnd();
 		}
+		glEnd();
 	}
 };
 

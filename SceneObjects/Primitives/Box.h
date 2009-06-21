@@ -16,11 +16,11 @@ public:
 	{
 		vertices.push_back(Vector3( x,  y,  z));
 		vertices.push_back(Vector3( x, -y,  z));
-		vertices.push_back(Vector3( x, -y, -z));
-		vertices.push_back(Vector3( x,  y, -z));
-		vertices.push_back(Vector3(-x,  y,  z));
 		vertices.push_back(Vector3(-x, -y,  z));
-		vertices.push_back(Vector3(-x, -y, -z));
+		vertices.push_back(Vector3(-x,  y,  z));
+		vertices.push_back(Vector3( x, -y, -z));
+		vertices.push_back(Vector3( x, -y, -z));
+		vertices.push_back(Vector3(-x,  y, -z));
 		vertices.push_back(Vector3(-x,  y, -z));
 
 		faces.push_back(PrimitiveFace(6, 1, 2, 3));
