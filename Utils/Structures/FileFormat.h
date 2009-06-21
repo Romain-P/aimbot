@@ -31,6 +31,7 @@ public:
 class FileFormat
 {
 	string filename;
+	fstream in;
 	fstream out;
 	vector<FileAttribute> attributes;
 
@@ -41,14 +42,20 @@ class FileFormat
 
 	void read()
 	{
-
+		in.open(name.c_str(), std::ios::in);
+		for(unsigned int i = 0; i < attributes.size(); i++)
+		{
+			out.read(attributes.at(i).data, attributes.at(i).numBytes);
+		}
 	}
 	void write()
 	{
+		out.open(name.c_str(), std::ios::out);
 		for(unsigned int i = 0; i < attributes.size(); i++)
 		{
 			out.write(attributes.at(i).data, attributes.at(i).numBytes);
 		}
+		out.close();
 	}
 };
 
