@@ -10,15 +10,6 @@ public:
 	{
 
 	}
-	void read()
-	{
-
-	}
-
-	void write()
-	{
-
-	}
 };
 
 #endif
