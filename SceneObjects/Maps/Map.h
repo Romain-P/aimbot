@@ -4,12 +4,13 @@
 #include <string>
 
 #include "MapObject.h"
-#include "MapPool.h"
 #include "../SceneObject.h"
 #include "../Mesh.h"
 #include "../Primitives/PrimitiveMesh.h"
 #include "../DestroyableMesh.h"
 #include "../ImmutableMesh.h"
+
+class MapPool;
 
 using std::string;
 

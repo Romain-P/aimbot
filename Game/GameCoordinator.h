@@ -9,7 +9,9 @@
 #include "../Graphics/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
 #include "../Graphics/HUD/DevConsole.h"
+#include "../Graphics/SceneDisplay.h"
 #include "../Utils/Structures/FileFormat.h"
+
 
 class GameCoordinator
 {
@@ -21,8 +23,9 @@ private:
 	PlayerHUD* hud;
 	DevConsole* console;
 	GlutDisplay* display;
+	SceneDisplay* scene;
+
 public:
-	//I don't know how to untangle this mess, there must be cleaner ways of doing this
 	GameCoordinator()
 	{
 		camera = new Camera();
@@ -32,10 +35,11 @@ public:
 		gameState = new GameState();
 		hud = new PlayerHUD(gameState, updater);
 		console = new DevConsole(hud);
-		display = new GlutDisplay(camera);
+		scene = new SceneDisplay();
 
 		display->addDrawable((Drawable*)hud);
 		display->addDrawable((Drawable*)console);
+		display->addDrawable((Drawable*)scene);
 
 		inputHandler = new InputHandler(this);
 	}
@@ -48,11 +52,12 @@ public:
 
 	~GameCoordinator()
 	{
-		delete console;
+		delete camera;
+		delete display;
 		delete updater;
 		delete gameState;
 		delete hud;
-		delete display;
+		delete console;
 		delete inputHandler;
 	}
 
