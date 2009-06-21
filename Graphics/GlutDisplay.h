@@ -88,16 +88,24 @@ public:
 		sort(drawables.begin(), drawables.end(), zSort);
 	}
 
-	void setFOV(string& fov)
+	void setFOV(float fov)
 	{
-		ss << fov;
-		ss >> fieldOfView;
-		ss.clear();
+		fieldOfView = fov;
+	}
+
+	float getFOV()
+	{
+		return fieldOfView;
 	}
 
 	float getGamma()
 	{
 		return gamma;
+	}
+
+	double getScreenAspect()
+	{
+		return screenAspect;
 	}
 
 	static bool zSort(Drawable* a, Drawable* b)

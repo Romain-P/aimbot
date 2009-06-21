@@ -30,6 +30,8 @@ public:
 	{
 		camera = new Camera();
 		display = new GlutDisplay(camera);
+		camera->setDisplay(display);
+
 		updater = new Updater(display);
 
 		gameState = new GameState();

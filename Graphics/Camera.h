@@ -6,49 +6,23 @@
 #include "GraphicIncludes.h"
 #include "../Utils/Structures/Vector3.h"
 
+class GlutDisplay;
+
 class Camera
 {
 private:
+	GlutDisplay* display;
 
 public:
 	Vector3 eyeDest, eye, up;
 	Vector3 uDest, vDest, nDest;
 	Vector3 u, v, n;
 
-	Camera()
-	{
-		eye = Vector3(0, 2, 0);
-		up  = Vector3(0, 1, 0);
-		n 	= Vector3(0, 1, 0);
-		nDest = n;
-		calcUV();
-		eyeDest = eye;
-	}
-
-	void updateView()
-	{
-		static float speed = 0.05f;
-		eye += (eyeDest - eye) * speed;
-		n += (nDest - n) * speed;
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(80, 1.6, 0.1, 200);
-		gluLookAt(eye.x, eye.y, eye.z, eye.x - n.x, eye.y - n.y, eye.z - n.z, up.x, up.y, up.z);
-	}
-
-	void calcUV()
-	{
-		uDest = Vector3(up.cross(nDest));
-		uDest.normalize();
-		vDest = Vector3(nDest.cross(uDest));
-		vDest.normalize();
-	}
-
-    inline void setLookAt()
-	{
-		gluLookAt(eye.x, eye.y, eye.z, eye.x - n.x, eye.y - n.y, eye.z - n.z, up.x, up.y, up.z);
-	}
+	Camera();
+	void updateView();
+	void calcUV();
+	void setDisplay(GlutDisplay* display);
+    void setLookAt();
 };
 
 #endif
