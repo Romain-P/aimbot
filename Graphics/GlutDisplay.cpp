@@ -3,11 +3,13 @@
 GlutDisplay* glutDisplay;
 
 GlutDisplay::GlutDisplay(Camera* cam) :
-	fieldOfView(80),
+	fieldOfView(120),
 	camera(cam)
 {
 	glutDisplay = this;
 	screenAspect = double(glutGet(GLUT_SCREEN_WIDTH)) / glutGet(GLUT_SCREEN_HEIGHT);
+
+	camera->updateView();
 }
 
 void GlutDisplay::displayDelegate()

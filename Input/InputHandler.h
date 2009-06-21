@@ -2,20 +2,29 @@
 #define inputhandler_h
 
 #include "../Graphics/GraphicIncludes.h"
+#include "../Graphics/Camera.h"
 #include "../Physics/EnvironmentUpdater.h"
+#include "../Utils/Structures/Vector3.h"
 
 class GameCoordinator;
 
 class InputHandler
 {
 private:
+	Camera* camera;
 	EnvironmentUpdater* updater;
 	GameCoordinator* coordinator;
 
 public:
 	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
 
-	InputHandler(GameCoordinator* coordinator);
+	InputHandler(GameCoordinator* coordinator, Camera* camera);
+
+	void keyboardFunction(unsigned char key);
+	void keyUpFunction(unsigned char key);
+	void specialKeyFunction(int key);
+	void mouseFunction(int button, int state, int x, int y);
+	void motionFunction(int x, int y);
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
 	static void keyUpDelegate(unsigned char key, int x, int y);
@@ -24,32 +33,6 @@ public:
 	static void motionDelegate(int x, int y);
 	static void updateDelegate();
 
-	void keyboardFunction(unsigned char key);
-
-	void keyUpFunction(unsigned char key)
-	{
-
-	}
-
-	void specialKeyFunction(int key)
-	{
-
-	}
-
-	void mouseFunction(int button, int state, int x, int y)
-	{
-		glutPostRedisplay();
-	}
-
-	void motionFunction(int x, int y)
-	{
-		glutPostRedisplay();
-	}
 };
 #endif
 
-
-
-/*
- * TODO: Should consider making this a singleton
- */

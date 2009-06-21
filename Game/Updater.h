@@ -16,7 +16,7 @@ private:
 	GlutDisplay* display;
 
 public:
-	Updater(GlutDisplay* display);
+	Updater(GlutDisplay* display, EnvironmentUpdater* eUpdater);
 
 	void updateFunction()
 	{
