@@ -9,6 +9,7 @@
 #include "../Graphics/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
 #include "../Graphics/HUD/DevConsole.h"
+#include "../Utils/Structures/FileFormat.h"
 
 class GameCoordinator
 {

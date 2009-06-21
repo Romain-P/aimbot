@@ -10,18 +10,8 @@ public:
 	MapFileFormat()
 	{
 		int totalBytes = 0;
-		FileAttribute header(8, (char*)"MAP_");
-		FileAttribute filesize(4, (char*)totalBytes);
-	}
-
-	void read()
-	{
-
-	}
-
-	void write()
-	{
-
+		attributes.push_back(FileAttribute(8, (char*)"MAP_"));
+		attributes.push_back(FileAttribute(4, (char*)totalBytes));
 	}
 };
 
