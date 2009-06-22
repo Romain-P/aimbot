@@ -21,7 +21,7 @@ private:
 public:
 	SceneDisplay() : Drawable(0)
 	{
-		cube = new Cube(0.5f);
+		cube = new Cube(0.25f);
 		box1 = new Box(0.2f, 1.5f, 2.f);
 		box2 = new Box(2.f, 1.5f, 0.2f);
 		tall = new Box(0.05f, 4.f, 0.05f);
@@ -33,6 +33,7 @@ public:
 		delete cube;
 		delete box1;
 		delete box2;
+		delete tall;
 		delete floor;
 	}
 
