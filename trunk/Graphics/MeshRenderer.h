@@ -45,6 +45,7 @@ public:
 			for(unsigned int i = 0; i < isize; i++)
 			{
 				Vector3& v = vertices.at(it->indices.at(i));
+				glColor3f(v.x, v.y, v.z);
 				glVertex3f(v.x, v.y, v.z);
 			}
 		}
