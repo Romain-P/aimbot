@@ -24,7 +24,7 @@ public:
 		velocity += acceleration * timeStep;
 		destination += velocity * timeStep;
 
-		position += (destination - position) * smoothness;
+		displacement += (destination - displacement) * smoothness;
 	}
 };
 

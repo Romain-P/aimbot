@@ -21,10 +21,9 @@ void GlutDisplay::initGraphicsOptions()
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 	glLineWidth(1.0);
 	glPointSize(2.0);
-	//glDepthMask(GL_FALSE);
 	glEnable(GL_DEPTH_TEST);
-
 	glClearColor(0.1, 0.16, 0.26, 0);
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 }
 
 void GlutDisplay::displayFunction()
