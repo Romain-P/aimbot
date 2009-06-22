@@ -44,8 +44,8 @@ public:
 
 		scene = new SceneDisplay();
 
-		//display->addDrawable((Drawable*)hud);
-		//display->addDrawable((Drawable*)console);
+		display->addDrawable((Drawable*)hud);
+		display->addDrawable((Drawable*)console);
 		display->addDrawable((Drawable*)scene);
 
 		envUpdater->addMovable((Movable*)camera);

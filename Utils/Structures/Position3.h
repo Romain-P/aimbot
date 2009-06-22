@@ -31,11 +31,44 @@ public:
 		return Position3(x * value, y * value, z * value);
 	}
 
+	Position3 operator+(const Position3& other)
+	{
+		return Position3(x + other.x, y + other.y, z + other.z);
+	}
+
 	void operator+=(const Vector3& vect)
 	{
 		x += vect.x;
 		y += vect.y;
 		z += vect.z;
+	}
+
+
+
+	std::string print()
+	{
+		float nums[] =
+		{
+			int(1000*x)/1000.f,
+			int(1000*y)/1000.f,
+			int(1000*z)/1000.f
+		};
+
+		std::string s[3];
+		std::string final = "";
+		std::stringstream ss;
+
+		for(int i = 0; i < 3; i++)
+		{
+			ss << nums[i];
+			ss >> s[i];
+			ss.clear();
+			final += nums[i] < 0 ? "" : " ";
+			final += s[i];
+			for(unsigned int j = 0; j < 8 - (s[i].length() - int(nums[i] < 0)); j++)
+				final += " ";
+		}
+		return final;
 	}
 };
 
