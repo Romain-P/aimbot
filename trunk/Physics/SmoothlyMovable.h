@@ -12,7 +12,7 @@ private:
 public:
 	Vector3 destination;
 
-	ContinuousMovable(float smooth) :
+	SmoothlyMovable(float smooth) :
 		smoothness(smooth)
 	{
 	}
