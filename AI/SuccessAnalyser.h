@@ -1,7 +1,7 @@
 #ifndef successanalyser_h
 #define successanalyser_h
 
-#include "Utils/NeuralNetwork.h"
+#include "MachineLearning/NeuralNetwork.h"
 
 class SuccessAnalyser
 {
