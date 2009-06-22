@@ -1,9 +1,9 @@
-#ifndef continuousmovable_h
-#define continuousmovable_h
+#ifndef smoothlymovable_h
+#define smoothlymovable_h
 
 #include "Movable.h"
 
-class ContinuousMovable : public Movable
+class SmoothlyMovable : public Movable
 {
 private:
 	// should be between 0.02 and 0.2 for best results
