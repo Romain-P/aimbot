@@ -20,23 +20,22 @@ void InputHandler::keyboardFunction(unsigned char key)
 		break;
 	}
 	case 'w': 	case 'W':
-		camera->velocity = Vector3(-1, 0, 0);
+		camera->velocity.z = -1;
 		break;
 	case 'a': 	case 'A':
-		camera->velocity = Vector3(0, 0, -1);
+		camera->velocity.x = -1;
 		break;
 	case 's': 	case 'S':
-		camera->velocity = Vector3(1, 0, 0);
+		camera->velocity.z = 1;
 		break;
 	case 'd':	case 'D':
-		camera->velocity = Vector3(0, 0, 1);
+		camera->velocity.x = 1;
 		break;
 
 	case '`':
 		coordinator->toggleConsoleVisibility();
 		break;
 	}
-	std::cout << camera->displacement.print() << std::endl;
 	glutPostRedisplay();
 }
 
@@ -45,16 +44,16 @@ void InputHandler::keyUpFunction(unsigned char key)
 	switch (key)
 	{
 	case 'w': 	case 'W':
-		camera->velocity = Vector3(0);
+		camera->velocity.z = 0;
 		break;
 	case 'a': 	case 'A':
-		camera->velocity = Vector3(0);
+		camera->velocity.x = 0;
 		break;
 	case 's': 	case 'S':
-		camera->velocity = Vector3(0);
+		camera->velocity.z = 0;
 		break;
 	case 'd':	case 'D':
-		camera->velocity = Vector3(0);
+		camera->velocity.x = 0;
 		break;
 	}
 	glutPostRedisplay();
@@ -62,21 +61,15 @@ void InputHandler::keyUpFunction(unsigned char key)
 
 void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
-
 }
 
 void InputHandler::motionFunction(int x, int y)
 {
-
 }
 
 void InputHandler::specialKeyFunction(int key)
 {
 }
-
-
-
-
 
 
 

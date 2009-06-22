@@ -3,9 +3,9 @@
 
 Camera::Camera()
 {
-	start = Position3(0, 3, 0);
+	start = Position3(0, 0, 3);
 	up  = Vector3(0, 1, 0);
-	n 	= Vector3(0, 2, 0);
+	n 	= Vector3(0, 0, 2);
 	nDest = n;
 	calcUV();
 }
