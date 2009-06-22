@@ -45,19 +45,19 @@ void InputHandler::keyUpFunction(unsigned char key)
 	switch (key)
 	{
 	case 'w':
-		if(camera->velocity.z == -1)
+		if(camera->velocity.z < 0)
 			camera->velocity.z = 0;
 		break;
 	case 'a':
-		if(camera->velocity.x == -1)
+		if(camera->velocity.x < 0)
 			camera->velocity.x = 0;
 		break;
 	case 's':
-		if(camera->velocity.z == 1)
+		if(camera->velocity.z > 0)
 			camera->velocity.z = 0;
 		break;
 	case 'd':
-		if(camera->velocity.x == 1)
+		if(camera->velocity.x > 0)
 			camera->velocity.x = 0;
 		break;
 	}
