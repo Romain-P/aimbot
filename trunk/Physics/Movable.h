@@ -11,7 +11,8 @@ class Movable
 {
 private:
 public:
-	Position3 position;
+	Position3 start;
+	Position3 displacement;
 	Vector3 velocity;
 	Vector3 acceleration;
 
@@ -24,7 +25,12 @@ public:
 		if(timeStep <= 0) return;
 
 		velocity += acceleration * timeStep;
-		position += velocity * timeStep;
+		displacement += velocity * timeStep;
+	}
+
+	Position3 getPosition()
+	{
+		return displacement + start;
 	}
 };
 

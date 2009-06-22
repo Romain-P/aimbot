@@ -35,8 +35,8 @@ void InputHandler::keyboardFunction(unsigned char key)
 	case '`':
 		coordinator->toggleConsoleVisibility();
 		break;
-
 	}
+	std::cout << camera->displacement.print() << std::endl;
 	glutPostRedisplay();
 }
 

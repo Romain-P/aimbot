@@ -70,7 +70,7 @@ public:
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
-		camera->setLookAt();
+		camera->updateView();
 		glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 		glMatrixMode(GL_MODELVIEW);
 	}
