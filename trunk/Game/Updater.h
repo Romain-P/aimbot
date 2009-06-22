@@ -29,9 +29,6 @@ public:
 		display->updateCamera();
 		envUpdater->updateEntities(deltaTime);
 
-		if(frames % 60 == 0)
-			std::cout << getFps() << std::endl;
-
 		glutPostRedisplay();
 	}
 
