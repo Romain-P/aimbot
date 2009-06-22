@@ -12,26 +12,25 @@ InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera)
 
 void InputHandler::keyboardFunction(unsigned char key)
 {
+	key = tolower(key);
+
 	switch(key)
 	{
 	case 27:
-	{
 		exit(0);
 		break;
-	}
-	case 'w': 	case 'W':
+	case 'w':
 		camera->velocity.z = -1;
 		break;
-	case 'a': 	case 'A':
+	case 'a':
 		camera->velocity.x = -1;
 		break;
-	case 's': 	case 'S':
+	case 's':
 		camera->velocity.z = 1;
 		break;
-	case 'd':	case 'D':
+	case 'd':
 		camera->velocity.x = 1;
 		break;
-
 	case '`':
 		coordinator->toggleConsoleVisibility();
 		break;
@@ -41,19 +40,25 @@ void InputHandler::keyboardFunction(unsigned char key)
 
 void InputHandler::keyUpFunction(unsigned char key)
 {
+	key = tolower(key);
+
 	switch (key)
 	{
-	case 'w': 	case 'W':
-		camera->velocity.z = 0;
+	case 'w':
+		if(camera->velocity.z == -1)
+			camera->velocity.z = 0;
 		break;
-	case 'a': 	case 'A':
-		camera->velocity.x = 0;
+	case 'a':
+		if(camera->velocity.x == -1)
+			camera->velocity.x = 0;
 		break;
-	case 's': 	case 'S':
-		camera->velocity.z = 0;
+	case 's':
+		if(camera->velocity.z == 1)
+			camera->velocity.z = 0;
 		break;
-	case 'd':	case 'D':
-		camera->velocity.x = 0;
+	case 'd':
+		if(camera->velocity.x == 1)
+			camera->velocity.x = 0;
 		break;
 	}
 	glutPostRedisplay();

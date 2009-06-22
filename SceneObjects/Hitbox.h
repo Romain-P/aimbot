@@ -9,9 +9,9 @@
  */
 
 #include <vector>
-#include "../../Utils/Structures/Vector3.h"
-#include "../../Utils/Math/LinearRegression.h"
-#include "../Mesh.h"
+#include "../Utils/Structures/Vector3.h"
+#include "../Utils/Math/LinearRegression.h"
+#include "Mesh.h"
 
 using std::vector;
 
