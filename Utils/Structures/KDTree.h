@@ -2,6 +2,7 @@
 #define KDTree_h
 
 #include "Vector3.h"
+#include "../Algo/MergeSort.h"
 
 class KDTree
 {
@@ -25,14 +26,27 @@ public:
 		else
 		{
 
-			int axis = depth % 3;
+			int axisNum = depth % 3;
+			char axis = null;
+			switch (axisNum){
+
+				case 0:
+					axis = x;
+				case 1:
+					axis = y;
+				case 2:
+					axis = z;
+			}
+
+
+			for(int i = 0; i < length; i++)
+			{
+
+			}
 
 			//Sort the list and get the median
+			Algorithms::mergeSort();
 			Vector3 median = null;
-			for(int i =0; i < length;i++)
-			{
-				// you know how to quickly make a merge sort?
-			}
 
 			//Create node and subtrees
 			Node node = new Node(median);
