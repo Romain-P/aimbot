@@ -21,9 +21,7 @@ public:
 	bool bigEndian;
 
 	FileAttribute(int bytes, char* dat, bool endian = false) :
-		numBytes(bytes),
-		data(dat),
-		bigEndian(endian)
+		numBytes(bytes), data(dat), bigEndian(endian)
 	{
 	}
 };
@@ -43,16 +41,14 @@ class FileFormat
 	void read()
 	{
 		in.open(filename.c_str(), std::ios::in);
-		for(unsigned int i = 0; i < attributes.size(); i++)
-		{
+		for (unsigned int i = 0; i < attributes.size(); i++) {
 			out.read(attributes.at(i).data, attributes.at(i).numBytes);
 		}
 	}
 	void write()
 	{
 		out.open(filename.c_str(), std::ios::out);
-		for(unsigned int i = 0; i < attributes.size(); i++)
-		{
+		for (unsigned int i = 0; i < attributes.size(); i++) {
 			out.write(attributes.at(i).data, attributes.at(i).numBytes);
 		}
 		out.close();

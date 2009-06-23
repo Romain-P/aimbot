@@ -1,7 +1,7 @@
 #ifndef destinationpath_h
 #define destinationpath_h
 
-#include "../Utils/AStarSearch.h"
+#include "../Utils/Algo/AStarSearch.h"
 
 class DestinationPath
 {
