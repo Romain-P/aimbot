@@ -8,9 +8,24 @@
 
 class GameCoordinator;
 
+class MouseEvent
+{
+public:
+	int downX;
+	int downY;
+	int x;
+	int y;
+	int lastX;
+	int lastY;
+	int button;
+	int state;
+};
+
 class InputHandler
 {
 private:
+	MouseEvent mouseEvent;
+
 	Camera* camera;
 	EnvironmentUpdater* updater;
 	GameCoordinator* coordinator;

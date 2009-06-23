@@ -45,7 +45,6 @@ public:
 		scene = new SceneDisplay();
 
 		display->addDrawable((Drawable*)hud);
-		display->addDrawable((Drawable*)console);
 		display->addDrawable((Drawable*)scene);
 
 		envUpdater->addMovable((Movable*)camera);
@@ -86,7 +85,10 @@ public:
 
 	void toggleConsoleVisibility()
 	{
-		console->toggleVisibility();
+		if(console->isVisible())
+			display->removeDrawable((Drawable*)console);
+		else
+			display->addDrawable((Drawable*)console);
 	}
 };
 
