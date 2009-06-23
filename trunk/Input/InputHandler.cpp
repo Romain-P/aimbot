@@ -12,6 +12,8 @@ InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera)
 
 void InputHandler::keyboardFunction(unsigned char key)
 {
+	int modifiers = glutGetModifiers();
+	std::cout << "modifiers: " << modifiers << std::endl;
 	key = tolower(key);
 
 	switch(key)
@@ -31,9 +33,14 @@ void InputHandler::keyboardFunction(unsigned char key)
 	case 'd':
 		camera->velocity.x = 1;
 		break;
+	case ' ':
+		camera->velocity.y = -1;
+		break;
 	case '`':
 		coordinator->toggleConsoleVisibility();
 		break;
+	default:
+		std::cout << "key pressed: " << int(key) << std::endl;
 	}
 	glutPostRedisplay();
 }
@@ -60,6 +67,9 @@ void InputHandler::keyUpFunction(unsigned char key)
 		if(camera->velocity.x > 0)
 			camera->velocity.x = 0;
 		break;
+	case ' ':
+		camera->velocity.y = 0;
+		break;
 	}
 	glutPostRedisplay();
 }
@@ -74,6 +84,7 @@ void InputHandler::motionFunction(int x, int y)
 
 void InputHandler::specialKeyFunction(int key)
 {
+	std::cout << "special key pressed" << std::endl;
 }
 
 
