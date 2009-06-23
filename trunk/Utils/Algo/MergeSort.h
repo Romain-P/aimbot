@@ -20,22 +20,24 @@ namespace Algorithms
 			return;
 		}
 
-		int f = n / 2;		/* f = number of elements in first half */
+		int f = n / 2;
 
-			/* Recursively sort both halves */
-		merge_sort(a, f);
-		merge_sort(a+f, n-f);
+		mergeSort(a, f);
+		mergeSort(a+f, n-f);
 
 		/* Merge */
-		T *s = new T[n];	/* temporary array to keep the sorted sequence */
+		T *s = new T[n];
 
 		for (i = 0, j = f, k = 0; i < f && j < n;)
 			s[k++] = (a[i] < a[j]) ? a[i++] : a[j++];
 
-			while (i < f) s[k++] = a[i++];
-			while (j < n) s[k++] = a[j++];
+			while (i < f)
+				s[k++] = a[i++];
+			while (j < n)
+				s[k++] = a[j++];
 
-			for (i = 0; i < n; i++) a[i] = s[i];
+			for (i = 0; i < n; i++)
+				a[i] = s[i];
 			delete[] s;
 	}
 
