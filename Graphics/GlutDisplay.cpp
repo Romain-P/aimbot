@@ -64,8 +64,17 @@ void GlutDisplay::updateCamera()
 void GlutDisplay::addDrawable(Drawable* drawable)
 {
 	drawables.push_back(drawable);
-
 	sort(drawables.begin(), drawables.end(), zSort);
+}
+
+void GlutDisplay::removeDrawable(Drawable* drawable)
+{
+	vector<Drawable*>::iterator it = drawables.begin();
+	while(*it != drawable && it != drawables.end())
+		++it;
+
+	if(it != drawables.end() || *it == drawable)
+		drawables.erase(it);
 }
 
 void GlutDisplay::setFOV(float fov)

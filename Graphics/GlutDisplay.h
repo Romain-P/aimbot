@@ -38,6 +38,7 @@ public:
 	void reshapeFunction(int w, int h);
 	void updateCamera();
 	void addDrawable(Drawable* drawable);
+	void removeDrawable(Drawable* drawable);
 	void startOrthographicMode();
 	void stopOrthographicMode();
 
