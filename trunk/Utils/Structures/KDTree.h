@@ -3,19 +3,22 @@
 
 #include "Vector3.h"
 #include "../Algo/MergeSort.h"
+#include <vector>
+
+using std::vector;
 
 class KDTree
 {
 public:
 
+	char axis = null;
 
-
-	KDTree (Vector3 pointList[], ,int length, int depth)
+	KDTree (vector<Vector3> pointList, ,int length, int depth)
 	{
 		constructTree(pointList, length, depth);
 	}
 
-	static Node constructTree(Vector3 pointList[], ,int length, int depth)
+	static Node constructTree(vector<Vector3> pointList, ,int length, int depth)
 	{
 
 
@@ -27,7 +30,6 @@ public:
 		{
 
 			int axisNum = depth % 3;
-			char axis = null;
 			switch (axisNum){
 
 				case 0:
@@ -38,14 +40,8 @@ public:
 					axis = z;
 			}
 
-
-			for(int i = 0; i < length; i++)
-			{
-
-			}
-
 			//Sort the list and get the median
-			Algorithms::mergeSort();
+			sort(pointList.begin(), pointList.end(), vectorSort);
 			Vector3 median = null;
 
 			//Create node and subtrees
@@ -69,6 +65,22 @@ public:
 			return Node;
 		}
 	}
+
+	static bool vectorSort(const Vector3& a, const Vector3& b)
+	{
+
+		switch(axis)
+		{
+			case y:
+				return a.y < b.y;
+			case z:
+				return a.z < b.z;
+		}
+		return a.x < b.x;
+
+	}
+
+
 
 };
 
