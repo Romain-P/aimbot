@@ -13,12 +13,12 @@ public:
 
 	char axis = null;
 
-	KDTree (vector<Vector3> pointList, ,int length, int depth)
+	KDTree (vector<Vector3*> pointList, ,int length, int depth)
 	{
 		constructTree(pointList, length, depth);
 	}
 
-	static Node constructTree(vector<Vector3> pointList, ,int length, int depth)
+	static Node constructTree(vector<Vector3*> pointList, ,int length, int depth)
 	{
 
 
@@ -42,21 +42,21 @@ public:
 
 			//Sort the list and get the median
 			sort(pointList.begin(), pointList.end(), vectorSort);
-			Vector3 median = null;
+			Vector3 median = pointList.at(length/2);
 
 			//Create node and subtrees
 			Node node = new Node(median);
 
-			Vector3 firstHalf[length/2];
+			vector<Vector3*> firstHalf;
 			for(int i = 0; i < length/2; i++)
 			{
-				firstHalf[i] = pointList[i];
+				firstHalf.at(i) = pointList.at(i);
 			}
 
-			Vector3 secondHalf[length/2];
+			vector<Vector3*> secondHalf;
 			for (int i = 0; i < length/2; i++)
 			{
-				secondHalf[i] = pointList[i + length/2];
+				secondHalf.at(i) = pointList.at(i + length/2);
 			}
 
 			Node.leftChild = KDTree(firstHalf, length/2, depth++);
