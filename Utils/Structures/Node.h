@@ -1,30 +1,20 @@
-/*
- * Node.h
- *
- *  Created on: Jun 17, 2009
- *      Author: Corey
- */
-
-#ifndef NODE_H_
-#define NODE_H_
+#ifndef node_h
+#define node_h
 
 #include "Position3.h"
 
 class Node
 {
-
-
-
 public:
 
-	Position3* point;
+	Position3 point;
 	Node *rightChild, *leftChild;
 
-	Node() {
-
+	Node()
+	{
 	}
 
-	void setPoint(Position3*& p)
+	void setPoint(Position3& p)
 	{
 		point = p;
 	}
