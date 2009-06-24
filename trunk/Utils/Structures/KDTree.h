@@ -1,11 +1,9 @@
-#ifndef KDTree_h
-#define KDTree_h
+#ifndef kdtree_h
+#define kdtree_h
 
-#include "Vector3.h"
+#include <vector>
 #include "Position3.h"
 #include "Node.h"
-#include "../Algo/MergeSort.h"
-#include <vector>
 
 using std::vector;
 
@@ -13,16 +11,15 @@ class KDTree
 {
 public:
 
-
-	KDTree (vector<Position3*> pointList, int length, int depth)
+	KDTree (vector<Position3>& pointList, int length, int depth)
 	{
-		Node* root = new Node();
+		Node root;
 		constructTree(pointList, length, depth, root);
 	}
 
-	static Node constructTree(vector<Position3*> pointList, int length, int depth, Node*& node)
+	Node constructTree(vector<Position3>& pointList, int length, int depth, Node& node)
 	{
-
+		int half = length / 2;
 
 		if (length == 0)
 		{
@@ -30,10 +27,10 @@ public:
 		}
 		else
 		{
-
 			// Sort depending on which axis you are splitting on
 			int axisNum = depth % 3;
-			switch (axisNum){
+			switch (axisNum)
+			{
 
 				case 0:
 					sort(pointList.begin(), pointList.end(), vectorSortX);
@@ -47,27 +44,16 @@ public:
 			}
 
 			//Create node sand subtrees
-			Position3* median = pointList.at(length/2);
+			Position3 median = pointList.at(half);
 			node.setPoint(median);
 
+			vector<Position3> firstHalf(pointList.begin(), pointList.begin() + half);
+			vector<Position3> secondHalf(pointList.begin() + half, pointList.end());
 
-			//vector<Position3*> firstHalf(pointList.begin(), pointList.begin() + length/2);
-			//vector<Position3*> secondHalf(pointList.begin()+ length/2, pointList.end());
+			depth++;
 
-			vector<Position3*> firstHalf;
-			for(int i = 0; i < length/2; i++)
-			{
-				firstHalf.at(i) = pointList.at(i);
-			}
-
-			vector<Position3*> secondHalf;
-			for (int i = 0; i < length/2; i++)
-			{
-				secondHalf.at(i) = pointList.at(i + length/2);
-			}
-
-			KDTree(firstHalf, length/2, depth++, node.leftChild);
-			KDTree(secondHalf, length/2, depth++, node.rightChild);
+			constructTree(firstHalf, half, depth, *(node.leftChild));
+			constructTree(secondHalf, half, depth, *(node.rightChild));
 
 			return node;
 		}
