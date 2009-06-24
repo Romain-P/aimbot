@@ -8,7 +8,7 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include "Vector3.h"
+#include "Position3.h"
 
 class Node
 {
@@ -17,10 +17,10 @@ class Node
 
 public:
 
-	Vector3 point;
+	Position3 point;
 	Node rightChild, leftchild;
 
-	Node(Vector3 point) {
+	Node(Position3 point) {
 		this->point = point;
 	}
 
