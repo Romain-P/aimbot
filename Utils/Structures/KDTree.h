@@ -3,6 +3,7 @@
 
 #include "Vector3.h"
 #include "Position3.h"
+#include "Node.h"
 #include "../Algo/MergeSort.h"
 #include <vector>
 
@@ -12,18 +13,18 @@ class KDTree
 {
 public:
 
-	char axis = null;
 
-	KDTree (vector<Vector3*> pointList, ,int length, int depth)
+	KDTree (vector<Position3*> pointList, int length, int depth)
 	{
-		constructTree(pointList, length, depth);
+		Node* root = new Node();
+		constructTree(pointList, length, depth, root);
 	}
 
-	static Node constructTree(vector<Position3*> pointList, ,int length, int depth, Node node)
+	static Node constructTree(vector<Position3*> pointList, int length, int depth, Node*& node)
 	{
 
 
-		if (pointList == null)
+		if (length == 0)
 		{
 			// Base case, do nothing noamsayin
 		}
@@ -45,9 +46,13 @@ public:
 					break;
 			}
 
-			//Create node and subtrees
-			Position3 median = pointList.at(length/2);
-			node = median;
+			//Create node sand subtrees
+			Position3* median = pointList.at(length/2);
+			node.setPoint(median);
+
+
+			//vector<Position3*> firstHalf(pointList.begin(), pointList.begin() + length/2);
+			//vector<Position3*> secondHalf(pointList.begin()+ length/2, pointList.end());
 
 			vector<Position3*> firstHalf;
 			for(int i = 0; i < length/2; i++)
@@ -61,24 +66,24 @@ public:
 				secondHalf.at(i) = pointList.at(i + length/2);
 			}
 
-			node.leftChild = KDTree(firstHalf, length/2, depth++);
-			node.rightChild = KDTree(secondHalf, length/2, depth++);
+			KDTree(firstHalf, length/2, depth++, node.leftChild);
+			KDTree(secondHalf, length/2, depth++, node.rightChild);
 
-			return Node;
+			return node;
 		}
 	}
 
-	static bool vectorSortX(const Vector3& a, const Vector3& b)
+	static bool vectorSortX(const Position3& a, const Position3& b)
 	{
 		return a.x < b.x;
 	}
 
-	static bool vectorSortY(const Vector3& a, const Vector3& b)
+	static bool vectorSortY(const Position3& a, const Position3& b)
 	{
 		return a.y < b.y;
 	}
 
-	static bool vectorSortZ(const Vector3& a, const Vector3& b)
+	static bool vectorSortZ(const Position3& a, const Position3& b)
 	{
 		return a.z < b.z;
 	}
