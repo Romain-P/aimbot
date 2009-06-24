@@ -3,60 +3,71 @@
 
 #include <vector>
 #include "Position3.h"
-#include "Node.h"
 
 using std::vector;
 
-class KDTree
+// we can embed this, we'll never need a kdnode without a kdtree
+class KDNode
 {
 public:
+	Position3 position;
 
-	KDTree (vector<Position3>& pointList, int length, int depth)
+	KDNode *rightChild;
+	KDNode *leftChild;
+
+	KDNode(Position3 pos)
 	{
-		Node root;
-		constructTree(pointList, length, depth, root);
+		position = pos;
+	}
+};
+
+
+class KDTree
+{
+private:
+	enum { X, Y, Z };
+
+	KDNode root;
+public:
+
+	KDTree(vector<Position3>& points)
+	{
+		root = constructTree(points, 0);
 	}
 
-	Node constructTree(vector<Position3>& pointList, int length, int depth, Node& node)
+	KDNode getRoot()
 	{
-		int half = length / 2;
+		return root;
+	}
 
-		if (length == 0)
+	KDNode constructTree(vector<Position3>& points, int depth)
+	{
+		if (points.empty())
+			return NULL;
+
+		switch (depth % 3)
 		{
-			// Base case, do nothing noamsayin
+			case X:
+				sort(points.begin(), points.end(), sortX);
+				break;
+			case Y:
+				sort(points.begin(), points.end(), sortY);
+				break;
+			case Z:
+				sort(points.begin(), points.end(), sortZ);
+				break;
 		}
-		else
-		{
-			// Sort depending on which axis you are splitting on
-			int axisNum = depth % 3;
 
-			switch (axisNum)
-			{
-				case 0:
-					sort(pointList.begin(), pointList.end(), sortX);
-					break;
-				case 1:
-					sort(pointList.begin(), pointList.end(), sortY);
-					break;
-				case 2:
-					sort(pointList.begin(), pointList.end(), sortZ);
-					break;
-			}
+		int half = points.size() / 2;
+		KDNode node(points.at(half));
 
-			//Create node sand subtrees
-			Position3 median = pointList.at(half);
-			node.setPoint(median);
+		vector<Position3> left(points.begin(), points.begin() + half);
+		vector<Position3> right(points.begin() + half, points.end());
 
-			vector<Position3> firstHalf(pointList.begin(), pointList.begin() + half);
-			vector<Position3> secondHalf(pointList.begin() + half, pointList.end());
+		node.leftChild = constructTree(left, depth + 1);
+		node.rightChild = constructTree(right, depth + 1);
 
-			depth++;
-
-			constructTree(firstHalf, half, depth, *(node.leftChild));
-			constructTree(secondHalf, half, depth, *(node.rightChild));
-
-			return node;
-		}
+		return node;
 	}
 
 	static bool sortX(const Position3& a, const Position3& b)
@@ -73,8 +84,6 @@ public:
 	{
 		return a.z < b.z;
 	}
-
-
 };
 
 #endif
