@@ -17,11 +17,16 @@ class Node
 
 public:
 
-	Position3 point;
-	Node rightChild, leftchild;
+	Position3* point;
+	Node *rightChild, *leftChild;
 
-	Node(Position3 point) {
-		this->point = point;
+	Node() {
+
+	}
+
+	void setPoint(Position3*& p)
+	{
+		point = p;
 	}
 
 };
