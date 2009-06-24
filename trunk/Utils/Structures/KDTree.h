@@ -29,17 +29,17 @@ public:
 		{
 			// Sort depending on which axis you are splitting on
 			int axisNum = depth % 3;
+
 			switch (axisNum)
 			{
-
 				case 0:
-					sort(pointList.begin(), pointList.end(), vectorSortX);
+					sort(pointList.begin(), pointList.end(), sortX);
 					break;
 				case 1:
-					sort(pointList.begin(), pointList.end(), vectorSortY);
+					sort(pointList.begin(), pointList.end(), sortY);
 					break;
 				case 2:
-					sort(pointList.begin(), pointList.end(), vectorSortZ);
+					sort(pointList.begin(), pointList.end(), sortZ);
 					break;
 			}
 
@@ -59,17 +59,17 @@ public:
 		}
 	}
 
-	static bool vectorSortX(const Position3& a, const Position3& b)
+	static bool sortX(const Position3& a, const Position3& b)
 	{
 		return a.x < b.x;
 	}
 
-	static bool vectorSortY(const Position3& a, const Position3& b)
+	static bool sortY(const Position3& a, const Position3& b)
 	{
 		return a.y < b.y;
 	}
 
-	static bool vectorSortZ(const Position3& a, const Position3& b)
+	static bool sortZ(const Position3& a, const Position3& b)
 	{
 		return a.z < b.z;
 	}
