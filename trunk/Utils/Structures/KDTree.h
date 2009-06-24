@@ -2,9 +2,10 @@
 #define kdtree_h
 
 #include <vector>
+#include <iostream>
 #include "Position3.h"
 
-using std::vector;
+using namespace std;
 
 // we can embed this, we'll never need a kdnode without a kdtree
 class KDNode
@@ -27,23 +28,21 @@ class KDTree
 private:
 	enum { X, Y, Z };
 
-	KDNode root;
 public:
+	KDNode* root;
 
 	KDTree(vector<Position3>& points)
 	{
 		root = constructTree(points, 0);
 	}
 
-	KDNode getRoot()
+	KDNode* constructTree(vector<Position3>& points, int depth)
 	{
-		return root;
-	}
+		printOut(points);
+		cout << endl;
 
-	KDNode constructTree(vector<Position3>& points, int depth)
-	{
 		if (points.empty())
-			return NULL;
+			return (KDNode*)NULL;
 
 		switch (depth % 3)
 		{
@@ -59,13 +58,13 @@ public:
 		}
 
 		int half = points.size() / 2;
-		KDNode node(points.at(half));
+		KDNode* node = new KDNode(points.at(half));
 
 		vector<Position3> left(points.begin(), points.begin() + half);
 		vector<Position3> right(points.begin() + half, points.end());
 
-		node.leftChild = constructTree(left, depth + 1);
-		node.rightChild = constructTree(right, depth + 1);
+		node->leftChild = constructTree(left, depth + 1);
+		node->rightChild = constructTree(right, depth + 1);
 
 		return node;
 	}
@@ -83,6 +82,23 @@ public:
 	static bool sortZ(const Position3& a, const Position3& b)
 	{
 		return a.z < b.z;
+	}
+
+	void printOut(vector<Position3>& points)
+	{
+		cout << "x: ";
+		for(int i = 0; i < points.size(); i++)
+			cout << points.at(i).x << " ";
+		cout << endl;
+		cout << "y: ";
+		for(int i = 0; i < points.size(); i++)
+			cout << points.at(i).y << " ";
+		cout << endl;
+		cout << "z: ";
+		for(int i = 0; i < points.size(); i++)
+			cout << points.at(i).z << " ";
+		cout << endl;
+		cout << "\n\n";
 	}
 };
 
