@@ -54,11 +54,11 @@ void GlutDisplay::reshapeFunction(int w, int h)
 
 void GlutDisplay::updateCamera()
 {
-	glMatrixMode(GL_PROJECTION);
+	//glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
 	camera->updateView();
-	glMatrixMode(GL_MODELVIEW);
+	//glMatrixMode(GL_MODELVIEW);
 }
 
 void GlutDisplay::addDrawable(Drawable* drawable)
