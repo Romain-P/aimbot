@@ -30,7 +30,6 @@ class KDTree
 {
 private:
 	enum { X, Y, Z };
-	static vector<Position3> traversal();
 
 public:
 	KDNode* root;

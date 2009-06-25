@@ -10,6 +10,7 @@ class GlutDisplay;
 class Camera : public Movable
 {
 private:
+
 	GlutDisplay* display;
 
 public:

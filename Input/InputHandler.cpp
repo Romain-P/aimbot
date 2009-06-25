@@ -21,17 +21,29 @@ void InputHandler::keyboardFunction(unsigned char key)
 		exit(0);
 		break;
 	case 'w':
-		camera->velocity.z = -1;
+	{
+		camera->velocity.x = -sin(camera->theta);
+		camera->velocity.z = -cos(camera->theta);
 		break;
+	}
 	case 'a':
-		camera->velocity.x = -1;
+	{
+		camera->velocity.x = cos(camera->theta);
+		camera->velocity.z = sin(camera->theta);
 		break;
+	}
 	case 's':
-		camera->velocity.z = 1;
+	{
+		camera->velocity.x = sin(camera->theta);
+		camera->velocity.z = cos(camera->theta);
 		break;
+	}
 	case 'd':
-		camera->velocity.x = 1;
+	{
+		camera->velocity.x = -cos(camera->theta);
+		camera->velocity.z = -sin(camera->theta);
 		break;
+	}
 	case ' ':
 		camera->velocity.y = -1;
 		break;
@@ -82,17 +94,17 @@ void InputHandler::motionFunction(int x, int y)
 {
 	static float sensitivity = 0.002f;
 
-	float dx = sensitivity * (float(x) - mouseEvent.lastX);
-	float dy = sensitivity * (float(y) - mouseEvent.lastY);
-
 	if(mouseEvent.firstEvent)
 	{
-		dx = 0;
-		dy = 0;
 		mouseEvent.firstEvent = false;
+		camera->calcLook(0, 0);
 	}
-
-	camera->calcLook(dx, dy);
+	else
+	{
+		float dx = sensitivity * (x - mouseEvent.lastX);
+		float dy = sensitivity * (y - mouseEvent.lastY);
+		camera->calcLook(dx, dy);
+	}
 
 	mouseEvent.lastX = x;
 	mouseEvent.lastY = y;
