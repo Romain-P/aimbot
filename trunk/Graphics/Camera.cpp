@@ -5,9 +5,7 @@ Camera::Camera()
 {
 	start = Position3(0, 0, 3);
 	up  = Vector3(0, 1, 0);
-	n 	= Vector3(0, 0, 2);
-	nDest = n;
-	calcUV();
+	look = Vector3(0, 1, 0);
 }
 
 void Camera::setDisplay(GlutDisplay* display)
@@ -18,13 +16,15 @@ void Camera::setDisplay(GlutDisplay* display)
 void Camera::updateView()
 {
 	Position3 eye = this->getPosition();
-	gluLookAt(eye.x, eye.y, eye.z, eye.x - n.x, eye.y - n.y, eye.z - n.z, up.x, up.y, up.z);
+	gluLookAt(eye.x, eye.y, eye.z, look.x, look.y, look.z, up.x, up.y, up.z);
 }
 
-void Camera::calcUV()
+void Camera::calcLook(float dx, float dy)
 {
-	uDest = Vector3(up.cross(nDest));
-	uDest.normalize();
-	vDest = Vector3(nDest.cross(uDest));
-	vDest.normalize();
+	theta += dx;
+	phi += dy;
+
+	look.x = sin(theta) * cos(phi);
+	look.y = sin(phi);
+	look.z = cos(theta) * cos(phi);
 }

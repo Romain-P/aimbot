@@ -75,19 +75,34 @@ void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
 	mouseEvent.downX = x;
 	mouseEvent.downY = y;
+	mouseEvent.firstEvent = true;
 }
 
 void InputHandler::motionFunction(int x, int y)
 {
-	camera->n.z = 0.5 * (y - mouseEvent.downY);
-	camera->n.y = 0.5 * (x - mouseEvent.downX);
+	static float sensitivity = 0.005f;
+
+	float dx = sensitivity * (float(x) - mouseEvent.lastX);
+	float dy = sensitivity * (float(y) - mouseEvent.lastY);
+
+	if(mouseEvent.firstEvent)
+	{
+		dx = 0;
+		dy = 0;
+		mouseEvent.firstEvent = false;
+	}
+
+	camera->calcLook(dx, dy);
+
+	mouseEvent.lastX = x;
+	mouseEvent.lastY = y;
+
+	glutPostRedisplay();
 }
 
 void InputHandler::specialKeyFunction(int key)
 {
 }
-
-
 
 void InputHandler::keyboardDelegate(unsigned char key, int x, int y)
 {

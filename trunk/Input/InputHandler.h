@@ -11,6 +11,11 @@ class GameCoordinator;
 class MouseEvent
 {
 public:
+	MouseEvent()
+	{
+
+	}
+
 	int downX;
 	int downY;
 	int x;
@@ -19,6 +24,7 @@ public:
 	int lastY;
 	int button;
 	int state;
+	bool firstEvent;
 };
 
 class InputHandler

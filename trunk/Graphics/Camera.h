@@ -13,12 +13,15 @@ private:
 	GlutDisplay* display;
 
 public:
-	Vector3 eyeDest, up;
-	Vector3 uDest, vDest, nDest;
-	Vector3 u, v, n;
+	float theta;
+	float phi;
+
+	Vector3 up;
+	Vector3 look;
 
 	Camera();
 	void updateView();
+	void calcLook(float, float);
 	void calcUV();
 	void setDisplay(GlutDisplay* display);
 };

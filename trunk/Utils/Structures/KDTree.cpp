@@ -17,5 +17,5 @@ void treeTest()
 	vector<Position3>::iterator it;
 
 	for(it = traversal.begin(); it != traversal.end(); ++it)
-		cout << (*it).print() << endl;
+		cout << it->print() << endl;
 }
