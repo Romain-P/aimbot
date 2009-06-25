@@ -13,7 +13,6 @@ class MouseEvent
 public:
 	MouseEvent()
 	{
-
 	}
 
 	int downX;

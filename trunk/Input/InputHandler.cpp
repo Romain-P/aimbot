@@ -80,7 +80,7 @@ void InputHandler::mouseFunction(int button, int state, int x, int y)
 
 void InputHandler::motionFunction(int x, int y)
 {
-	static float sensitivity = 0.005f;
+	static float sensitivity = 0.002f;
 
 	float dx = sensitivity * (float(x) - mouseEvent.lastX);
 	float dy = sensitivity * (float(y) - mouseEvent.lastY);
