@@ -5,7 +5,7 @@ Camera::Camera()
 {
 	theta = 135;
 	phi = 0;
-	start = Position3(0, 0, 2);
+	start = Position3(0, 0, 1);
 	up  = Vector3(0, 1, 0);
 	calcLook(0, 0);
 }
