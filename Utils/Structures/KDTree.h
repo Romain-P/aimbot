@@ -5,9 +5,10 @@
 #include <iostream>
 #include "Position3.h"
 
-using namespace std;
+using std::vector;
+using std::cout;
+using std::endl;
 
-// we can embed this, we'll never need a kdnode without a kdtree
 class KDNode
 {
 public:
@@ -106,7 +107,7 @@ public:
 	/**
 	 * @param operate -- pointer to function which takes a node and
 	 * 					 performs some operation with it. This means
-	 * 					 we don't have to rewrite a local binary search for
+	 * 					 we don't have to rewrite a local bst traversal for
 	 * 					 each of several possible operations on nodes.
 	 * @param node -- pointer to KDNode
 	 * @awesomeness -- > 9000
