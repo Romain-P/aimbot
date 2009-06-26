@@ -76,6 +76,7 @@ public:
 
 		glutMouseFunc(&InputHandler::mouseDelegate);
 		glutMotionFunc(&InputHandler::motionDelegate);
+		glutPassiveMotionFunc(&InputHandler::passiveMotionDelegate);
 		glutKeyboardFunc(&InputHandler::keyboardDelegate);
 		glutKeyboardUpFunc(&InputHandler::keyUpDelegate);
 		glutSpecialFunc(&InputHandler::specialKeyDelegate);

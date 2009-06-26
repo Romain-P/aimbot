@@ -15,17 +15,17 @@ using std::stringstream;
 class PlayerHUD : public Drawable
 {
 private:
+
 	bool showFPS;
 	GameState* state;
 	Updater* updater;
-	stringstream ss;
 
 public:
 	PlayerHUD(GameState* gameState, Updater* gameUpdater);
 	virtual ~PlayerHUD() {}
 	void setShowFPS(bool show);
 	void drawFPS();
-	void drawText(string& text, int leftX, int topY);
+	void drawText(string& text, float leftX, float topY);
 	void draw();
 };
 
