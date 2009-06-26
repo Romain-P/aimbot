@@ -30,6 +30,7 @@ public:
 class InputHandler
 {
 private:
+
 	MouseEvent mouseEvent;
 	MovementControls controls;
 
@@ -46,6 +47,7 @@ public:
 	void specialKeyFunction(int key);
 	void mouseFunction(int button, int state, int x, int y);
 	void motionFunction(int x, int y);
+	void passiveMotionFunction(int x, int y);
 	void moveCamera(unsigned char key);
 
 
@@ -54,6 +56,7 @@ public:
 	static void specialKeyDelegate(int key, int x, int y);
 	static void mouseDelegate(int button, int state, int x, int y);
 	static void motionDelegate(int x, int y);
+	static void passiveMotionDelegate(int x, int y);
 	static void updateDelegate();
 
 };

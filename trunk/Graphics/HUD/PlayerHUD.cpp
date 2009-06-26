@@ -11,11 +11,26 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
 
 void PlayerHUD::drawFPS()
 {
-	static string str;
+	static stringstream ss;
+	static string a, b, c, d;
+	static float minFps = 10000, maxFps = 0, avg, fps;
 
-	ss << updater->getFps();
-	ss >> str;
-	drawText(str, 40, 40);
+	fps = updater->getFps();
+	avg = 0.5f * fps + 0.5f * avg;
+
+	if(fps < minFps)
+		minFps = fps;
+	if(fps > maxFps)
+		maxFps = fps;
+
+	ss << fps << avg << maxFps << minFps;
+	ss >> a >> b >> c >> d;
+
+	//drawText(a, 20.f, 20.f);
+
+	if(updater->getFrames() % 60 == 0)
+		std::cout << minFps << " " << maxFps << std::endl;
+
 	ss.str("");
 	ss.clear();
 }
@@ -25,13 +40,14 @@ void PlayerHUD::setShowFPS(bool show)
 	showFPS = show;
 }
 
-void PlayerHUD::drawText(string& text, int leftX, int topY)
+void PlayerHUD::drawText(string& text, float leftX, float topY)
 {
 	glPushMatrix();
 		glTranslatef(leftX, topY, 0);
-		glScalef(0.14, -0.15, 0.14);
+		glScalef(0.14, -0.14, 0.14);
 		for (unsigned int i = 0; i < text.length(); i++)
 			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, text.at(i));
+
 	glPopMatrix();
 }
 
