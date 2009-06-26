@@ -1,6 +1,7 @@
 #ifndef inputhandler_h
 #define inputhandler_h
 
+#include "MovementControls.h"
 #include "../Graphics/GraphicIncludes.h"
 #include "../Graphics/Camera.h"
 #include "../Physics/EnvironmentUpdater.h"
@@ -30,13 +31,13 @@ class InputHandler
 {
 private:
 	MouseEvent mouseEvent;
+	MovementControls controls;
 
 	Camera* camera;
 	EnvironmentUpdater* updater;
 	GameCoordinator* coordinator;
 
 public:
-	enum movements { FORWARD, LEFT, BACKWARD, RIGHT, UP, DOWN };
 
 	InputHandler(GameCoordinator* coordinator, Camera* camera);
 
@@ -45,6 +46,8 @@ public:
 	void specialKeyFunction(int key);
 	void mouseFunction(int button, int state, int x, int y);
 	void motionFunction(int x, int y);
+	void moveCamera(unsigned char key);
+
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
 	static void keyUpDelegate(unsigned char key, int x, int y);

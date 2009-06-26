@@ -12,44 +12,30 @@ InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera)
 
 void InputHandler::keyboardFunction(unsigned char key)
 {
-	int modifiers = glutGetModifiers();
 	key = tolower(key);
 
 	switch(key)
 	{
-	case 27:
-		exit(0);
-		break;
-	case 'w':
-	{
-		camera->velocity.x = -sin(camera->theta);
-		camera->velocity.z = -cos(camera->theta);
-		break;
-	}
-	case 'a':
-	{
-		camera->velocity.x = cos(camera->theta);
-		camera->velocity.z = sin(camera->theta);
-		break;
-	}
-	case 's':
-	{
-		camera->velocity.x = sin(camera->theta);
-		camera->velocity.z = cos(camera->theta);
-		break;
-	}
-	case 'd':
-	{
-		camera->velocity.x = -cos(camera->theta);
-		camera->velocity.z = -sin(camera->theta);
-		break;
-	}
-	case ' ':
-		camera->velocity.y = -1;
-		break;
-	case '`':
-		coordinator->toggleConsoleVisibility();
-		break;
+		case MovementControls::FORWARD:
+		case MovementControls::RIGHT:
+		case MovementControls::BACKWARD:
+		case MovementControls::LEFT:
+		case MovementControls::UP:
+		case MovementControls::DOWN:
+		{
+			controls.push(key);
+			Vector3 temp = controls.getDirection();
+
+			camera->velocity.x = cos(camera->theta) * temp.x - sin(camera->theta) * temp.z;
+			camera->velocity.z = sin(camera->theta) * temp.x + cos(camera->theta) * temp.z;
+			break;
+		}
+		case 27:
+			exit(0);
+			break;
+		case '`':
+			coordinator->toggleConsoleVisibility();
+			break;
 	}
 	glutPostRedisplay();
 }
@@ -60,25 +46,21 @@ void InputHandler::keyUpFunction(unsigned char key)
 
 	switch (key)
 	{
-	case 'w':
-		if(camera->velocity.z < 0)
-			camera->velocity.z = 0;
-		break;
-	case 'a':
-		if(camera->velocity.x < 0)
-			camera->velocity.x = 0;
-		break;
-	case 's':
-		if(camera->velocity.z > 0)
-			camera->velocity.z = 0;
-		break;
-	case 'd':
-		if(camera->velocity.x > 0)
-			camera->velocity.x = 0;
-		break;
-	case ' ':
-		camera->velocity.y = 0;
-		break;
+		case MovementControls::FORWARD:
+		case MovementControls::RIGHT:
+		case MovementControls::BACKWARD:
+		case MovementControls::LEFT:
+		case MovementControls::UP:
+		case MovementControls::DOWN:
+		{
+			controls.pop(key);
+			Vector3 temp = controls.getDirection();
+
+			camera->velocity.x = cos(camera->theta) * temp.x - sin(camera->theta) * temp.z;
+			camera->velocity.z = sin(camera->theta) * temp.x + cos(camera->theta) * temp.z;
+
+			break;
+		}
 	}
 	glutPostRedisplay();
 }
@@ -108,8 +90,10 @@ void InputHandler::motionFunction(int x, int y)
 
 	mouseEvent.lastX = x;
 	mouseEvent.lastY = y;
+}
 
-	glutPostRedisplay();
+void InputHandler::moveCamera(unsigned char key)
+{
 }
 
 void InputHandler::specialKeyFunction(int key)
