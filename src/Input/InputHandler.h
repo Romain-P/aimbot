@@ -14,12 +14,14 @@ class MouseEvent
 public:
 	MouseEvent()
 	{
+		deltaX = 0;
+		deltaY = 0;
 	}
 
 	int downX;
 	int downY;
-	int x;
-	int y;
+	int deltaX;
+	int deltaY;
 	int lastX;
 	int lastY;
 	int button;
@@ -30,6 +32,8 @@ public:
 class InputHandler
 {
 private:
+	int width;
+	int height;
 
 	MouseEvent mouseEvent;
 	MovementControls controls;
