@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 
-#include "../Orthographic.h"
+#include "../Drawable.h"
 #include "../../Game/GameState.h"
 
 class Updater;
@@ -12,7 +12,7 @@ class Updater;
 using std::string;
 using std::stringstream;
 
-class PlayerHUD : public Orthographic
+class PlayerHUD : public Drawable
 {
 private:
 

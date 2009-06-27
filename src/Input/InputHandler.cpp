@@ -3,15 +3,14 @@
 
 InputHandler* inputHandler;
 
-InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera)
+InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera) :
+	ScreenBoundsUser()
 {
 	this->coordinator = coordinator;
 	this->camera = camera;
 	inputHandler = this;
 
 	mouseEvent.firstEvent = true;
-	width = glutGet(GLUT_SCREEN_WIDTH);
-	height = glutGet(GLUT_SCREEN_HEIGHT);
 }
 
 void InputHandler::keyboardFunction(unsigned char key)
@@ -138,8 +137,6 @@ void InputHandler::passiveMotionFunction(int x, int y)
 		mouseEvent.deltaX = (x - mouseEvent.lastX);
 		mouseEvent.deltaY = (y - mouseEvent.lastY);
 		camera->calcLook(sens * mouseEvent.deltaX, sens * mouseEvent.deltaY);
-
-		cout << mouseEvent.deltaX << endl;
 	}
 
 	if(warped)

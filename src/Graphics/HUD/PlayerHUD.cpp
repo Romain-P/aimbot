@@ -2,7 +2,7 @@
 #include "../../Game/Updater.h"
 
 PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
-	Orthographic(300)
+	Drawable(300)
 {
 	state = gameState;
 	updater = gameUpdater;

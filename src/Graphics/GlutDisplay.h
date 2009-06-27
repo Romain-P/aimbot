@@ -8,7 +8,6 @@
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 #include "Drawable.h"
-#include "Orthographic.h"
 #include "Camera.h"
 
 #include "HUD/PlayerHUD.h"
@@ -28,11 +27,8 @@ private:
 
 	stringstream ss;
 
-	// all 3D renderable objects in scene
 	vector<Drawable*> drawables;
-
-	// all 2D renderable objects
-	vector<Orthographic*> orthographics;
+	vector<Drawable*> orthographics;
 
 	Camera* camera;
 
@@ -44,9 +40,10 @@ public:
 	void reshapeFunction(int w, int h);
 	void updateCamera();
 	void addDrawable(Drawable* drawable);
-	void addOrthographic(Orthographic* drawable);
+	void addOrthographic(Drawable* drawable);
 	void removeDrawable(Drawable* drawable);
-	void removeOrthographic(Orthographic* drawable);
+	void enterOrthoProjection();
+	void exitOrthoProjection();
 
 	void setFOV(float fov);
 

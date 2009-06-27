@@ -5,13 +5,13 @@
 #include <queue>
 
 #include "PlayerHUD.h"
-#include "../Orthographic.h"
+#include "../Drawable.h"
 #include "../../Utils/Misc/Tokenizer.h"
 
 using std::string;
 using std::queue;
 
-class DevConsole : public Orthographic
+class DevConsole : public Drawable
 {
 private:
 	bool visible;
@@ -23,7 +23,7 @@ private:
 public:
 	enum position { TOP, LEFT, BOTTOM, RIGHT };
 
-	DevConsole(PlayerHUD* hud) : Orthographic(500), playerHud(hud)
+	DevConsole(PlayerHUD* hud) : Drawable(500), playerHud(hud)
 	{
 	}
 
