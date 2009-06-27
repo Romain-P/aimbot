@@ -4,12 +4,13 @@
 #include <map>
 #include <fstream>
 #include <string>
+
 #include "FileNameStore.h"
 #include "../Utils/Structures/Singleton.h"
 
+using std::map;
 using std::fstream;
 using std::string;
-using std::map;
 
 class ConfigMap : public Singleton<ConfigMap>
 {
