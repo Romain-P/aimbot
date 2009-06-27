@@ -23,7 +23,7 @@ void PlayerHUD::drawFPS()
 	static string a, b, c, d;
 	static float minFps = 10000, maxFps = 0, avg, fps;
 
-	fps = updater->getFps();
+	fps = updater->getFPS();
 	avg = 0.5f * fps + 0.5f * avg;
 
 	if(fps < minFps)
@@ -52,7 +52,7 @@ void PlayerHUD::drawText(string& text, float leftX, float topY)
 	glPopMatrix();
 }
 
-void PlayerHUD::setShowFPS(bool show)
+void PlayerHUD::toggleFPS()
 {
-	showFPS = show;
+	showFPS = !showFPS;
 }
