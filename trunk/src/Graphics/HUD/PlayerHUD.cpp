@@ -28,9 +28,6 @@ void PlayerHUD::drawFPS()
 
 	//drawText(a, 20.f, 20.f);
 
-	if(updater->getFrames() % 60 == 0)
-		std::cout << minFps << " " << maxFps << std::endl;
-
 	ss.str("");
 	ss.clear();
 }
