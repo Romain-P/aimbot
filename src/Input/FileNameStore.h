@@ -3,8 +3,7 @@
 
 namespace FileNameStore
 {
-	//const static char* baseInstall = "";
-	const static char* config = "config.ini";
+	const static char* config = "../../conf/config.ini";
 }
 
 #endif
