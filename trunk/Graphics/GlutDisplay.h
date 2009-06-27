@@ -32,7 +32,7 @@ private:
 	vector<Drawable*> drawables;
 
 	// all 2D renderable objects
-	vector<OrthographicDrawable*> orthographics;
+	vector<Orthographic*> orthographics;
 
 	Camera* camera;
 
@@ -46,8 +46,7 @@ public:
 	void addDrawable(Drawable* drawable);
 	void addOrthographic(Orthographic* drawable);
 	void removeDrawable(Drawable* drawable);
-	void startOrthographicMode();
-	void stopOrthographicMode();
+	void removeOrthographic(Orthographic* drawable);
 
 	void setFOV(float fov);
 

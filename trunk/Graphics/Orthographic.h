@@ -6,29 +6,20 @@
 class Orthographic : public Drawable
 {
 private:
-	bool inOrthoProjection;
-	int width;
-	int height;
 
 public:
 	Orthographic()
 	{
-		width = glutGet(GLUT_SCREEN_WIDTH);
-		height = glutGet(GLUT_SCREEN_HEIGHT);
 	}
 
 	Orthographic(int zIndex) : Drawable(zIndex)
 	{
-		width = glutGet(GLUT_SCREEN_WIDTH);
-		height = glutGet(GLUT_SCREEN_HEIGHT);
 	}
 
-	virtual void draw() = 0;
-
-	void enterOrthoProjection()
+	static void enterOrthoProjection()
 	{
-		if(inOrthoProjection)
-			return;
+		int width = glutGet(GLUT_SCREEN_HEIGHT);
+		int height = glutGet(GLUT_SCREEN_HEIGHT);
 
 		// fix blending problems with overlapping lines
 		glDepthMask(GL_FALSE);
@@ -46,20 +37,15 @@ public:
 
 		glScalef(1, -1, 1);
 		glTranslatef(0, -height, 0);
-
-		inOrthoProjection = true;
 	}
 
-	void exitOrthoProjection()
+	static void exitOrthoProjection()
 	{
-		if(!inOrthoProjection)
-			return;
-
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glDepthMask(GL_TRUE);
-
-		inOrthoProjection = false;
 	}
+
+	virtual void draw() = 0;
 };
 #endif
