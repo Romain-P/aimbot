@@ -8,6 +8,7 @@
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 #include "Drawable.h"
+#include "OrthographicDrawable.h"
 #include "Camera.h"
 
 #include "HUD/PlayerHUD.h"
@@ -26,7 +27,12 @@ private:
 	double screenAspect;
 
 	stringstream ss;
+
+	// all 3D renderable objects in scene
 	vector<Drawable*> drawables;
+
+	// all 2D renderable objects
+	vector<OrthographicDrawable*> orthographics;
 
 	Camera* camera;
 
