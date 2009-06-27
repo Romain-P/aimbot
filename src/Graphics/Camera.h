@@ -25,6 +25,7 @@ public:
 	void calcLook(float, float);
 	void calcUV();
 	void setDisplay(GlutDisplay* display);
+	void updateVelocity(const Vector3&);
 };
 
 #endif

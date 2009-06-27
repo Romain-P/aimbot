@@ -3,13 +3,17 @@
 
 InputHandler* inputHandler;
 
-InputHandler::InputHandler(GameCoordinator* coordinator, Camera* camera) :
+InputHandler::InputHandler(
+		GameCoordinator* coordinator,
+		GameState* gameState,
+		Camera* camera) :
 	ScreenBoundsUser()
 {
 	this->coordinator = coordinator;
 	this->camera = camera;
-	inputHandler = this;
+	this->gameState = gameState;
 
+	inputHandler = this;
 	mouseEvent.firstEvent = true;
 }
 
@@ -17,34 +21,55 @@ void InputHandler::keyboardFunction(unsigned char key)
 {
 	key = tolower(key);
 
-	switch(key)
+	switch(gameState->getIngameState())
 	{
-		case MovementControls::FORWARD:
-		case MovementControls::RIGHT:
-		case MovementControls::BACKWARD:
-		case MovementControls::LEFT:
-		case MovementControls::UP:
-		case MovementControls::DOWN:
+		case GameState::PLAYING:
 		{
-			controls.push(key);
-			Vector3 temp = controls.getDirection();
-
-			camera->velocity.x = 2 * cos(camera->theta) * temp.x - sin(camera->theta) * temp.z;
-			camera->velocity.z = 2 * sin(camera->theta) * temp.x + cos(camera->theta) * temp.z;
+			switch(key)
+			{
+				case MovementControls::FORWARD:
+				case MovementControls::RIGHT:
+				case MovementControls::BACKWARD:
+				case MovementControls::LEFT:
+				case MovementControls::UP:
+				case MovementControls::DOWN:
+				{
+					controls.push(key);
+					camera->updateVelocity(controls.getDirection());
+					break;
+				}
+				case 27:
+					exit(0);
+					break;
+				case '`':
+					coordinator->toggleConsoleVisibility();
+					break;
+			}
 			break;
 		}
-		case 27:
-			exit(0);
+		case GameState::IN_DEV_CONSOLE:
+		{
+			switch(key)
+			{
+				case 27:
+				case '`':
+					coordinator->toggleConsoleVisibility();
+					break;
+				default:
+					coordinator->putCharToConsole(key);
+			}
 			break;
-		case '`':
-			coordinator->toggleConsoleVisibility();
-			break;
+		}
 	}
+
 	glutPostRedisplay();
 }
 
 void InputHandler::keyUpFunction(unsigned char key)
 {
+	if(gameState->getIngameState() == GameState::IN_DEV_CONSOLE)
+		return;
+
 	key = tolower(key);
 
 	switch (key)
@@ -57,11 +82,7 @@ void InputHandler::keyUpFunction(unsigned char key)
 		case MovementControls::DOWN:
 		{
 			controls.pop(key);
-			Vector3 temp = controls.getDirection();
-
-			camera->velocity.x = 2 * cos(camera->theta) * temp.x - sin(camera->theta) * temp.z;
-			camera->velocity.z = 2 * sin(camera->theta) * temp.x + cos(camera->theta) * temp.z;
-
+			camera->updateVelocity(controls.getDirection());
 			break;
 		}
 	}
@@ -78,40 +99,6 @@ void InputHandler::mouseFunction(int button, int state, int x, int y)
 void InputHandler::motionFunction(int x, int y)
 {
 }
-
-/*void passivemotion( int x, int y ) {
-        int deltaX = x - lastX;
-        int deltaY = y - lastY;
-
-        lastX = x;
-        lastY = y;
-
-        if( deltaX == 0 && deltaY == 0 ) return;
-
-        int windowX             = glutGet( GLUT_WINDOW_X );
-        int windowY             = glutGet( GLUT_WINDOW_Y );
-        int screenWidth         = glutGet( GLUT_SCREEN_WIDTH );
-        int screenHeight        = glutGet( GLUT_SCREEN_HEIGHT );
-
-        int screenLeft = -windowX;
-        int screenTop = -windowY;
-        int screenRight = screenWidth - windowX;
-        int screenBottom = screenHeight - windowY;
-
-        if( x <= screenLeft+10 || (y) <= screenTop+10 || x >= screenRight-10 || y >= screenBottom - 10) {
-                lastX = 150;
-                lastY = 150;
-                glutWarpPointer( lastX, lastY );
-                //      If on Mac OS X, the following will also work (and CGwarpMouseCursorPosition seems faster than glutWarpPointer).
-                //      CGPoint centerPos = CGPointMake( windowX + lastX, windowY + lastY );
-                //      CGWarpMouseCursorPosition( centerPos );
-                // Have to re-hide if the user touched any UI element with the invisible pointer, like the Dock.
-                //      CGDisplayHideCursor(kCGDirectMainDisplay);
-        }
-
-        curX += deltaX;
-        curY -= deltaY;
-}*/
 
 void InputHandler::passiveMotionFunction(int x, int y)
 {

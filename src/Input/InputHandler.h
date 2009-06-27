@@ -2,6 +2,7 @@
 #define inputhandler_h
 
 #include "MovementControls.h"
+#include "../Game/GameState.h"
 #include "../Graphics/GraphicIncludes.h"
 #include "../Graphics/ScreenBoundsUser.h"
 #include "../Graphics/Camera.h"
@@ -37,12 +38,13 @@ private:
 	MovementControls controls;
 
 	Camera* camera;
+	GameState* gameState;
 	EnvironmentUpdater* updater;
 	GameCoordinator* coordinator;
 
 public:
 
-	InputHandler(GameCoordinator* coordinator, Camera* camera);
+	InputHandler(GameCoordinator* coordinator, GameState* gameState, Camera* camera);
 
 	void keyboardFunction(unsigned char key);
 	void keyUpFunction(unsigned char key);

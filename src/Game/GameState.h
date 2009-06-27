@@ -25,7 +25,9 @@ public:
 		//I guess these sort of depend upon the specific game
 	};
 
-	GameState()
+	GameState(int macro, int ingame) :
+		macroState(macro),
+		ingameState(ingame)
 	{
 	}
 
@@ -37,6 +39,16 @@ public:
 	int getIngameState()
 	{
 		return ingameState;
+	}
+
+	void setGameState(int state)
+	{
+		macroState = state;
+	}
+
+	void setIngameState(int state)
+	{
+		ingameState = state;
 	}
 };
 

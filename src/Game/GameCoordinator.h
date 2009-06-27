@@ -31,16 +31,16 @@ public:
 	GameCoordinator()
 	{
 		camera = new Camera();
+		gameState = new GameState(GameState::GAME_IN_SESSION, GameState::PLAYING);
 		display = new GlutDisplay(camera);
-		inputHandler = new InputHandler(this, camera);
+		inputHandler = new InputHandler(this, gameState, camera);
 		camera->setDisplay(display);
 
 		envUpdater = new EnvironmentUpdater();
 		updater = new Updater(display, envUpdater);
 
-		gameState = new GameState();
 		hud = new PlayerHUD(gameState, updater);
-		console = new DevConsole(hud);
+		console = new DevConsole(hud, display);
 
 		scene = new SceneDisplay();
 
@@ -87,10 +87,17 @@ public:
 
 	void toggleConsoleVisibility()
 	{
+		console->toggleVisibility();
+
 		if(console->isVisible())
-			display->removeDrawable((Drawable*)console);
+			gameState->setIngameState(GameState::IN_DEV_CONSOLE);
 		else
-			display->addDrawable((Drawable*)console);
+			gameState->setIngameState(GameState::PLAYING);
+	}
+
+	void putCharToConsole(unsigned char ch)
+	{
+		console->putChar(ch);
 	}
 };
 

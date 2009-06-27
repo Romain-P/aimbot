@@ -32,7 +32,7 @@ public:
 		glutPostRedisplay();
 	}
 
-	float getFps()
+	float getFPS()
 	{
 		return 1 / deltaTime;
 	}

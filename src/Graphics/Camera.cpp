@@ -32,3 +32,9 @@ void Camera::calcLook(float dx, float dy)
 	look.y = sin(phi);
 	look.z = -cos(theta) * cos(phi);
 }
+
+void Camera::updateVelocity(const Vector3& direction)
+{
+	velocity.x = 2 * (cos(theta) * direction.x - sin(theta) * direction.z);
+	velocity.z = 2 * (sin(theta) * direction.x + cos(theta) * direction.z);
+}
