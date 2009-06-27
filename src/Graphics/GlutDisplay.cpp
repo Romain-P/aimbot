@@ -88,9 +88,6 @@ void GlutDisplay::removeDrawable(Drawable* drawable)
 
 void GlutDisplay::enterOrthoProjection()
 {
-	int width = glutGet(GLUT_SCREEN_WIDTH);
-	int height = glutGet(GLUT_SCREEN_HEIGHT);
-
 	// fix blending problems with overlapping lines
 	glDepthMask(GL_FALSE);
 
