@@ -33,19 +33,15 @@ void GlutDisplay::displayFunction()
 	glLoadIdentity();
 
 	static vector<Drawable*>::const_iterator drawIter;
-	static vector<OrthographicDrawable*>::const_iterator orthoIter;
+	static vector<Orthographic*>::const_iterator orthoIter;
 
 	for(drawIter = drawables.begin(); drawIter != drawables.end(); ++drawIter)
-	{
 		(*drawIter)->draw();
-	}
 
+	Orthographic::enterOrthoProjection();
 	for(orthoIter = orthographics.begin(); orthoIter != orthographics.end(); ++orthoIter)
-	{
 		(*orthoIter)->draw();
-	}
-
-
+	Orthographic::exitOrthoProjection();
 
 	glFlush();
 	glutSwapBuffers();
