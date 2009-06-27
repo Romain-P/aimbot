@@ -18,7 +18,7 @@ using std::string;
 using std::vector;
 
 
-class GlutDisplay
+class GlutDisplay : public ScreenBoundsUser
 {
 private:
 	float gamma;
@@ -46,13 +46,11 @@ public:
 	void exitOrthoProjection();
 
 	void setFOV(float fov);
-
 	float getFOV();
 	float getGamma();
 	double getScreenAspect();
 
 	static bool zSort(Drawable* a, Drawable* b);
-
 	static void displayDelegate();
 	static void reshapeDelegate(int w, int h);
 };

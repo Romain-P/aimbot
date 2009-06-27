@@ -9,6 +9,14 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
 	showFPS = true;
 }
 
+void PlayerHUD::draw()
+{
+	if(showFPS)
+	{
+		drawFPS();
+	}
+}
+
 void PlayerHUD::drawFPS()
 {
 	static stringstream ss;
@@ -42,15 +50,6 @@ void PlayerHUD::drawText(string& text, float leftX, float topY)
 			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, text.at(i));
 		}
 	glPopMatrix();
-}
-
-
-void PlayerHUD::draw()
-{
-	if(showFPS)
-	{
-		drawFPS();
-	}
 }
 
 void PlayerHUD::setShowFPS(bool show)
