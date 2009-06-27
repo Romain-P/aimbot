@@ -76,14 +76,30 @@ void GlutDisplay::addDrawable(Drawable* drawable)
 	sort(drawables.begin(), drawables.end(), zSort);
 }
 
+void GlutDisplay::addOrthographic(Orthographic* orthographic)
+{
+	orthographics.push_back(orthographic);
+	sort(orthographics.begin(), orthographics.end(), zSort);
+}
+
 void GlutDisplay::removeDrawable(Drawable* drawable)
 {
 	vector<Drawable*>::iterator it = drawables.begin();
 	while(*it != drawable && it != drawables.end())
 		++it;
 
-	if(it != drawables.end() || *it == drawable)
+	if(*it == drawable)
 		drawables.erase(it);
+}
+
+void GlutDisplay::removeOrthographic(Orthographic* orthographic)
+{
+	vector<Orthographic*>::iterator it = orthographics.begin();
+	while(*it != orthographic && it != orthographics.end())
+		++it;
+
+	if(*it == orthographic)
+		orthographics.erase(it);
 }
 
 void GlutDisplay::setFOV(float fov)
