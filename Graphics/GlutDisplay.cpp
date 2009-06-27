@@ -32,11 +32,20 @@ void GlutDisplay::displayFunction()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	static vector<Drawable*>::const_iterator it;
-	for(it = drawables.begin(); it != drawables.end(); ++it)
+	static vector<Drawable*>::const_iterator drawIter;
+	static vector<OrthographicDrawable*>::const_iterator orthoIter;
+
+	for(drawIter = drawables.begin(); drawIter != drawables.end(); ++drawIter)
 	{
-		(*it)->draw();
+		(*drawIter)->draw();
 	}
+
+	for(orthoIter = orthographics.begin(); orthoIter != orthographics.end(); ++orthoIter)
+	{
+		(*orthoIter)->draw();
+	}
+
+
 
 	glFlush();
 	glutSwapBuffers();
