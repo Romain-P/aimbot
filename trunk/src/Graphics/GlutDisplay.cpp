@@ -23,7 +23,7 @@ void GlutDisplay::initGraphicsOptions()
 	glPointSize(2.0);
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.1, 0.16, 0.26, 0);
-	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
+	glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 void GlutDisplay::displayFunction()
@@ -33,15 +33,15 @@ void GlutDisplay::displayFunction()
 	glLoadIdentity();
 
 	static vector<Drawable*>::const_iterator drawIter;
-	static vector<Orthographic*>::const_iterator orthoIter;
+	static vector<Drawable*>::const_iterator orthoIter;
 
 	for(drawIter = drawables.begin(); drawIter != drawables.end(); ++drawIter)
 		(*drawIter)->draw();
 
-	Orthographic::enterOrthoProjection();
+	enterOrthoProjection();
 	for(orthoIter = orthographics.begin(); orthoIter != orthographics.end(); ++orthoIter)
 		(*orthoIter)->draw();
-	Orthographic::exitOrthoProjection();
+	exitOrthoProjection();
 
 	glFlush();
 	glutSwapBuffers();
@@ -59,11 +59,9 @@ void GlutDisplay::reshapeFunction(int w, int h)
 
 void GlutDisplay::updateCamera()
 {
-	//glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
 	camera->updateView();
-	//glMatrixMode(GL_MODELVIEW);
 }
 
 void GlutDisplay::addDrawable(Drawable* drawable)
@@ -72,9 +70,9 @@ void GlutDisplay::addDrawable(Drawable* drawable)
 	sort(drawables.begin(), drawables.end(), zSort);
 }
 
-void GlutDisplay::addOrthographic(Orthographic* orthographic)
+void GlutDisplay::addOrthographic(Drawable* drawable)
 {
-	orthographics.push_back(orthographic);
+	orthographics.push_back(drawable);
 	sort(orthographics.begin(), orthographics.end(), zSort);
 }
 
@@ -88,14 +86,34 @@ void GlutDisplay::removeDrawable(Drawable* drawable)
 		drawables.erase(it);
 }
 
-void GlutDisplay::removeOrthographic(Orthographic* orthographic)
+void GlutDisplay::enterOrthoProjection()
 {
-	vector<Orthographic*>::iterator it = orthographics.begin();
-	while(*it != orthographic && it != orthographics.end())
-		++it;
+	int width = glutGet(GLUT_SCREEN_WIDTH);
+	int height = glutGet(GLUT_SCREEN_HEIGHT);
 
-	if(*it == orthographic)
-		orthographics.erase(it);
+	// fix blending problems with overlapping lines
+	glDepthMask(GL_FALSE);
+
+	// save current projection matrix
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+
+	// switch to orthographic projection
+	glLoadIdentity();
+	gluOrtho2D(0, width, 0, height);
+
+	// back to modelview to scale / translate
+	glMatrixMode(GL_MODELVIEW);
+
+	glScalef(1, -1, 1);
+	glTranslatef(0, -height, 0);
+}
+
+void GlutDisplay::exitOrthoProjection()
+{
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glDepthMask(GL_TRUE);
 }
 
 void GlutDisplay::setFOV(float fov)

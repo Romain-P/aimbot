@@ -3,6 +3,7 @@
 
 #include "MovementControls.h"
 #include "../Graphics/GraphicIncludes.h"
+#include "../Graphics/ScreenBoundsUser.h"
 #include "../Graphics/Camera.h"
 #include "../Physics/EnvironmentUpdater.h"
 #include "../Utils/Structures/Vector3.h"
@@ -29,12 +30,9 @@ public:
 	bool firstEvent;
 };
 
-class InputHandler
+class InputHandler : public ScreenBoundsUser
 {
 private:
-	int width;
-	int height;
-
 	MouseEvent mouseEvent;
 	MovementControls controls;
 

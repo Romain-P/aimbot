@@ -2,8 +2,9 @@
 #define drawable_h
 
 #include "GraphicIncludes.h"
+#include "../Graphics/ScreenBoundsUser.h"
 
-class Drawable
+class Drawable : public ScreenBoundsUser
 {
 
 public:
