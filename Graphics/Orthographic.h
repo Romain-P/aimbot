@@ -3,25 +3,27 @@
 
 #include "Drawable.h"
 
-class OrthographicDrawable : public Drawable
+class Orthographic : public Drawable
 {
 private:
 	bool inOrthoProjection;
+	int width;
+	int height;
 
 public:
-	OrthographicDrawable(int zIndex) : Drawable(zIndex)
+	Orthographic()
 	{
+		width = glutGet(GLUT_SCREEN_WIDTH);
+		height = glutGet(GLUT_SCREEN_HEIGHT);
+	}
 
+	Orthographic(int zIndex) : Drawable(zIndex)
+	{
+		width = glutGet(GLUT_SCREEN_WIDTH);
+		height = glutGet(GLUT_SCREEN_HEIGHT);
 	}
 
 	virtual void draw() = 0;
-
-	void orthoDraw()
-	{
-		enterOrthoProjection();
-		draw();
-		exitOrthoProjection();
-	}
 
 	void enterOrthoProjection()
 	{
@@ -37,13 +39,13 @@ public:
 
 		// switch to orthographic projection
 		glLoadIdentity();
-		gluOrtho2D(0, glutGet(GLUT_SCREEN_WIDTH), 0, glutGet(GLUT_SCREEN_HEIGHT));
+		gluOrtho2D(0, width, 0, height);
 
 		// back to modelview to scale / translate
 		glMatrixMode(GL_MODELVIEW);
 
 		glScalef(1, -1, 1);
-		glTranslatef(0, -glutGet(GLUT_SCREEN_HEIGHT), 0);
+		glTranslatef(0, -height, 0);
 
 		inOrthoProjection = true;
 	}

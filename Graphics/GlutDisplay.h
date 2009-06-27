@@ -8,7 +8,7 @@
 #include "MeshRenderer.h"
 #include "GraphicIncludes.h"
 #include "Drawable.h"
-#include "OrthographicDrawable.h"
+#include "Orthographic.h"
 #include "Camera.h"
 
 #include "HUD/PlayerHUD.h"
@@ -44,6 +44,7 @@ public:
 	void reshapeFunction(int w, int h);
 	void updateCamera();
 	void addDrawable(Drawable* drawable);
+	void addOrthographic(Orthographic* drawable);
 	void removeDrawable(Drawable* drawable);
 	void startOrthographicMode();
 	void stopOrthographicMode();

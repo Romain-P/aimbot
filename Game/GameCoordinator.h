@@ -44,10 +44,11 @@ public:
 
 		scene = new SceneDisplay();
 
-		display->addDrawable((Drawable*)hud);
-		display->addDrawable((Drawable*)scene);
+		display->addOrthographic(console);
+		display->addOrthographic(hud);
+		display->addDrawable(scene);
 
-		envUpdater->addMovable((Movable*)camera);
+		envUpdater->addMovable(camera);
 	}
 
 	void initialize()
