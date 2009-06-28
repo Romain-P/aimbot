@@ -4,11 +4,13 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "../Utils/Structures/Vector3.h"
+#include <exception>
+#include "../Utils/Structures/Position3.h"
 
 using std::vector;
 using std::string;
 using std::fstream;
+using std::exception;
 
 class Face
 {
@@ -34,31 +36,44 @@ public:
 class Mesh
 {
 private:
-	vector<Vector3> vertices;
+	vector<Position3> vertices;
 	vector<Face> faces;
 
-	void read(const string& filename)
+	void readObjectFileFormat(const string& filename)
 	{
 		fstream in;
-		int numVertices, numFaces;
-		in.open(filename.c_str(), std::ios::in);
+		int numVertices, numFaces, numEdges;
+		string format;
 
-		in >> numVertices;
-		float x, y, z;
-		for(int i = 0; i < numVertices; i++)
+		try
 		{
-			in >> x >> y >> z;
-			vertices.push_back(Vector3(x, y, z));
+			in.open(filename.c_str(), std::ios::in);
+
+			in >> format;
+			assert(format == "OFF");
+
+			in >> numVertices >> numFaces >> numEdges;
+
+			float x, y, z;
+			for(int i = 0; i < numVertices; i++)
+			{
+				in >> x >> y >> z;
+				vertices.push_back(Position3(x, y, z));
+			}
+
+			int num, a, b, c, d;
+			for(int i = 0; i < numFaces; i++)
+			{
+				in >> num >> a >> b >> c >> d;
+				faces.push_back(Face(a, b, c, d));
+			}
 		}
-
-		in >> numFaces;
-		int a, b, c, d;
-		for(int i = 0; i < numFaces; i++)
+		catch(exception& e)
 		{
-			in >> a >> b >> c >> d;
-			faces.push_back(Face(a, b, c, d));
+			std::cout << e.what() << std::endl;
 		}
 	}
+
 public:
 	Mesh()
 	{
@@ -66,10 +81,10 @@ public:
 
 	Mesh(const string& filename)
 	{
-		read(filename);
+		readObjectFileFormat(filename);
 	}
 
-	const vector<Vector3>& getVertices()
+	const vector<Position3>& getVertices()
 	{
 		return vertices;
 	}

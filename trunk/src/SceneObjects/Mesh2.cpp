@@ -1,6 +1,6 @@
 #include "Mesh2.h"
 
-Mesh::Mesh()
+Mesh2::Mesh2()
 {
 	numVerts = numFaces = numNormals = 0;
 	points = NULL;
@@ -10,7 +10,7 @@ Mesh::Mesh()
 	useSmoothNormals = false;
 }
 
-Mesh::~Mesh()
+Mesh2::~Mesh2()
 {
 	if(points) 		delete [] points;
 	if(flatNorms) 	delete [] flatNorms;
@@ -18,7 +18,7 @@ Mesh::~Mesh()
 	if(smoothNorms) delete [] smoothNorms;
 }
 
-int Mesh::readFile(string filename)
+int Mesh2::readFile(string filename)
 {
 	fstream infile;
 	infile.open(filename.c_str(), std::ios::in);
@@ -56,7 +56,7 @@ int Mesh::readFile(string filename)
 	return 0;
 }
 
-void Mesh::writeMesh(string filename)
+void Mesh2::writeMesh(string filename)
 {
 	if(numVerts == 0 || numNormals == 0 || numFaces == 0)
 		return;
@@ -83,7 +83,7 @@ void Mesh::writeMesh(string filename)
 	outStream.close();
 }
 
-void Mesh::writeNormFile(string filename)
+void Mesh2::writeNormFile(string filename)
 {
 	if(!smoothNorms) {
 		std::cout << "No smooth normal array" << std::endl;
@@ -96,7 +96,7 @@ void Mesh::writeNormFile(string filename)
 	outfile.close();
 }
 
-void Mesh::readSmoothNormals(string filename)
+void Mesh2::readSmoothNormals(string filename)
 {
 	ifstream in(filename.c_str(), std::ios::in);
 	if(in.fail())	return;
@@ -107,7 +107,7 @@ void Mesh::readSmoothNormals(string filename)
 }
 
 //brute force n*m, n=#vertices m=#faces
-void Mesh::generateSmoothNormals()
+void Mesh2::generateSmoothNormals()
 {
 	useSmoothNormals = true;
 	smoothNorms = new Vector3[numVerts];
@@ -118,7 +118,7 @@ void Mesh::generateSmoothNormals()
 	}
 }
 
-Vector3 Mesh::getSmoothNormal(std::vector<Face*>* vFaces)
+Vector3 Mesh2::getSmoothNormal(std::vector<Face*>* vFaces)
 {
 	Vector3 m(0);
 	for(unsigned int face = 0; face < vFaces->size(); face++) {
@@ -130,7 +130,7 @@ Vector3 Mesh::getSmoothNormal(std::vector<Face*>* vFaces)
 	return m;
 }
 
-std::vector<Face*>* Mesh::getConnectedFaces(int vIndex)
+std::vector<Face*>* Mesh2::getConnectedFaces(int vIndex)
 {
 	std::vector<Face*>* vFaces = new std::vector<Face*>;
 	for(int face = 0; face < numFaces; face++) {
@@ -141,7 +141,7 @@ std::vector<Face*>* Mesh::getConnectedFaces(int vIndex)
 	return vFaces;
 }
 
-void Mesh::readRawFile(string filename)
+void Mesh2::readRawFile(string filename)
 {
 	string input;
 	stringstream sstream;
@@ -208,7 +208,7 @@ void Mesh::readRawFile(string filename)
 	delete normals;
 }
 
-int Mesh::getVertIndex(Vector3* vertex, vector<Vector3*>* coords)
+int Mesh2::getVertIndex(Vector3* vertex, vector<Vector3*>* coords)
 {
 	int index = coords->size();
 	for(unsigned int i = 0; i < coords->size(); i++)
@@ -217,7 +217,7 @@ int Mesh::getVertIndex(Vector3* vertex, vector<Vector3*>* coords)
 	return index;
 }
 
-Vector3* Mesh::getNormal(vector<int>* indices, vector<Vector3*>* v)
+Vector3* Mesh2::getNormal(vector<int>* indices, vector<Vector3*>* v)
 {
 	int size = indices->size();
 	Vector3* normal = new Vector3();
@@ -232,7 +232,7 @@ Vector3* Mesh::getNormal(vector<int>* indices, vector<Vector3*>* v)
 	return normal;
 }
 
-void Mesh::print()
+void Mesh2::print()
 {
 	cout << "Address: " << this << endl;
 	cout << "Faces: " << numFaces << endl;

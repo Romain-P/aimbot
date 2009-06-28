@@ -1,11 +1,11 @@
-#ifndef mesh_h
-#define mesh_h
+#ifndef mesh2_h
+#define mesh2_h
 
 #include <math.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "../Graphics/GraphicIncludes.h"
+#include "../Graphics/Glut/GraphicIncludes.h"
 #include "../Utils/Structures/Vector3.h"
 
 using namespace std;
@@ -34,7 +34,7 @@ public:
   	}
 };
 
-class Mesh
+class Mesh2
 {
 private:
 	bool useSmoothNormals;
@@ -51,8 +51,8 @@ public:
 	Vector3* smoothNorms;
 	Face* faces;
 
-	Mesh();
-	~Mesh();
+	Mesh2();
+	~Mesh2();
 	int readFile(string filename);
 	void generateSmoothNormals();
 	void readSmoothNormals(string filename);

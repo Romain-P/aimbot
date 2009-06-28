@@ -5,13 +5,12 @@
 #include <sstream>
 #include <vector>
 
-#include "MeshRenderer.h"
 #include "GraphicIncludes.h"
-#include "Drawable.h"
-#include "Camera.h"
-
-#include "HUD/PlayerHUD.h"
-#include "HUD/DevConsole.h"
+#include "../MeshRenderer.h"
+#include "../Drawable.h"
+#include "../Camera.h"
+#include "../HUD/PlayerHUD.h"
+#include "../HUD/DevConsole.h"
 
 using std::stringstream;
 using std::string;

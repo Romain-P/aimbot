@@ -1,7 +1,7 @@
 #ifndef screenboundsuser_h
 #define screenboundsuser_h
 
-#include "GraphicIncludes.h"
+#include "Glut/GraphicIncludes.h"
 
 class ScreenBoundsUser
 {

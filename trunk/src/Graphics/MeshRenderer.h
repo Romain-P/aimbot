@@ -15,7 +15,7 @@ public:
 	static void draw(Mesh* mesh)
 	{
 		const vector<Face>& faces = mesh->getFaces();
-		const vector<Vector3>& vertices = mesh->getVertices();
+		const vector<Position3>& vertices = mesh->getVertices();
 		vector<Face>::const_iterator it;
 
 		glBegin(GL_QUADS);
@@ -23,9 +23,9 @@ public:
 		{
 			for(int i = 0; i < 4; i++)
 			{
-				const Vector3& v = vertices.at(it->indices[i]);
-				glColor3f(v.x, v.y, v.z);
-				glVertex3f(v.x, v.y, v.z);
+				const Position3& p = vertices.at(it->indices[i]);
+				glColor3f(p.x, p.y, p.z);
+				glVertex3f(p.x, p.y, p.z);
 			}
 		}
 		glEnd();

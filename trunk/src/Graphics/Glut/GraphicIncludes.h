@@ -1,5 +1,5 @@
-#ifndef openglincludes_h
-#define openglincludes_h
+#ifndef graphicincludes_h
+#define graphicincludes_h
 
 	#ifdef WIN32
 		#define GLUT_DISABLE_ATEXIT_HACK
