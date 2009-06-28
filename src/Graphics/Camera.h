@@ -1,7 +1,7 @@
 #ifndef camera_h
 #define camera_h
 
-#include "GraphicIncludes.h"
+#include "Glut/GraphicIncludes.h"
 #include "../Utils/Structures/Vector3.h"
 #include "../Physics/Movable.h"
 

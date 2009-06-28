@@ -8,7 +8,7 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
 	updater = gameUpdater;
 	showFPS = false;
 
-	crosshair = new Crosshair(Crosshair::CROSS, 6.f, Colour(1.f, 0.9f, 0.9f));
+	crosshair = new Crosshair(Crosshair::CORNER, 6.f, Colour(1.f, 0.9f, 0.9f));
 }
 
 PlayerHUD::~PlayerHUD()

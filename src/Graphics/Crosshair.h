@@ -27,8 +27,6 @@ public:
 		this->type = type;
 		this->size = size;
 		colour = Colour(1, 0, 0.2f);
-
-		std::cout << type << std::endl;
 	}
 
 	Crosshair(int type, float size, const Colour& colour)
@@ -42,7 +40,6 @@ public:
 	void draw()
 	{
 		glColor3f(colour.r, colour.g, colour.b);
-
 		switch(type)
 		{
 		case DOT:
@@ -82,6 +79,7 @@ public:
 
 	void drawCorner()
 	{
+		glDisable(GL_BLEND);
 		glBegin(GL_LINES);
 		glVertex2f(halfWidth, halfHeight);
 		glVertex2f(halfWidth + size, halfHeight);
@@ -89,6 +87,7 @@ public:
 		glVertex2f(halfWidth, halfHeight);
 		glVertex2f(halfWidth, halfHeight + size);
 		glEnd();
+		glEnable(GL_BLEND);
 	}
 };
 

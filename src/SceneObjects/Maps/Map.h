@@ -9,17 +9,26 @@
 #include "../Primitives/PrimitiveMesh.h"
 #include "../DestroyableMesh.h"
 #include "../ImmutableMesh.h"
+#include "../Hitbox.h"
 
 class MapPool;
 
 using std::string;
+using std::vector;
 
 class Map
 {
+private:
+	vector<Hitbox> hitboxes;
 public:
 	Map(string& filename)
 	{
 
+	}
+
+	const vector<Hitbox>& getHitboxes()
+	{
+		return hitboxes;
 	}
 };
 

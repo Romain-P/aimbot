@@ -5,8 +5,8 @@
 #include "Updater.h"
 
 #include "../Input/InputHandler.h"
-#include "../Graphics/GraphicIncludes.h"
-#include "../Graphics/GlutDisplay.h"
+#include "../Graphics/Glut/GraphicIncludes.h"
+#include "../Graphics/Glut/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
 #include "../Graphics/HUD/DevConsole.h"
 #include "../Graphics/SceneDisplay.h"

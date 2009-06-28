@@ -1,7 +1,7 @@
 #ifndef updater_h
 #define updater_h
 
-#include "../Graphics/GlutDisplay.h"
+#include "../Graphics/Glut/GlutDisplay.h"
 #include "../Utils/Misc/MicroTimer.h"
 #include "../Physics/EnvironmentUpdater.h"
 

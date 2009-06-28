@@ -2,7 +2,7 @@
 #define textrenderer_h
 
 #include <string>
-#include "GraphicIncludes.h"
+#include "Glut/GraphicIncludes.h"
 
 using std::string;
 

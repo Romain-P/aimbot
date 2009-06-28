@@ -1,7 +1,7 @@
 #ifndef drawable_h
 #define drawable_h
 
-#include "GraphicIncludes.h"
+#include "Glut/GraphicIncludes.h"
 #include "../Graphics/ScreenBoundsUser.h"
 
 class Drawable : public ScreenBoundsUser

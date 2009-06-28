@@ -20,18 +20,22 @@ public:
 	{
 	}
 
-	void move(float timeStep)
+	Movable(Position3 start)
 	{
-		if(timeStep <= 0) return;
-
-		velocity += acceleration * timeStep;
-		displacement += velocity * timeStep;
+		this->start = start;
 	}
 
 	Position3 getPosition()
 	{
 		return displacement + start;
 	}
+
+	virtual void move(float timeStep)
+	{
+		if(timeStep <= 0) return;
+		displacement += velocity * timeStep;
+	}
+	//virtual void move(float timeStep) = 0;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include "DevConsole.h"
-#include "../GlutDisplay.h"
+#include "../Glut/GlutDisplay.h"
 
 DevConsole::DevConsole(PlayerHUD* hud, GlutDisplay* display) :
 	Drawable(500),

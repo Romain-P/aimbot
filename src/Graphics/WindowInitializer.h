@@ -1,8 +1,8 @@
 #ifndef windowinitializer_h
 #define windowinitializer_h
 
-#include "GraphicIncludes.h"
-#include "GlutDisplay.h"
+#include "Glut/GraphicIncludes.h"
+#include "Glut/GlutDisplay.h"
 #include "../Game/GameCoordinator.h"
 
 class WindowInitializer

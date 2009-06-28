@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "GlutDisplay.h"
+#include "Glut/GlutDisplay.h"
 
 Camera::Camera()
 {

@@ -3,10 +3,13 @@
 
 #include <iostream>
 #include "../../Physics/Movable.h"
+#include "../../Physics/Collidable.h"
 
 using std::string;
 
-class Entity : public Movable
+class Entity :
+	public Movable,
+	public Collidable
 {
 protected:
 	string name;
@@ -15,6 +18,10 @@ protected:
 public:
 	Entity(const string& nom) :
 		name(nom)
+	{
+	}
+
+	virtual ~Entity()
 	{
 	}
 
@@ -37,6 +44,8 @@ public:
 	{
 		lookDirection = look;
 	}
+
+
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 #include "MovementControls.h"
 #include "../Game/GameState.h"
-#include "../Graphics/GraphicIncludes.h"
+#include "../Graphics/Glut/GraphicIncludes.h"
 #include "../Graphics/ScreenBoundsUser.h"
 #include "../Graphics/Camera.h"
 #include "../Physics/EnvironmentUpdater.h"
