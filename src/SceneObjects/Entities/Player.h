@@ -25,14 +25,9 @@ private:
 	}
 
 public:
-	Player(const string& name) : Entity(name)
+	Player() : Entity("")
 	{
 		health = 100;
-
-		mesh = new Mesh();
-		initializeMesh();
-
-		hitbox = new Hitbox(mesh);
 	}
 
 	~Player()

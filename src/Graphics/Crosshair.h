@@ -1,6 +1,7 @@
 #ifndef crosshair_h
 #define crosshair_h
 
+#include <iostream>
 #include "Drawable.h"
 #include "Colour.h"
 
@@ -26,6 +27,8 @@ public:
 		this->type = type;
 		this->size = size;
 		colour = Colour(1, 0, 0.2f);
+
+		std::cout << type << std::endl;
 	}
 
 	Crosshair(int type, float size, const Colour& colour)
@@ -51,6 +54,8 @@ public:
 		case CORNER:
 			drawCorner();
 			return;
+		default:
+			drawDot();
 		}
 	}
 
@@ -64,13 +69,15 @@ public:
 
 	void drawCross()
 	{
+		glDisable(GL_BLEND);
 		glBegin(GL_LINES);
-		glVertex2f(halfWidth - size * 0.5f, halfHeight);
-		glVertex2f(halfWidth + size * 0.5f, halfHeight);
+		glVertex2f(halfWidth - size, halfHeight);
+		glVertex2f(halfWidth + size, halfHeight);
 
-		glVertex2f(halfWidth, halfHeight + size * 0.5f);
-		glVertex2f(halfWidth, halfHeight - size * 0.5f);
+		glVertex2f(halfWidth, halfHeight + size);
+		glVertex2f(halfWidth, halfHeight - size);
 		glEnd();
+		glEnable(GL_BLEND);
 	}
 
 	void drawCorner()

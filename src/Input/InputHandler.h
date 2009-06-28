@@ -7,6 +7,7 @@
 #include "../Graphics/ScreenBoundsUser.h"
 #include "../Graphics/Camera.h"
 #include "../Physics/EnvironmentUpdater.h"
+#include "../SceneObjects/Entities/Player.h"
 #include "../Utils/Structures/Vector3.h"
 
 class GameCoordinator;
@@ -37,11 +38,12 @@ private:
 	MouseEvent mouseEvent;
 	MovementControls controls;
 
-	Camera* camera;
 	GameState* gameState;
 	EnvironmentUpdater* updater;
 	GameCoordinator* coordinator;
+	Player* player;
 
+	Camera* camera;
 public:
 
 	InputHandler(GameCoordinator* coordinator, GameState* gameState, Camera* camera);
