@@ -1,9 +1,9 @@
 #ifndef cube_h
 #define cube_h
 
-#include "PrimitiveMesh.h"
+#include "../Mesh.h"
 
-class Cube : public PrimitiveMesh
+class Cube : public Mesh
 {
 private:
 	float size;

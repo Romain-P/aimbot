@@ -10,19 +10,22 @@ private:
 	bool animating;
 	float duration;
 	int samples;
+	int samplePosition;
 
 public:
 	Animatable() :
 		animating(false),
 		duration(1.f),
-		samples(15)
+		samples(15),
+		samplePosition(0)
 	{
 	}
 
 	Animatable(float d, int s) :
 		animating(false),
 		duration(d),
-		samples(s)
+		samples(s),
+		samplePosition(0)
 	{
 	}
 
@@ -31,15 +34,16 @@ public:
 		animating = true;
 	}
 
-	void draw()
+	void move(float timestep)
 	{
 		if(animating)
 		{
-
+			update(timestep, samplePosition);
 		}
 	}
 
-	virtual void move(float timestep) = 0;
+	virtual void draw() = 0;
+	virtual void update(float timestep, int index) = 0;
 };
 
 #endif
