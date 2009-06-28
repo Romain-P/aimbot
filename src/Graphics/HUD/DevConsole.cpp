@@ -33,11 +33,15 @@ void DevConsole::executeCommand(const string& command)
 	else if(a == "fov" && b.length() > 0)
 	{
 		float fov;
-		ss << b;
-		ss >> fov;
+		fov = atof(b.c_str());
+		if(fov < 10)
+			fov = 10;
 		glutDisplay->setFOV(fov);
 		glutDisplay->reshapeFunction(width, height);
-		ss.clear();
+	}
+	else if(command == "way she goes")
+	{
+		pushMessage("Fuckin way she goes!\n");
 	}
 	else
 	{
@@ -108,6 +112,11 @@ void DevConsole::putChar(unsigned char ch)
 		pushMessage(currentMessage);
 		executeCommand(currentMessage);
 		currentMessage = "";
+	}
+	else if(ch == '\b')
+	{
+		if(currentMessage.length() > 0)
+			currentMessage = currentMessage.substr(0, currentMessage.length() - 1);
 	}
 	else
 	{
