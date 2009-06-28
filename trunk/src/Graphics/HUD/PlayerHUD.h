@@ -6,6 +6,7 @@
 
 #include "../Drawable.h"
 #include "../TextRenderer.h"
+#include "../Crosshair.h"
 #include "../../Game/GameState.h"
 
 class Updater;
@@ -20,10 +21,11 @@ private:
 
 	GameState* state;
 	Updater* updater;
+	Crosshair* crosshair;
 
 public:
 	PlayerHUD(GameState* gameState, Updater* gameUpdater);
-	virtual ~PlayerHUD() {}
+	virtual ~PlayerHUD();
 	void drawText(string& text, float leftX, float topY);
 	void draw();
 	void drawFPS();

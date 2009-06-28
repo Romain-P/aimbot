@@ -3,7 +3,8 @@
 
 DevConsole::DevConsole(PlayerHUD* hud, GlutDisplay* display) :
 	Drawable(500),
-	numMessages(10),
+	messagesShown(10),
+	maxMessages(100),
 	playerHud(hud),
 	glutDisplay(display)
 {
@@ -13,7 +14,7 @@ void DevConsole::pushMessage(const string& message)
 {
 	messages.push_back(message);
 
-	if(messages.size() > numMessages)
+	if(messages.size() > messagesShown)
 		messages.pop_front();
 }
 
@@ -29,16 +30,18 @@ void DevConsole::executeCommand(const string& command)
 		if(b == "fps")
 			playerHud->toggleFPS();
 	}
-	else if(a == "set")
+	else if(a == "fov" && b.length() > 0)
 	{
-		if(b == "fov")
-		{
-			float fov;
-			ss << c;
-			ss >> fov;
-			glutDisplay->setFOV(fov);
-			glutDisplay->reshapeFunction(width, height);
-		}
+		float fov;
+		ss << b;
+		ss >> fov;
+		glutDisplay->setFOV(fov);
+		glutDisplay->reshapeFunction(width, height);
+		ss.clear();
+	}
+	else
+	{
+		pushMessage("Command Unrecognised.\n");
 	}
 }
 
@@ -64,8 +67,7 @@ void DevConsole::draw()
 	glEnd();
 
 	glBegin(GL_LINES);
-		glColor3f(0.06f, 0.06f, 0.06f);
-
+		glColor4f(0.06f, 0.06f, 0.06f, 1.0f);
 		glVertex2f(0, h1+1);
 		glVertex2f(width, h1+1);
 
@@ -74,14 +76,14 @@ void DevConsole::draw()
 	glEnd();
 
 	glColor3f(0.8f, 0.82f, 0.84f);
-	drawString(currentMessage, 5, h2 - 3);
+	drawString(currentMessage, 5, h2 - 4);
 
 	int i = 1;
-	list<string>::const_iterator it = messages.begin();
+	list<string>::reverse_iterator it = messages.rbegin();
 
-	while(it != messages.end())
+	while(it != messages.rend())
 	{
-		drawString(*it, 5, i * 18);
+		drawString(*it, 5, 190 - i * 18);
 		++it;
 		++i;
 	}

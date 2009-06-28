@@ -20,7 +20,8 @@ class DevConsole : public Drawable, public TextRenderer
 private:
 	bool visible;
 	float size;
-	unsigned int numMessages;
+	unsigned int messagesShown;
+	unsigned int maxMessages;
 	string currentMessage;
 
 	stringstream ss;
