@@ -47,30 +47,41 @@ void DevConsole::draw()
 	if (!visible)
 		return;
 
-	glColor4f(0.13f, 0.15f, 0.17f, 0.6f);
-
+	int h1 = 190;
+	int h2 = h1 + 18;
 	glBegin(GL_QUADS);
-		glVertex2i(0, 0);
-		glVertex2i(0, height / 4);
-		glVertex2i(width, height / 4);
+		glColor4f(0.13f, 0.15f, 0.17f, 0.6f);
+		glVertex2f(0, 0);
+		glVertex2f(0, h1);
+		glVertex2f(width, h1);
 		glVertex2f(width, 0);
+
+		glColor4f(0.13f, 0.15f, 0.17f, 0.8f);
+		glVertex2f(0, h1+2);
+		glVertex2f(0, h2);
+		glVertex2f(width, h2);
+		glVertex2f(width, h1+2);
 	glEnd();
 
-	glColor3f(0.06f, 0.06f, 0.06f);
 	glBegin(GL_LINES);
-		glVertex2i(0, height / 4);
-		glVertex2i(width, height / 4);
+		glColor3f(0.06f, 0.06f, 0.06f);
+
+		glVertex2f(0, h1+1);
+		glVertex2f(width, h1+1);
+
+		glVertex2f(0, h2);
+		glVertex2f(width, h2);
 	glEnd();
 
-	glColor3f(0.7f, 0.72f, 0.74f);
-	drawString(currentMessage, 40, 200);
+	glColor3f(0.8f, 0.82f, 0.84f);
+	drawString(currentMessage, 5, h2 - 3);
 
-	int i = 0;
+	int i = 1;
 	list<string>::const_iterator it = messages.begin();
 
 	while(it != messages.end())
 	{
-		drawString(*it, 40, i * 40);
+		drawString(*it, 5, i * 18);
 		++it;
 		++i;
 	}

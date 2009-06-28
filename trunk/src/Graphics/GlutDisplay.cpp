@@ -8,7 +8,6 @@ GlutDisplay::GlutDisplay(Camera* cam) :
 {
 	glutDisplay = this;
 	screenAspect = double(glutGet(GLUT_SCREEN_WIDTH)) / glutGet(GLUT_SCREEN_HEIGHT);
-
 	camera->updateView();
 }
 
@@ -88,6 +87,8 @@ void GlutDisplay::removeDrawable(Drawable* drawable)
 
 void GlutDisplay::enterOrthoProjection()
 {
+	glDisable(GL_DEPTH_TEST);
+
 	// fix blending problems with overlapping lines
 	glDepthMask(GL_FALSE);
 
@@ -111,6 +112,7 @@ void GlutDisplay::exitOrthoProjection()
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glDepthMask(GL_TRUE);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void GlutDisplay::setFOV(float fov)

@@ -15,8 +15,8 @@ protected:
 	{
 		topLeftX = glutGet(GLUT_WINDOW_X);
 		topLeftY = glutGet(GLUT_WINDOW_Y);
-		width = glutGet(GLUT_WINDOW_WIDTH);
-		height = glutGet(GLUT_WINDOW_HEIGHT);
+		width = glutGet(GLUT_SCREEN_WIDTH);
+		height = glutGet(GLUT_SCREEN_HEIGHT);
 	}
 };
 
