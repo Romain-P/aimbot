@@ -35,7 +35,7 @@ public:
 
 class Mesh
 {
-private:
+protected:
 	vector<Position3> vertices;
 	vector<Face> faces;
 

@@ -1,9 +1,9 @@
 #ifndef box_h
 #define box_h
 
-#include "PrimitiveMesh.h"
+#include "../Mesh.h"
 
-class Box : public PrimitiveMesh
+class Box : public Mesh
 {
 	float x;
 	float y;
