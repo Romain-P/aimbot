@@ -4,8 +4,7 @@
 #include <vector>
 
 #include "Entity.h"
-#include "Hitbox.h"
-
+#include "../Hitbox.h"
 #include "../Weapons/Weapon.h"
 #include "../Mesh.h"
 
@@ -17,7 +16,7 @@ private:
 	float health;
 
 	vector<Weapon*> weapons;
-	Mesh* playerMesh;
+	Mesh* mesh;
 	Hitbox* hitbox;
 
 	void initializeMesh()
@@ -26,25 +25,25 @@ private:
 	}
 
 public:
-	Player(string name) : Entity(name)
+	Player(const string& name) : Entity(name)
 	{
 		health = 100;
 
-		playerMesh = new Mesh();
+		mesh = new Mesh();
 		initializeMesh();
 
-		//the hitbox adapt to a given mesh
-		hitbox = new Hitbox(playerMesh);
+		hitbox = new Hitbox(mesh);
+	}
+
+	~Player()
+	{
+		delete mesh;
+		delete hitbox;
 	}
 
 	void addWeapon(Weapon* weapon)
 	{
-		weapons.add(weapon);
-	}
-
-	std::vector<Weapon*>& getWeapons()
-	{
-		return weapons;
+		weapons.push_back(weapon);
 	}
 
 	void setHealth(float h)
