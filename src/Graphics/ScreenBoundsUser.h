@@ -10,6 +10,8 @@ protected:
 	int topLeftY;
 	int width;
 	int height;
+	int halfWidth;
+	int halfHeight;
 
 	ScreenBoundsUser()
 	{
@@ -17,6 +19,9 @@ protected:
 		topLeftY = glutGet(GLUT_WINDOW_Y);
 		width = glutGet(GLUT_SCREEN_WIDTH);
 		height = glutGet(GLUT_SCREEN_HEIGHT);
+
+		halfWidth = width / 2;
+		halfHeight = height / 2;
 	}
 };
 

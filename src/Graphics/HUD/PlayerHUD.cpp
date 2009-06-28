@@ -7,14 +7,21 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
 	state = gameState;
 	updater = gameUpdater;
 	showFPS = true;
+
+	crosshair = new Crosshair(Crosshair::DOT, 3.f);
+}
+
+PlayerHUD::~PlayerHUD()
+{
+	delete crosshair;
 }
 
 void PlayerHUD::draw()
 {
 	if(showFPS)
-	{
 		drawFPS();
-	}
+
+	crosshair->draw();
 }
 
 void PlayerHUD::drawFPS()
@@ -24,7 +31,7 @@ void PlayerHUD::drawFPS()
 	static float minFps = 10000, maxFps = 0, avg, fps;
 
 	fps = updater->getFPS();
-	avg = 0.5f * fps + 0.5f * avg;
+	avg = 0.1f * fps + 0.9f * avg;
 
 	if(fps < minFps)
 		minFps = fps;
@@ -34,22 +41,10 @@ void PlayerHUD::drawFPS()
 	ss << fps << avg << maxFps << minFps;
 	ss >> a >> b >> c >> d;
 
-	//drawText(a, 20.f, 20.f);
+	drawString(a, 20.f, 20.f);
 
 	ss.str("");
 	ss.clear();
-}
-
-void PlayerHUD::drawText(string& text, float leftX, float topY)
-{
-	glPushMatrix();
-		glTranslatef(leftX, topY, 0);
-		glScalef(0.14, -0.14, 0.14);
-		for (unsigned int i = 0; i < text.length(); i++)
-		{
-			glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, text.at(i));
-		}
-	glPopMatrix();
 }
 
 void PlayerHUD::toggleFPS()
