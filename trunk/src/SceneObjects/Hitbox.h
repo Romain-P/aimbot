@@ -29,12 +29,13 @@ public:
 	void calculateSurroundingBox()
 	{
 		float maxX, minX, maxY, minY, maxZ, minZ, x, y, z;
-		vector<Vector3>* meshVerts = meshToSurround->vertices;
-		for(int i = 0; i < meshVerts->size(); i++)
+		const vector<Vector3>& meshVerts = meshToSurround->getVertices();
+		vector<Vector3>::const_iterator it;
+		for(it = meshVerts.begin(); it != meshVerts.end(); ++it)
 		{
-			x = meshVerts->at(i).x;
-			y = meshVerts->at(i).y;
-			z = meshVerts->at(i).z;
+			x = it->x;
+			y = it->y;
+			z = it->z;
 
 			if(maxX < x) maxX = x;
 			if(maxY < y) maxY = y;
@@ -45,17 +46,17 @@ public:
 			if(minZ > z) minZ = z;
 		}
 
-		vertices.push_back(maxX, maxY, maxZ);
-		vertices.push_back(maxX, minY, maxZ);
-		vertices.push_back(maxX, minY, minZ);
-		vertices.push_back(maxX, maxY, minZ);
-		vertices.push_back(minZ, maxY, maxZ);
-		vertices.push_back(minZ, minY, maxZ);
-		vertices.push_back(minZ, minY, minZ);
-		vertices.push_back(minZ, maxY, minZ);
+		vertices.push_back(Vector3(maxX, maxY, maxZ));
+		vertices.push_back(Vector3(maxX, minY, maxZ));
+		vertices.push_back(Vector3(maxX, minY, minZ));
+		vertices.push_back(Vector3(maxX, maxY, minZ));
+		vertices.push_back(Vector3(minZ, maxY, maxZ));
+		vertices.push_back(Vector3(minZ, minY, maxZ));
+		vertices.push_back(Vector3(minZ, minY, minZ));
+		vertices.push_back(Vector3(minZ, maxY, minZ));
 	}
 
-	vector<Vector3>& getVertices()
+	const vector<Vector3>& getVertices()
 	{
 		return vertices;
 	}

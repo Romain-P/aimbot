@@ -12,7 +12,7 @@
 #include "../Graphics/SceneDisplay.h"
 #include "../Physics/EnvironmentUpdater.h"
 #include "../Utils/Structures/FileFormat.h"
-
+#include "../SceneObjects/Entities/Player.h"
 
 class GameCoordinator
 {
@@ -26,6 +26,7 @@ private:
 	GlutDisplay* display;
 	SceneDisplay* scene;
 	EnvironmentUpdater* envUpdater;
+	Player* player;
 
 public:
 	GameCoordinator()
@@ -33,7 +34,9 @@ public:
 		camera = new Camera();
 		gameState = new GameState(GameState::GAME_IN_SESSION, GameState::PLAYING);
 		display = new GlutDisplay(camera);
+		player = new Player();
 		inputHandler = new InputHandler(this, gameState, camera);
+
 		camera->setDisplay(display);
 
 		envUpdater = new EnvironmentUpdater();
@@ -68,6 +71,7 @@ public:
 		delete inputHandler;
 		delete envUpdater;
 		delete scene;
+		delete player;
 	}
 
 	void setFunctionCallbacks()

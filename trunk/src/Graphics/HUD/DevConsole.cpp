@@ -93,8 +93,6 @@ void DevConsole::draw()
 	}
 }
 
-
-
 void DevConsole::toggleVisibility()
 {
 	visible = !visible;

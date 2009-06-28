@@ -98,6 +98,7 @@ void InputHandler::mouseFunction(int button, int state, int x, int y)
 
 void InputHandler::motionFunction(int x, int y)
 {
+	passiveMotionFunction(x, y);
 }
 
 void InputHandler::passiveMotionFunction(int x, int y)
@@ -117,7 +118,7 @@ void InputHandler::passiveMotionFunction(int x, int y)
 		if(x + 2 * mouseEvent.deltaX > width || x + 2 * mouseEvent.deltaX < 0 ||
 			y + 2 * mouseEvent.deltaY > height || y + 2 * mouseEvent.deltaY < 0)
 		{
-			glutWarpPointer(width / 2, height / 2);
+			glutWarpPointer(halfWidth, halfHeight);
 			warped = true;
 		}
 
@@ -128,8 +129,8 @@ void InputHandler::passiveMotionFunction(int x, int y)
 
 	if(warped)
 	{
-		mouseEvent.lastX = width / 2;
-		mouseEvent.lastY = height / 2;
+		mouseEvent.lastX = halfWidth;
+		mouseEvent.lastY = halfHeight;
 		warped = false;
 	}
 	else

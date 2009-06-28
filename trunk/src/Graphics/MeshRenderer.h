@@ -14,28 +14,27 @@ class MeshRenderer
 public:
 	static void draw(Mesh* mesh)
 	{
-		for (int face = 0; face < mesh->numFaces; face++)
+		const vector<Face>& faces = mesh->getFaces();
+		const vector<Vector3>& vertices = mesh->getVertices();
+		vector<Face>::const_iterator it;
+
+		glBegin(GL_QUADS);
+		for (it = faces.begin(); it != faces.end(); ++it)
 		{
-			glBegin(GL_POLYGON);
-			for (int vert = 0; vert < mesh->faces[face].nVerts; vert++)
+			for(int i = 0; i < 4; i++)
 			{
-				int nIndex = mesh->faces[face].verts[vert].normIndex;
-				int vIndex = mesh->faces[face].verts[vert].vertIndex;
-				glNormal3f(mesh->flatNorms[nIndex].x,
-						mesh->flatNorms[nIndex].y,
-						mesh->flatNorms[nIndex].z);
-				glVertex3f(mesh->points[vIndex].x,
-						mesh->points[vIndex].y,
-						mesh->points[vIndex].z);
+				const Vector3& v = vertices.at(it->indices[i]);
+				glColor3f(v.x, v.y, v.z);
+				glVertex3f(v.x, v.y, v.z);
 			}
-			glEnd();
 		}
+		glEnd();
 	}
 
 	static void draw(PrimitiveMesh* mesh)
 	{
-		vector<PrimitiveFace> faces = mesh->getFaces();
-		vector<Vector3> vertices = mesh->getVertices();
+		const vector<PrimitiveFace>& faces = mesh->getFaces();
+		const vector<Vector3>& vertices = mesh->getVertices();
 		vector<PrimitiveFace>::const_iterator it;
 
 		glBegin(GL_QUADS);
@@ -44,7 +43,7 @@ public:
 			unsigned int isize = it->indices.size();
 			for(unsigned int i = 0; i < isize; i++)
 			{
-				Vector3& v = vertices.at(it->indices.at(i));
+				const Vector3& v = vertices.at(it->indices.at(i));
 				glColor3f(v.x, v.y, v.z);
 				glVertex3f(v.x, v.y, v.z);
 			}

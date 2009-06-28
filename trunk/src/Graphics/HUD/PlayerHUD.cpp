@@ -8,7 +8,7 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater) :
 	updater = gameUpdater;
 	showFPS = false;
 
-	crosshair = new Crosshair(Crosshair::DOT, 3.f);
+	crosshair = new Crosshair(Crosshair::CROSS, 6.f, Colour(1.f, 0.9f, 0.9f));
 }
 
 PlayerHUD::~PlayerHUD()
@@ -31,7 +31,6 @@ void PlayerHUD::drawFPS()
 
 	if(updater->getFrames() % 200 == 0)
 		fps = updater->getFPS();
-	//avg = 0.02f * fps + 0.98f * avg;
 	sprintf(str, "%4.1f", fps);
 	glColor3f(0.9, 0.9, 0.9);
 	drawString(string(str), width - 100, 20.f);
