@@ -6,7 +6,6 @@
 class Animatable : public Drawable
 {
 private:
-	bool animating;
 
 	void stopAnimation()
 	{
@@ -14,8 +13,9 @@ private:
 		timeElapsed = 0;
 	}
 protected:
-	float timeElapsed;
+	bool animating;
 	float duration;
+	float timeElapsed;
 
 	virtual void draw() = 0;
 	virtual void animate() = 0;

@@ -66,8 +66,8 @@ public:
 
 		display->addOrthographic(console);
 		display->addOrthographic(hud);
+		display->addOrthographic(laserShot);
 		display->addDrawable(scene);
-		display->addDrawable(laserShot);
 
 		envUpdater->addMovable(camera);
 
@@ -92,6 +92,9 @@ public:
 		delete envUpdater;
 		delete scene;
 		delete player;
+		delete animator;
+		delete laser;
+		delete laserShot;
 	}
 
 	void setFunctionCallbacks()

@@ -22,14 +22,14 @@ public:
 		CORNER
 	};
 
-	Crosshair(int type, float size)
+	Crosshair(int type, float size) : Drawable(10000)
 	{
 		this->type = type;
 		this->size = size;
 		colour = Colour(1, 0, 0.2f);
 	}
 
-	Crosshair(int type, float size, const Colour& colour)
+	Crosshair(int type, float size, const Colour& colour) : Drawable(10000)
 	{
 		this->type = type;
 		this->size = size;
