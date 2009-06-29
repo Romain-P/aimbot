@@ -36,6 +36,7 @@ public:
 class Mesh
 {
 protected:
+	Position3 centre;
 	vector<Position3> vertices;
 	vector<Face> faces;
 
@@ -77,6 +78,12 @@ protected:
 public:
 	Mesh()
 	{
+		centre = Position3(0, 0, 0);
+	}
+
+	Mesh(Position3 centre)
+	{
+		this->centre = centre;
 	}
 
 	Mesh(const string& filename)
@@ -92,6 +99,11 @@ public:
 	const vector<Face>& getFaces()
 	{
 		return faces;
+	}
+
+	const Position3& getCentre()
+	{
+		return centre;
 	}
 };
 

@@ -31,7 +31,7 @@ public:
 		return Position3(x * value, y * value, z * value);
 	}
 
-	Position3 operator+(const Position3& other)
+	const Position3 operator+(const Position3& other)
 	{
 		return Position3(x + other.x, y + other.y, z + other.z);
 	}
@@ -43,6 +43,12 @@ public:
 		z += vect.z;
 	}
 
+	void operator*=(float ratio)
+	{
+		x *= ratio;
+		y *= ratio;
+		z *= ratio;
+	}
 
 
 	std::string print()

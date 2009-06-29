@@ -2,6 +2,7 @@
 #define updater_h
 
 #include "../Graphics/Glut/GlutDisplay.h"
+#include "../Graphics/Animator.h"
 #include "../Utils/Misc/MicroTimer.h"
 #include "../Physics/EnvironmentUpdater.h"
 
@@ -12,41 +13,19 @@ private:
 	long frames;
 	MicroTimer microTimer;
 
-	EnvironmentUpdater* envUpdater;
 	GlutDisplay* display;
+	EnvironmentUpdater* environmentUpdater;
+	Animator* animator;
 
 public:
-	Updater(GlutDisplay* display, EnvironmentUpdater* eUpdater);
+	Updater(GlutDisplay* display,
+			EnvironmentUpdater* envUpdater,
+			Animator* animator);
 
-	void updateFunction()
-	{
-		frames++;
-
-		microTimer.stopMicroTimer();
-		deltaTime = microTimer.getDeltaTime();
-		microTimer.startMicroTimer();
-
-		display->updateCamera();
-		envUpdater->updateEntities(deltaTime);
-
-		glutPostRedisplay();
-	}
-
-	float getFPS()
-	{
-		return 1 / deltaTime;
-	}
-
-	long getFrames()
-	{
-		return frames;
-	}
-
-	float getDeltaTime()
-	{
-		return deltaTime;
-	}
-
+	void updateFunction();
+	float getFPS();
+	long getFrames();
+	float getDeltaTime();
 	static void updateDelegate();
 };
 

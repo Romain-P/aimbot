@@ -6,7 +6,6 @@
 #include "MapObject.h"
 #include "../SceneObject.h"
 #include "../Mesh.h"
-#include "../Primitives/PrimitiveMesh.h"
 #include "../DestroyableMesh.h"
 #include "../ImmutableMesh.h"
 #include "../Hitbox.h"

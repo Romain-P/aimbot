@@ -2,30 +2,41 @@
 #define animatable_h
 
 #include "Drawable.h"
-#include "../Physics/Movable.h"
 
-class Animatable : public Drawable, public Movable
+class Animatable : public Drawable
 {
 private:
 	bool animating;
+
+	void stopAnimation()
+	{
+		animating = false;
+		timeElapsed = 0;
+	}
+protected:
+	float timeElapsed;
 	float duration;
-	int samples;
-	int samplePosition;
+
+	virtual void draw() = 0;
+	virtual void animate() = 0;
+
+	float progress()
+	{
+		return timeElapsed / duration;
+	}
 
 public:
 	Animatable() :
 		animating(false),
 		duration(1.f),
-		samples(15),
-		samplePosition(0)
+		timeElapsed(0)
 	{
 	}
 
-	Animatable(float d, int s) :
+	Animatable(float d) :
 		animating(false),
 		duration(d),
-		samples(s),
-		samplePosition(0)
+		timeElapsed(0)
 	{
 	}
 
@@ -34,16 +45,20 @@ public:
 		animating = true;
 	}
 
-	void move(float timestep)
+	void update(float timestep)
 	{
-		if(animating)
-		{
-			update(timestep, samplePosition);
-		}
-	}
+		if(!animating)
+			return;
 
-	virtual void draw() = 0;
-	virtual void update(float timestep, int index) = 0;
+		if(timeElapsed > duration)
+		{
+			stopAnimation();
+			return;
+		}
+
+		timeElapsed += timestep;
+		animate();
+	}
 };
 
 #endif
