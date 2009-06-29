@@ -11,6 +11,8 @@ using std::vector;
 using std::string;
 using std::fstream;
 using std::exception;
+using std::cout;
+using std::endl;
 
 class Face
 {
@@ -48,30 +50,29 @@ protected:
 
 		try
 		{
+			float x, y, z;
+			int num, a, b, c, d;
+
 			in.open(filename.c_str(), std::ios::in);
+			if (in.fail() || in.eof()) {
+				cout << "Opening " << filename << " failed." << endl;
+				return;
+			}
 
 			in >> format;
-			assert(format == "OFF");
-
 			in >> numVertices >> numFaces >> numEdges;
 
-			float x, y, z;
-			for(int i = 0; i < numVertices; i++)
-			{
+			for (int i = 0; i < numVertices; i++) {
 				in >> x >> y >> z;
 				vertices.push_back(Position3(x, y, z));
 			}
 
-			int num, a, b, c, d;
-			for(int i = 0; i < numFaces; i++)
-			{
+			for (int i = 0; i < numFaces; i++) {
 				in >> num >> a >> b >> c >> d;
 				faces.push_back(Face(a, b, c, d));
 			}
-		}
-		catch(exception& e)
-		{
-			std::cout << e.what() << std::endl;
+		} catch (exception& e) {
+			cout << e.what() << endl;
 		}
 	}
 

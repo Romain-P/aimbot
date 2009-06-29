@@ -16,6 +16,11 @@ private:
 public:
 	SceneDisplay() : Drawable(0)
 	{
+		/*
+		meshes = new Mesh*[1];
+		meshes[0] = new Mesh("D:/CS/Workspace/AIm/data/meshes/morpheus.off");
+		*/
+
 		meshes = new Mesh*[5];
 
 		meshes[0] = new Cube(0.25f, Position3(0, 0, 0));
