@@ -2,7 +2,7 @@
 
 ConfigMap::ConfigMap()
 {
-	file.open(FileNameStore::config, std::ios::in);
+	file.open(Filenames::config, std::ios::in);
 	int eqIndex;
 	string line;
 	string key;

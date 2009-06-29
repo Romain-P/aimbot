@@ -16,6 +16,7 @@ private:
 	float health;
 
 	vector<Weapon*> weapons;
+	Weapon* currentWeapon;
 	Mesh* mesh;
 	Hitbox* hitbox;
 
@@ -28,6 +29,7 @@ public:
 	Player() : Entity("")
 	{
 		health = 100;
+		currentWeapon = NULL;
 	}
 
 	~Player()
@@ -39,6 +41,7 @@ public:
 	void addWeapon(Weapon* weapon)
 	{
 		weapons.push_back(weapon);
+		currentWeapon = weapon;
 	}
 
 	void setHealth(float h)
@@ -51,6 +54,17 @@ public:
 		return health;
 	}
 
+	void firePrimary()
+	{
+		if(currentWeapon != NULL)
+			currentWeapon->firePrimary();
+	}
+
+	void fireSecondary()
+	{
+		if(currentWeapon != NULL)
+			currentWeapon->fireSecondary();
+	}
 };
 
 

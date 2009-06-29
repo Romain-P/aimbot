@@ -6,12 +6,14 @@ InputHandler* inputHandler;
 InputHandler::InputHandler(
 		GameCoordinator* coordinator,
 		GameState* gameState,
-		Camera* camera) :
+		Camera* camera,
+		Player* player) :
 	ScreenBoundsUser()
 {
 	this->coordinator = coordinator;
 	this->camera = camera;
 	this->gameState = gameState;
+	this->player = player;
 
 	inputHandler = this;
 	mouseEvent.firstEvent = true;
@@ -91,8 +93,14 @@ void InputHandler::keyUpFunction(unsigned char key)
 
 void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
-	mouseEvent.downX = x;
-	mouseEvent.downY = y;
+	if(state == GLUT_DOWN)
+	{
+		if(button == GLUT_LEFT_BUTTON)
+			player->firePrimary();
+		else if(button == GLUT_RIGHT_BUTTON)
+			player->fireSecondary();
+	}
+
 	mouseEvent.firstEvent = true;
 }
 

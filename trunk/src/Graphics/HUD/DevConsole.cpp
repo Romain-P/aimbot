@@ -45,7 +45,7 @@ void DevConsole::executeCommand(const string& command)
 	}
 	else
 	{
-		pushMessage("Command Unrecognised.\n");
+		pushMessage("Huh?\n");
 	}
 }
 

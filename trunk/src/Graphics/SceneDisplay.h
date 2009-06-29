@@ -8,58 +8,36 @@
 #include "../SceneObjects/Primitives/Box.h"
 #include "../SceneObjects/Maps/Map.h"
 
-class SceneDisplay : public Drawable
+class SceneDisplay : public Drawable, public MeshRenderer
 {
 private:
-	Map* map;
-	Box* box1;
-	Box* box2;
-	Box* floor;
-	Box* tall;
-	Cube* cube;
+	Mesh** meshes;
 
 public:
 	SceneDisplay() : Drawable(0)
 	{
-		cube = new Cube(0.25f);
-		box1 = new Box(0.2f, 1.5f, 2.f);
-		box2 = new Box(2.f, 1.5f, 0.2f);
-		tall = new Box(0.05f, 4.f, 0.05f);
-		floor = new Box(5.f, 0.05f, 5.f);
+		meshes = new Mesh*[5];
+
+		meshes[0] = new Cube(0.25f, Position3(0, 0, 0));
+		meshes[1] = new Box(Dimension3(0.2f, 1.5f, 2.f), Position3(-1.5, 0.25, 0));
+		meshes[2] = new Box(Dimension3(2.f, 1.5f, 0.2f), Position3(0, 0.25, -2));
+		meshes[3] = new Box(Dimension3(0.05f, 4.f, 0.05f), Position3(1.5, 1.5, -2));
+		meshes[4] = new Box(Dimension3(5.f, 0.05f, 5.f), Position3(0, -0.5, 0));
+
+
 	}
 
 	virtual ~SceneDisplay()
 	{
-		delete cube;
-		delete box1;
-		delete box2;
-		delete tall;
-		delete floor;
+		for(int i = 0; i < 5; i++)
+			delete meshes[i];
+		delete [] meshes;
 	}
 
 	void draw()
 	{
-		MeshRenderer::draw(cube);
-
-		glPushMatrix();
-			glTranslatef(-1.5, 0.25, 0);
-			MeshRenderer::draw(box1);
-		glPopMatrix();
-
-		glPushMatrix();
-			glTranslatef(0, 0.25, -2);
-			MeshRenderer::draw(box2);
-		glPopMatrix();
-
-		glPushMatrix();
-			glTranslatef(1.5, 1.5, -2);
-			MeshRenderer::draw(tall);
-		glPopMatrix();
-
-		glPushMatrix();
-			glTranslatef(0, -0.5, 0);
-			MeshRenderer::draw(floor);
-		glPopMatrix();
+		for(int i = 0; i < 5; i++)
+			drawMesh(meshes[i]);
 	}
 };
 

@@ -2,13 +2,14 @@
 
 Updater* updater;
 
-Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* eUpdater) :
+Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* envUpdater, Animator* anim) :
+	display(glutDisplay),
+	animator(anim),
+	environmentUpdater(envUpdater),
 	deltaTime(0),
 	frames(0)
 {
-	display = glutDisplay;
 	updater = this;
-	envUpdater = eUpdater;
 
 	microTimer.startMicroTimer();
 }
@@ -16,4 +17,34 @@ Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* eUpdater) :
 void Updater::updateDelegate()
 {
 	updater->updateFunction();
+}
+
+void Updater::updateFunction()
+{
+	frames++;
+
+	microTimer.stopMicroTimer();
+	deltaTime = microTimer.getDeltaTime();
+	microTimer.startMicroTimer();
+
+	display->updateCamera();
+	environmentUpdater->updateEntities(deltaTime);
+	animator->updateAnimations(deltaTime);
+
+	glutPostRedisplay();
+}
+
+float Updater::getFPS()
+{
+	return 1 / deltaTime;
+}
+
+long Updater::getFrames()
+{
+	return frames;
+}
+
+float Updater::getDeltaTime()
+{
+	return deltaTime;
 }

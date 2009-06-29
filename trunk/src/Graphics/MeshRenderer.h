@@ -9,9 +9,11 @@ using std::vector;
 
 class MeshRenderer
 {
-public:
-	void draw(Mesh* mesh)
+protected:
+	void drawMesh(Mesh* mesh)
 	{
+		const Position3& c = mesh->getCentre();
+
 		const vector<Face>& faces = mesh->getFaces();
 		const vector<Position3>& vertices = mesh->getVertices();
 		vector<Face>::const_iterator it;
@@ -23,7 +25,7 @@ public:
 			{
 				const Position3& p = vertices.at(it->indices[i]);
 				glColor3f(p.x, p.y, p.z);
-				glVertex3f(p.x, p.y, p.z);
+				glVertex3f(p.x + c.x, p.y + c.y, p.z + c.z);
 			}
 		}
 		glEnd();

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 
-#include "FileNameStore.h"
+#include "Filenames.h"
 #include "../Utils/Structures/Singleton.h"
 
 using std::map;

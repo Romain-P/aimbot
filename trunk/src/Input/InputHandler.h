@@ -46,7 +46,10 @@ private:
 	Camera* camera;
 public:
 
-	InputHandler(GameCoordinator* coordinator, GameState* gameState, Camera* camera);
+	InputHandler(GameCoordinator* coordinator,
+			GameState* gameState,
+			Camera* camera,
+			Player* player);
 
 	void keyboardFunction(unsigned char key);
 	void keyUpFunction(unsigned char key);
