@@ -25,28 +25,29 @@ void DevConsole::executeCommand(const string& command)
 	string b = tokenizer.nextToken();
 	string c = tokenizer.nextToken();
 
-	if(a == "stat")
-	{
-		if(b == "fps")
+	if (command == "fps")
 			playerHud->toggleFPS();
-	}
-	else if(a == "fov" && b.length() > 0)
-	{
+	else if (a == "fov" && b.length() > 0) {
 		float fov;
 		fov = atof(b.c_str());
-		if(fov < 10)
+		if (fov < 10)
 			fov = 10;
 		glutDisplay->setFOV(fov);
 		glutDisplay->reshapeFunction(width, height);
 	}
-	else if(command == "way she goes")
+	else if(command == "position")
+		playerHud->togglePosition();
+	else if(command == "angles")
+		playerHud->toggleAngles();
+	else if (command == "clear")
+		messages.clear();
+	else if (command == "now folks")
 	{
-		pushMessage("Fuckin way she goes!\n");
+		pushMessage("Some of you might already know... what this car is.");
+		pushMessage("And some of you do not.");
 	}
 	else
-	{
 		pushMessage("Huh?\n");
-	}
 }
 
 void DevConsole::draw()

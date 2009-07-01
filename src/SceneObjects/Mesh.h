@@ -17,9 +17,11 @@ using std::endl;
 class Face
 {
 public:
+	int order;
 	int indices[4];
 	Face()
 	{
+		order = 4;
 		indices[0] = 0;
 		indices[1] = 0;
 		indices[2] = 0;
@@ -28,10 +30,19 @@ public:
 
 	Face(int a, int b, int c, int d)
 	{
+		order = 4;
 		indices[0] = a;
 		indices[1] = b;
 		indices[2] = c;
 		indices[3] = d;
+	}
+
+	Face(int a, int b, int c)
+	{
+		order = 3;
+		indices[0] = a;
+		indices[1] = b;
+		indices[2] = c;
 	}
 };
 
@@ -51,7 +62,7 @@ protected:
 		try
 		{
 			float x, y, z;
-			int num, a, b, c, d;
+			int order, a, b, c, d;
 
 			in.open(filename.c_str(), std::ios::in);
 			if (in.fail() || in.eof()) {
@@ -68,12 +79,20 @@ protected:
 			}
 
 			for (int i = 0; i < numFaces; i++) {
-				in >> num >> a >> b >> c >> d;
-				faces.push_back(Face(a, b, c, d));
+				in >> order;
+				if (order == 4) {
+					in >> a >> b >> c >> d;
+					faces.push_back(Face(a, b, c, d));
+				}
+				else if (order == 3) {
+					in >> a >> b >> c;
+					faces.push_back(Face(a, b, c));
+				}
 			}
 		} catch (exception& e) {
 			cout << e.what() << endl;
 		}
+
 	}
 
 public:
@@ -105,6 +124,11 @@ public:
 	const Position3& getCentre()
 	{
 		return centre;
+	}
+
+	void setCentre(const Position3& centre)
+	{
+		this->centre = centre;
 	}
 };
 

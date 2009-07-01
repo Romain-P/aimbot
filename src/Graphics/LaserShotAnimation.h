@@ -2,6 +2,7 @@
 #define lasershotanimation_h
 
 #include "Animatable.h"
+#include "../Utils/Math/Random.h"
 
 class LaserShotAnimation : public Animatable
 {
@@ -12,13 +13,10 @@ private:
 
 	void calcWidth()
 	{
-		if(p < 0.5f)
-			currWidth = 4 * baseWidth * p * p + 1;
-		else
-			currWidth = 4 * baseWidth * (1 - p) * (1 - p) + 1;
+		currWidth = baseWidth * p * p + 1;
 	}
 public:
-	LaserShotAnimation() : Animatable(0.8f)
+	LaserShotAnimation() : Animatable(0.2f)
 	{
 		baseWidth = 20.f;
 		currWidth = 1.f;
@@ -36,17 +34,17 @@ public:
 			return;
 
 		glBegin(GL_QUADS);
-			glColor4f(1, 0.8f, 0.4f, 0);
+			glColor4f(1, 1, 1, 0);
 			glVertex2f(width * 0.75f + currWidth, height);
 			glVertex2f(halfWidth + 1.f, halfHeight);
-			glColor4f(1, 0.9f, 0.8f, 1);
+			glColor4f(1, 1, 1, 1);
 			glVertex2f(halfWidth, halfHeight);
 			glVertex2f(width * 0.75f, height);
 
-			glColor4f(1, 0.8f, 0.4f, 0);
+			glColor4f(1, 1, 1, 0);
 			glVertex2f(width * 0.75f - currWidth, height);
 			glVertex2f(halfWidth - 1.f, halfHeight);
-			glColor4f(1, 0.9f, 0.8f, 1);
+			glColor4f(1, 1, 1, 1);
 			glVertex2f(halfWidth, halfHeight);
 			glVertex2f(width * 0.75f, height);
 		glEnd();

@@ -14,8 +14,8 @@ private:
 	MicroTimer microTimer;
 
 	GlutDisplay* display;
-	EnvironmentUpdater* environmentUpdater;
 	Animator* animator;
+	EnvironmentUpdater* environmentUpdater;
 
 public:
 	Updater(GlutDisplay* display,
