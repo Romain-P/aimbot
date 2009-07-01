@@ -3,7 +3,7 @@
 
 Camera::Camera()
 {
-	theta = 135;
+	theta = 0.786;
 	phi = 0;
 	start = Position3(0, 0, 1);
 	up  = Vector3(0, 1, 0);

@@ -7,18 +7,14 @@
 class Random
 {
 public:
-	Random()
-	{
-		srand(time(0));
-	}
-
-	static inline int randomInt(int lowerBound, int upperBound)
+	static int randomInt(int lowerBound, int upperBound)
 	{
 		return rand() % (upperBound - lowerBound) + lowerBound;
 	}
 
-	static inline float randomFloat()
+	static float randomFloat()
 	{
+		srand(time(0));
 		return rand() / float(INT_MAX);
 	}
 

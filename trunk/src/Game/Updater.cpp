@@ -3,11 +3,11 @@
 Updater* updater;
 
 Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* envUpdater, Animator* anim) :
+	deltaTime(0),
+	frames(0),
 	display(glutDisplay),
 	animator(anim),
-	environmentUpdater(envUpdater),
-	deltaTime(0),
-	frames(0)
+	environmentUpdater(envUpdater)
 {
 	updater = this;
 

@@ -42,7 +42,6 @@ public:
 	void putChar(unsigned char ch);
 	bool isVisible();
 	void draw();
-	void drawMessages();
 
 };
 

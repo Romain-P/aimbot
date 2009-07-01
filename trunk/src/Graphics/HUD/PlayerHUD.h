@@ -11,6 +11,7 @@
 #include "../../Game/GameState.h"
 
 class Updater;
+class GameCoordinator;
 
 using std::string;
 using std::stringstream;
@@ -19,18 +20,25 @@ class PlayerHUD : public Drawable, public TextRenderer
 {
 private:
 	bool showFPS;
+	bool showPosition;
+	bool showAngles;
 
 	GameState* state;
 	Updater* updater;
 	Crosshair* crosshair;
+	GameCoordinator* coordinator;
 
 public:
-	PlayerHUD(GameState* gameState, Updater* gameUpdater);
+	PlayerHUD(GameState* gameState, Updater* gameUpdater, GameCoordinator* coordinator);
 	virtual ~PlayerHUD();
 	void drawText(string& text, float leftX, float topY);
 	void draw();
 	void drawFPS();
+	void drawPosition();
+	void drawAngles();
 	void toggleFPS();
+	void togglePosition();
+	void toggleAngles();
 };
 
 

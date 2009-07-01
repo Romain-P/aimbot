@@ -59,7 +59,7 @@ public:
 		animator = new Animator();
 		updater = new Updater(display, envUpdater, animator);
 
-		hud = new PlayerHUD(gameState, updater);
+		hud = new PlayerHUD(gameState, updater, this);
 		console = new DevConsole(hud, display);
 
 		scene = new SceneDisplay();
@@ -112,6 +112,9 @@ public:
 		glutIdleFunc(&Updater::updateDelegate);
 	}
 
+
+	/* Delegation functions */
+
 	void toggleConsoleVisibility()
 	{
 		console->toggleVisibility();
@@ -125,6 +128,21 @@ public:
 	void putCharToConsole(unsigned char ch)
 	{
 		console->putChar(ch);
+	}
+
+	const Position3& getCameraPosition()
+	{
+		return camera->getPosition();
+	}
+
+	float getCameraTheta()
+	{
+		return camera->theta;
+	}
+
+	float getCameraPhi()
+	{
+		return camera->phi;
 	}
 };
 

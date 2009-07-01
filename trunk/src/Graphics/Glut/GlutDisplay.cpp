@@ -1,4 +1,5 @@
 #include "GlutDisplay.h"
+#include "GlutLighting.h"
 
 GlutDisplay* glutDisplay;
 
@@ -14,15 +15,18 @@ GlutDisplay::GlutDisplay(Camera* cam) :
 void GlutDisplay::initGraphicsOptions()
 {
 	glEnable(GL_POINT_SMOOTH);
-	glEnable(GL_LINE_SMOOTH);
+	//glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
-	glLineWidth(1.0);
+	glLineWidth(2.0);
 	glPointSize(2.0);
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.1, 0.16, 0.26, 0);
 	glutSetCursor(GLUT_CURSOR_NONE);
+	glPushAttrib (GL_ALL_ATTRIB_BITS);
+
+	GlutLighting::initLight();
 }
 
 void GlutDisplay::displayFunction()
@@ -35,7 +39,9 @@ void GlutDisplay::displayFunction()
 	static vector<Drawable*>::const_iterator orthoIter;
 
 	for(drawIter = drawables.begin(); drawIter != drawables.end(); ++drawIter)
+	{
 		(*drawIter)->draw();
+	}
 
 	enterOrthoProjection();
 	for(orthoIter = orthographics.begin(); orthoIter != orthographics.end(); ++orthoIter)
@@ -88,6 +94,7 @@ void GlutDisplay::removeDrawable(Drawable* drawable)
 void GlutDisplay::enterOrthoProjection()
 {
 	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
 
 	// fix blending problems with overlapping lines
 	glDepthMask(GL_FALSE);
@@ -105,6 +112,9 @@ void GlutDisplay::enterOrthoProjection()
 
 	glScalef(1, -1, 1);
 	glTranslatef(0, -height, 0);
+
+	glEnable(GL_LINE_SMOOTH);
+	glLineWidth(1.0);
 }
 
 void GlutDisplay::exitOrthoProjection()
@@ -113,6 +123,9 @@ void GlutDisplay::exitOrthoProjection()
 	glPopMatrix();
 	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glDisable(GL_LINE_SMOOTH);
+	glLineWidth(2.0);
 }
 
 void GlutDisplay::setFOV(float fov)
