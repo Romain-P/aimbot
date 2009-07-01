@@ -6,6 +6,8 @@
  */
 
 #include "SceneObject.h"
+//Added just to debug
+#include "../Physics/CollisionDetector.h"
 
 Vector2 SceneObject::getMomentum()
 {
