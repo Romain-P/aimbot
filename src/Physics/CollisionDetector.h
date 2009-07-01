@@ -39,6 +39,7 @@ public:
 		}
 
 		KDTree* tree = new KDTree(nearbyCentres);
+		vector<Position3> traversal = tree->getTraversal();
 
 
 
