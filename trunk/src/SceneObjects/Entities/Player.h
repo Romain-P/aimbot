@@ -34,8 +34,9 @@ public:
 
 	~Player()
 	{
-		delete mesh;
-		delete hitbox;
+
+		//delete mesh;
+		//delete hitbox;
 	}
 
 	void addWeapon(Weapon* weapon)
@@ -64,6 +65,17 @@ public:
 	{
 		if(currentWeapon != NULL)
 			currentWeapon->fireSecondary();
+	}
+
+	void releasePrimary()
+	{
+		if(currentWeapon != NULL)
+			currentWeapon->releasePrimary();
+	}
+
+	void releaseSecondary()
+	{
+
 	}
 };
 

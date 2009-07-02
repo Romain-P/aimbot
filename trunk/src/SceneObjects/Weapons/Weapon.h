@@ -2,6 +2,7 @@
 #define weapon_h
 
 #include "../../Graphics/Animatable.h"
+#include "../../Utils/Misc/MicroTimer.h"
 
 class Weapon
 {
@@ -13,33 +14,51 @@ protected:
 	float secondaryFireDamage;
 	float coolDownTime;
 
+	MicroTimer timer;
+
 public:
 
 	Weapon(float damage) : primaryFireDamage(damage)
 	{
 		coolDownTime = 1.0f;
-		primaryShotAnimation = NULL;
-		secondaryShotAnimation = NULL;
+		timer.startMicroTimer();
 	}
 
 	Weapon(float damage, float coolDown) :
 		primaryFireDamage(damage),
 		coolDownTime(coolDown)
 	{
-		primaryShotAnimation = NULL;
-		secondaryShotAnimation = NULL;
+		timer.startMicroTimer();
 	}
 
 	void firePrimary()
 	{
-		if(primaryShotAnimation != NULL)
+		timer.stop();
+
+		if(timer.delta() > coolDownTime)
 			primaryShotAnimation->startAnimation();
+
+		timer.start();
 	}
 
 	void fireSecondary()
 	{
-		if(secondaryShotAnimation != NULL)
+		timer.stop();
+
+		if(timer.delta() > coolDownTime)
 			secondaryShotAnimation->startAnimation();
+
+		timer.start();
+	}
+
+	void releasePrimary()
+	{
+		primaryShotAnimation->expireStage();
+	}
+
+	void releaseSecondary()
+	{
+		primaryShotAnimation->expireStage();
 	}
 };
 

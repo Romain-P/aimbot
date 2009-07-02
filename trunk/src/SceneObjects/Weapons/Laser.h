@@ -11,6 +11,7 @@ public:
 	Laser(LaserShotAnimation* primary) : Weapon(75.f)
 	{
 		primaryShotAnimation = primary;
+		secondaryShotAnimation = primary;
 	}
 };
 
