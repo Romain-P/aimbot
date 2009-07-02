@@ -21,7 +21,7 @@ public:
 	 *
 	 * Put this before a function call ...
 	 */
-	void startMicroTimer()
+	void start()
 	{
 		QueryPerformanceCounter(&tick1);
 	}
@@ -30,7 +30,7 @@ public:
 	 *
 	 * ...And this directly after, then call...
 	 */
-	void stopMicroTimer()
+	void stop()
 	{
 		QueryPerformanceCounter(&tick2);
 	}
@@ -38,7 +38,7 @@ public:
 	/**
 	 * ...this, and you have the time it took in seconds, microsecond accurate.
 	 */
-	double getDeltaTime()
+	double delta()
 	{
 		return (tick2.QuadPart - tick1.QuadPart) / double(ticksPerSecond.QuadPart);
 	}

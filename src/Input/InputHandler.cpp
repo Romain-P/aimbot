@@ -100,6 +100,13 @@ void InputHandler::mouseFunction(int button, int state, int x, int y)
 		else if(button == GLUT_RIGHT_BUTTON)
 			player->fireSecondary();
 	}
+	else if(state == GLUT_UP)
+	{
+		if(button == GLUT_LEFT_BUTTON)
+			player->releasePrimary();
+		else if(button == GLUT_RIGHT_BUTTON)
+			player->releaseSecondary();
+	}
 
 	mouseEvent.firstEvent = true;
 }
