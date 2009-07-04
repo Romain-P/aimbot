@@ -6,7 +6,8 @@
 
 #include "../Drawable.h"
 #include "../TextRenderer.h"
-#include "../Crosshair.h"
+#include "../Crosshairs/Crosshair.h"
+#include "../Crosshairs/Cross.h"
 #include "../Colour.h"
 #include "../../Game/GameState.h"
 

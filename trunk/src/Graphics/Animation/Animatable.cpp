@@ -12,10 +12,20 @@ public:
 
 
 Animatable::Animatable() :
-		animating(false)
+		animating(false),
+		stage(0)
 {
 	stages.push_back(new NullStage());
-	stageIter = stages.begin();
+}
+
+Animatable::~Animatable()
+{
+	vector<AnimationStage*>::const_iterator it = stages.begin();
+	while(it != stages.end())
+	{
+		delete *it;
+		++it;
+	}
 }
 
 void Animatable::stopAnimation()
@@ -25,7 +35,7 @@ void Animatable::stopAnimation()
 
 void Animatable::startAnimation()
 {
-	stageIter = stages.begin();
+	stage = 0;
 	animating = true;
 }
 
@@ -34,15 +44,19 @@ void Animatable::update(float timestep)
 	if (!animating)
 		return;
 
-	if ((*stageIter)->hasExpired()) {
-		if (stageIter == stages.end()) {
+	if (stages.at(stage)->hasExpired())
+	{
+		if (stage == stages.size() - 1)
+		{
 			stopAnimation();
 			return;
 		}
-		++stageIter;
+		stages.at(stage)->timeElapsed = 0;
+		++stage;
 	}
-	else {
-		(*stageIter)->timeElapsed += timestep;
+	else
+	{
+		stages.at(stage)->timeElapsed += timestep;
 	}
 
 	animate();
@@ -50,16 +64,21 @@ void Animatable::update(float timestep)
 
 void Animatable::expireStage()
 {
-	(*stageIter)->setExpired();
+	stages.at(stage)->setExpired();
 }
 
 void Animatable::draw()
 {
 	if(animating)
-		(*stageIter)->draw();
+		stages.at(stage)->draw();
 }
 
 void Animatable::animate()
 {
-	(*stageIter)->animate();
+	stages.at(stage)->animate();
+}
+
+void Animatable::setStage(int stage)
+{
+	this->stage = stage;
 }
