@@ -11,7 +11,7 @@ Updater::Updater(GlutDisplay* glutDisplay, EnvironmentUpdater* envUpdater, Anima
 {
 	updater = this;
 
-	microTimer.startMicroTimer();
+	microTimer.start();
 }
 
 void Updater::updateDelegate()
@@ -23,9 +23,9 @@ void Updater::updateFunction()
 {
 	frames++;
 
-	microTimer.stopMicroTimer();
-	deltaTime = microTimer.getDeltaTime();
-	microTimer.startMicroTimer();
+	microTimer.stop();
+	deltaTime = microTimer.delta();
+	microTimer.start();
 
 	display->updateCamera();
 	environmentUpdater->updateEntities(deltaTime);

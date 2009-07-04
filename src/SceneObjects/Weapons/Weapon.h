@@ -21,33 +21,29 @@ public:
 	Weapon(float damage) : primaryFireDamage(damage)
 	{
 		coolDownTime = 1.0f;
-		timer.startMicroTimer();
+		timer.start();
 	}
 
 	Weapon(float damage, float coolDown) :
 		primaryFireDamage(damage),
 		coolDownTime(coolDown)
 	{
-		timer.startMicroTimer();
+		timer.start();
 	}
 
 	void firePrimary()
 	{
 		timer.stop();
-
 		if(timer.delta() > coolDownTime)
 			primaryShotAnimation->startAnimation();
-
 		timer.start();
 	}
 
 	void fireSecondary()
 	{
 		timer.stop();
-
 		if(timer.delta() > coolDownTime)
 			secondaryShotAnimation->startAnimation();
-
 		timer.start();
 	}
 

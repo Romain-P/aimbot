@@ -10,6 +10,7 @@ class Animator
 {
 private:
 	vector<Animatable*> animatables;
+
 public:
 	Animator()
 	{
