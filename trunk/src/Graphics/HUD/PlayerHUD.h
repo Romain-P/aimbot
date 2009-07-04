@@ -4,10 +4,10 @@
 #include <string>
 #include <sstream>
 
+#include "Crosshairs/Crosshair.h"
+#include "Crosshairs/Cross.h"
 #include "../Drawable.h"
 #include "../TextRenderer.h"
-#include "../Crosshairs/Crosshair.h"
-#include "../Crosshairs/Cross.h"
 #include "../Colour.h"
 #include "../../Game/GameState.h"
 
@@ -37,6 +37,7 @@ public:
 	void drawFPS();
 	void drawPosition();
 	void drawAngles();
+	void drawFooterBar();
 	void toggleFPS();
 	void togglePosition();
 	void toggleAngles();

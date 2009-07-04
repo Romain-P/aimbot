@@ -2,8 +2,8 @@
 #define crosshair_h
 
 #include <iostream>
-#include "../Drawable.h"
-#include "../Colour.h"
+#include "../../Drawable.h"
+#include "../../Colour.h"
 
 class Crosshair : public Drawable
 {

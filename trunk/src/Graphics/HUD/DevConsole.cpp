@@ -81,14 +81,14 @@ void DevConsole::draw()
 	glEnd();
 
 	glColor3f(0.8f, 0.82f, 0.84f);
-	drawString(currentMessage, 5, h2 - 4);
+	drawString(currentMessage, 0.1f, 5, h2 - 4);
 
 	int i = 1;
 	list<string>::reverse_iterator it = messages.rbegin();
 
 	while(it != messages.rend())
 	{
-		drawString(*it, 5, 190 - i * 18);
+		drawString(*it, 0.1f, 5, 190 - i * 18);
 		++it;
 		++i;
 	}

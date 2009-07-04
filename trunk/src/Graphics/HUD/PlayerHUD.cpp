@@ -31,6 +31,42 @@ void PlayerHUD::draw()
 		drawAngles();
 
 	crosshair->draw();
+
+	drawFooterBar();
+}
+
+void PlayerHUD::drawFooterBar()
+{
+	glColor4f(0.9f, 0.9f, 0.9f, 0.2f);
+	glBegin(GL_QUADS);
+		glVertex2f(0, 	  height);
+		glVertex2f(110.f, height);
+		glVertex2f(110.f, height - 60.f);
+		glVertex2f(0, 	  height - 60.f);
+
+		glVertex2f(110.f, height);
+		glVertex2f(160.f, height);
+		glVertex2f(160.f, height - 20.f);
+		glVertex2f(110.f, height - 60.f);
+
+		glVertex2f(160.f, height);
+		glVertex2f(width, height);
+		glVertex2f(width, height - 20.f);
+		glVertex2f(160.f, height - 20.f);
+	glEnd();
+
+	glColor3f(0.3f, 0.3f, 0.3f);
+	glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 	  height - 60.f);
+		glVertex2f(110.f, height - 60.f);
+		glVertex2f(160.f, height - 20.f);
+		glVertex2f(width, height - 20.f);
+	glEnd();
+
+	glColor3f(0.1f, 0.1f, 0.1f);
+	glLineWidth(2.0f);
+	drawString("100", 0.28f, 9.f, height - 15.f);
+	glLineWidth(1.0f);
 }
 
 void PlayerHUD::drawFPS()
@@ -42,7 +78,7 @@ void PlayerHUD::drawFPS()
 		fps = updater->getFPS();
 	sprintf(str, "%4.1f", fps);
 	glColor3f(0.9f, 0.9f, 0.9f);
-	drawString(string(str), width - 100, 20.f);
+	drawString(string(str), 0.1f, width - 100, 20.f);
 }
 
 void PlayerHUD::drawPosition()
@@ -55,7 +91,7 @@ void PlayerHUD::drawPosition()
 
 	sprintf(str, "%3.2f %3.2f %3.2f", position.x, position.y, position.z);
 	glColor3f(0.9f, 0.9f, 0.9f);
-	drawString(string(str), width - 400, 20.f);
+	drawString(string(str), 0.1f, width - 400, 20.f);
 }
 
 void PlayerHUD::drawAngles()
@@ -72,7 +108,7 @@ void PlayerHUD::drawAngles()
 
 	sprintf(str, "%3.2f %3.2f", theta, phi);
 	glColor3f(0.9f, 0.9f, 0.9f);
-	drawString(string(str), width - 600, 20.f);
+	drawString(string(str), 0.1f, width - 600, 20.f);
 }
 
 void PlayerHUD::toggleFPS()
