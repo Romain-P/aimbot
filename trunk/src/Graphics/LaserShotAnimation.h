@@ -2,130 +2,111 @@
 #define lasershotanimation_h
 
 #include "Animatable.h"
+#include "AnimationStage.h"
 #include "../Utils/Math/Random.h"
 
-class ChargeUpStage: public AnimationStage
+class ChargeUpStage : public AnimationStage
 {
+private:
+	float r, g, b;
 public:
 	ChargeUpStage(float duration) :
-		AnimationStage(duration)
+		AnimationStage(duration), r(0), g(0), b(0)
 	{
 	}
 
 	void draw()
 	{
+		glColor3f(r, g, b);
 		glBegin(GL_QUADS);
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f + currWidth, height);
-			glVertex2f(halfWidth + 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
-
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f - currWidth, height);
-			glVertex2f(halfWidth - 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
+			glVertex2f(0, 100);
+			glVertex2f(100, 100);
+			glVertex2f(100, 0);
+			glVertex2f(0, 0);
 		glEnd();
 	}
 	void animate()
 	{
-		p = progress();
-		calcWidth();
+		r = 1 - progress();
+		g = r;
+		b = r;
 	}
 };
 
-class SustainStage: public AnimationStage
+class SustainStage : public AnimationStage
 {
+private:
+	float r, g, b;
 public:
 	SustainStage(float duration) :
-		AnimationStage(duration)
+		AnimationStage(duration), r(0), g(0), b(0)
 	{
 	}
 
 	void draw()
 	{
-		if (!animating)
-			return;
-
+		glColor3f(r, g, b);
 		glBegin(GL_QUADS);
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f + currWidth, height);
-			glVertex2f(halfWidth + 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
-
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f - currWidth, height);
-			glVertex2f(halfWidth - 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
+			glVertex2f(0, 100);
+			glVertex2f(100, 100);
+			glVertex2f(100, 0);
+			glVertex2f(0, 0);
 		glEnd();
 	}
+
 	void animate()
 	{
-		p = progress();
-		calcWidth();
+		r = fmodf(timeElapsed, 0.3f);
+		g = fmodf(timeElapsed, 0.4f);
+		b = fmodf(timeElapsed, 1.2f);
 	}
 };
 
-class CooldownStage: public AnimationStage
+class CooldownStage : public AnimationStage
 {
+private:
+	float r, g, b;
 public:
 	CooldownStage(float duration) :
-		AnimationStage(duration)
+		AnimationStage(duration), r(0), g(0), b(0)
 	{
 	}
 
 	void draw()
 	{
+		glColor3f(r, g, b);
 		glBegin(GL_QUADS);
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f + currWidth, height);
-			glVertex2f(halfWidth + 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
-
-			glColor4f(1, 1, 1, 0);
-			glVertex2f(width * 0.75f - currWidth, height);
-			glVertex2f(halfWidth - 1.f, halfHeight);
-			glColor4f(1, 1, 1, 1);
-			glVertex2f(halfWidth, halfHeight);
-			glVertex2f(width * 0.75f, height);
+			glVertex2f(0, 100);
+			glVertex2f(100, 100);
+			glVertex2f(100, 0);
+			glVertex2f(0, 0);
 		glEnd();
 	}
 	void animate()
 	{
-		p = progress();
-		calcWidth();
+		b = progress();
+		r = b;
+		g = b;
 	}
 };
 
-class LaserShotAnimation: public Animatable
+class LaserShotAnimation : public Animatable
 {
 private:
 	float baseWidth;
 	float currWidth;
 	float p;
 
-	void calcWidth()
-	{
-		currWidth = baseWidth * p * p + 1;
-	}
 public:
 	LaserShotAnimation()
 	{
 		baseWidth = 20.f;
 		currWidth = 1.f;
 
-		stages.push_back(ChargeUpStage(0.2f));
-		stages.push_back(SustainStage(AnimationStage::INFINITE_TIME));
-		stages.push_back(CooldownStage(0.2f));
+		stages.push_back(new ChargeUpStage(0.6f));
+		stages.push_back(new SustainStage(AnimationStage::INFINITE_TIME));
+		stages.push_back(new CooldownStage(0.6f));
+
 	}
 };
 
