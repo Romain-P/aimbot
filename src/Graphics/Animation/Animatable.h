@@ -12,7 +12,6 @@ class AnimationStage;
 class Animatable : public Drawable
 {
 private:
-	//vector<AnimationStage*>::const_iterator stageIter;
 	int stage;
 	void stopAnimation();
 

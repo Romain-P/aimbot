@@ -62,7 +62,7 @@ public:
 		hud = new PlayerHUD(gameState, updater, this);
 		console = new DevConsole(hud, display);
 
-		scene = new SceneDisplay();
+		scene = new SceneDisplay(animator);
 
 		display->addOrthographic(console);
 		display->addOrthographic(hud);

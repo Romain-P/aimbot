@@ -4,34 +4,32 @@
 #include "Drawable.h"
 #include "MeshRenderer.h"
 
-#include "../SceneObjects/Primitives/Cube.h"
-#include "../SceneObjects/Primitives/Box.h"
+#include "../Graphics/Animation/Animator.h"
+#include "../Graphics/Animation/Animatable.h"
+#include "../Graphics/Animation/RotatingBlock.h"
 #include "../SceneObjects/Maps/Map.h"
 
 class SceneDisplay : public Drawable, public MeshRenderer
 {
 private:
+	Animator* animator;
+	Animatable* block;
 	Mesh** meshes;
 
-public:
-	SceneDisplay() : Drawable(0)
+	void initSceneObjects()
 	{
-
-
 		meshes = new Mesh*[1];
 		meshes[0] = new Mesh("D:/CS/Workspace/AIm/data/meshes/test.off");
 		meshes[0]->setCentre(Position3(0, -0.5f, 0));
 
-		/*
-		meshes = new Mesh*[5];
-
-		meshes[0] = new Cube(0.25f, Position3(0, 0, 0));
-		meshes[1] = new Box(Dimension3(0.2f, 1.5f, 2.f), Position3(-1.5, 0.25, 0));
-		meshes[2] = new Box(Dimension3(2.f, 1.5f, 0.2f), Position3(0, 0.25, -2));
-		meshes[3] = new Box(Dimension3(0.05f, 4.f, 0.05f), Position3(1.5, 1.5, -2));
-		meshes[4] = new Box(Dimension3(5.f, 0.05f, 5.f), Position3(0, -0.5, 0));
-		*/
-
+		block = new RotatingBlock();
+		animator->addAnimatable(block);
+	}
+public:
+	SceneDisplay(Animator* animator) : Drawable(0)
+	{
+		this->animator = animator;
+		initSceneObjects();
 	}
 
 	virtual ~SceneDisplay()
@@ -39,12 +37,21 @@ public:
 		for(int i = 0; i < 1; i++)
 			delete meshes[i];
 		delete [] meshes;
+
+		delete block;
 	}
 
 	void draw()
 	{
+		static Position3 c = meshes[0]->getCentre();
 		for(int i = 0; i < 1; i++)
-			drawMesh(meshes[i]);
+		{
+			glPushMatrix();
+				glTranslatef(c.x, c.y, c.z);
+				drawMesh(meshes[i]);
+			glPopMatrix();
+		}
+		block->draw();
 	}
 };
 
