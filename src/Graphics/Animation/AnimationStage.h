@@ -1,7 +1,7 @@
 #ifndef animationstage_h
 #define animationstage_h
 
-#include "ScreenBoundsUser.h"
+#include "../ScreenBoundsUser.h"
 
 class AnimationStage : public ScreenBoundsUser
 {

@@ -2,7 +2,7 @@
 #define updater_h
 
 #include "../Graphics/Glut/GlutDisplay.h"
-#include "../Graphics/Animator.h"
+#include "../Graphics/Animation/Animator.h"
 #include "../Utils/Misc/MicroTimer.h"
 #include "../Physics/EnvironmentUpdater.h"
 

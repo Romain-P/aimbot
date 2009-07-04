@@ -2,7 +2,7 @@
 #define laser_h
 
 #include "Weapon.h"
-#include "../../Graphics/LaserShotAnimation.h"
+#include "../../Graphics/Animation/LaserShotAnimation.h"
 
 class Laser : public Weapon
 {

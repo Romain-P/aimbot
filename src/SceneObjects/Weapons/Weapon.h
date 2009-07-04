@@ -1,7 +1,7 @@
 #ifndef weapon_h
 #define weapon_h
 
-#include "../../Graphics/Animatable.h"
+#include "../../Graphics/Animation/Animatable.h"
 #include "../../Utils/Misc/MicroTimer.h"
 
 class Weapon
