@@ -2,6 +2,7 @@
 #define animatable_h
 
 #include <vector>
+#include <iostream>
 #include "../Drawable.h"
 
 using std::vector;
@@ -11,8 +12,8 @@ class AnimationStage;
 class Animatable : public Drawable
 {
 private:
-	vector<AnimationStage*>::const_iterator stageIter;
-
+	//vector<AnimationStage*>::const_iterator stageIter;
+	int stage;
 	void stopAnimation();
 
 protected:
@@ -22,11 +23,13 @@ protected:
 
 public:
 	Animatable();
+	virtual ~Animatable();
 	void startAnimation();
 	void update(float timestep);
 	void expireStage();
 	void draw();
 	void animate();
+	void setStage(int stage);
 };
 
 #endif

@@ -13,7 +13,7 @@ PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater, GameCoordinator
 	showPosition = false;
 	showAngles = false;
 
-	crosshair = new Crosshair(Crosshair::CROSS, 6.f, Colour(1.f, 0.9f, 0.9f));
+	crosshair = new Cross(6.f, Colour(1.f, 0.9f, 0.9f));
 }
 
 PlayerHUD::~PlayerHUD()

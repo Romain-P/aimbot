@@ -8,7 +8,7 @@ class Laser : public Weapon
 {
 private:
 public:
-	Laser(LaserShotAnimation* primary) : Weapon(75.f)
+	Laser(LaserShotAnimation* primary) : Weapon(75.f, 2)
 	{
 		primaryShotAnimation = primary;
 		secondaryShotAnimation = primary;

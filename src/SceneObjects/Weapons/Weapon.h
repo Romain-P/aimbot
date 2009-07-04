@@ -13,28 +13,34 @@ protected:
 	float primaryFireDamage;
 	float secondaryFireDamage;
 	float coolDownTime;
+	int releaseStage;
 
 	MicroTimer timer;
 
 public:
 
-	Weapon(float damage) : primaryFireDamage(damage)
+	Weapon(float damage, int release) :
+		primaryFireDamage(damage),
+		releaseStage(release)
 	{
 		coolDownTime = 1.0f;
 		timer.start();
 	}
 
-	Weapon(float damage, float coolDown) :
+	Weapon(float damage, float coolDown, int release) :
 		primaryFireDamage(damage),
-		coolDownTime(coolDown)
+		coolDownTime(coolDown),
+		releaseStage(release)
 	{
 		timer.start();
 	}
 
+	//TODO: solve the problem of not being able to shoot when
+	//		game loads, before a period of 'cooldowntime' has passed
 	void firePrimary()
 	{
 		timer.stop();
-		if(timer.delta() > coolDownTime)
+		if(timer.delta() > coolDownTime || true)
 			primaryShotAnimation->startAnimation();
 		timer.start();
 	}
@@ -50,6 +56,7 @@ public:
 	void releasePrimary()
 	{
 		primaryShotAnimation->expireStage();
+		primaryShotAnimation->setStage(releaseStage);
 	}
 
 	void releaseSecondary()

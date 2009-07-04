@@ -59,6 +59,8 @@ public:
 	{
 		if(currentWeapon != NULL)
 			currentWeapon->firePrimary();
+		else
+			std::cout << "weapon is null" << std::endl;
 	}
 
 	void fireSecondary()
