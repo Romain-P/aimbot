@@ -21,12 +21,11 @@ InputHandler::InputHandler(
 
 void InputHandler::keyboardFunction(unsigned char key)
 {
-	key = tolower(key);
-
 	switch(gameState->getIngameState())
 	{
 		case GameState::PLAYING:
 		{
+			key = tolower(key);
 			switch(key)
 			{
 				case MovementControls::FORWARD:
@@ -93,24 +92,20 @@ void InputHandler::keyUpFunction(unsigned char key)
 
 void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
-	if(state == GLUT_DOWN)
-	{
-		if(button == GLUT_LEFT_BUTTON)
-		{
+	if (state == GLUT_DOWN) {
+		if (button == GLUT_LEFT_BUTTON) {
 			std::cout << "firing" << std::endl;
 			player->firePrimary();
 		}
-		else if(button == GLUT_RIGHT_BUTTON)
+		else if (button == GLUT_RIGHT_BUTTON)
 			player->fireSecondary();
 	}
-	else if(state == GLUT_UP)
-	{
-		if(button == GLUT_LEFT_BUTTON)
-		{
+	else if (state == GLUT_UP) {
+		if (button == GLUT_LEFT_BUTTON) {
 			std::cout << "releasing" << std::endl;
 			player->releasePrimary();
 		}
-		else if(button == GLUT_RIGHT_BUTTON)
+		else if (button == GLUT_RIGHT_BUTTON)
 			player->releaseSecondary();
 	}
 
