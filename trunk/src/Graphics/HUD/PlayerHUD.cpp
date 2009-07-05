@@ -2,7 +2,9 @@
 #include "../../Game/Updater.h"
 #include "../../Game/GameCoordinator.h"
 
-PlayerHUD::PlayerHUD(GameState* gameState, Updater* gameUpdater, GameCoordinator* coordinator) :
+PlayerHUD::PlayerHUD(GameState* gameState,
+		Updater* gameUpdater,
+		GameCoordinator* coordinator) :
 	Drawable(300)
 {
 	state = gameState;
