@@ -18,8 +18,10 @@ void DevConsole::pushMessage(const string& message)
 		messages.pop_front();
 }
 
-void DevConsole::executeCommand(const string& command)
+void DevConsole::executeCommand(string& command)
 {
+	StringUtils::toLower(command);
+
 	Tokenizer tokenizer(command);
 	string a = tokenizer.nextToken();
 	string b = tokenizer.nextToken();

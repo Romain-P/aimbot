@@ -9,6 +9,7 @@
 #include "../Drawable.h"
 #include "../TextRenderer.h"
 #include "../../Utils/Misc/Tokenizer.h"
+#include "../../Utils/Misc/StringUtils.h"
 
 using std::string;
 using std::list;
@@ -37,7 +38,7 @@ public:
 	~DevConsole();
 
 	void pushMessage(const string& message);
-	void executeCommand(const string& command);
+	void executeCommand(string& command);
 	void toggleVisibility();
 	void putChar(unsigned char ch);
 	bool isVisible();

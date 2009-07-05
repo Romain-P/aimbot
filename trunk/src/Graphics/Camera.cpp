@@ -35,8 +35,9 @@ void Camera::calcLook(float dx, float dy)
 	look.z = -cosf(theta) * c;
 }
 
+// TODO: rethink where the camera's position is controlled, involving the player object
 void Camera::updateVelocity(const Vector3& direction)
 {
-	velocity.x = 2 * (cos(theta) * direction.x - sin(theta) * direction.z);
-	velocity.z = 2 * (sin(theta) * direction.x + cos(theta) * direction.z);
+	velocity.x = 3 * (cos(theta) * direction.x - sin(theta) * direction.z);
+	velocity.z = 3 * (sin(theta) * direction.x + cos(theta) * direction.z);
 }

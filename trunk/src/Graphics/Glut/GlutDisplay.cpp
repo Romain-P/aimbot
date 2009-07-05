@@ -24,7 +24,6 @@ void GlutDisplay::initGraphicsOptions()
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.1, 0.16, 0.26, 0);
 	glutSetCursor(GLUT_CURSOR_NONE);
-	glPushAttrib (GL_ALL_ATTRIB_BITS);
 
 	GlutLighting::initLight();
 }
@@ -48,7 +47,6 @@ void GlutDisplay::displayFunction()
 		(*orthoIter)->draw();
 	exitOrthoProjection();
 
-	glFlush();
 	glutSwapBuffers();
 }
 
