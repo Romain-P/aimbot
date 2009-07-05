@@ -1,21 +1,10 @@
 #include "Animatable.h"
 #include "AnimationStage.h"
 
-//prevent null pointers by initializing vector with this dummy stage
-class NullStage : public AnimationStage
-{
-public:
-	NullStage() : AnimationStage(0) {}
-	void draw() {}
-	void animate() {}
-};
-
-
 Animatable::Animatable() :
-		animating(false),
-		stage(0)
+		stage(0),
+		animating(false)
 {
-	stages.push_back(new NullStage());
 }
 
 Animatable::~Animatable()
@@ -46,7 +35,7 @@ void Animatable::update(float timestep)
 
 	if (stages.at(stage)->hasExpired())
 	{
-		if (stage == stages.size() - 1)
+		if(stage == stages.size() - 1)
 		{
 			stopAnimation();
 			return;
