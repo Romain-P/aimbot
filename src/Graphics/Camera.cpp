@@ -3,7 +3,7 @@
 
 Camera::Camera()
 {
-	theta = 0.786;
+	theta = 3.14;
 	phi = 0;
 	start = Position3(0, 0, 1);
 	up  = Vector3(0, 1, 0);
@@ -25,12 +25,14 @@ void Camera::updateView()
 
 void Camera::calcLook(float dx, float dy)
 {
+	static float c;
 	theta += dx;
 	phi += dy;
 
-	look.x = sin(theta) * cos(phi);
-	look.y = sin(phi);
-	look.z = -cos(theta) * cos(phi);
+	c = cosf(phi);
+	look.x = sinf(theta) * c;
+	look.y = sinf(phi);
+	look.z = -cosf(theta) * c;
 }
 
 void Camera::updateVelocity(const Vector3& direction)

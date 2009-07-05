@@ -29,6 +29,8 @@ public:
 	 */
 	bool hasExpired()
 	{
+		if(timeElapsed > duration)
+			std::cout << timeElapsed << " " << duration << std::endl;
 		return expired || timeElapsed > duration;
 	}
 

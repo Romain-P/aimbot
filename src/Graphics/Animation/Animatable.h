@@ -12,10 +12,10 @@ class AnimationStage;
 class Animatable : public Drawable
 {
 private:
-	int stage;
 	void stopAnimation();
 
 protected:
+	unsigned int stage;
 	bool animating;
 
 	vector<AnimationStage*> stages;

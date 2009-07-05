@@ -9,42 +9,50 @@
 class RotationStage : public AnimationStage, public MeshRenderer
 {
 private:
-	Mesh* cube;
+	Position3 centre;
+	Mesh* mesh;
 	float rotation;
+	float speed;
 public:
-	RotationStage() : AnimationStage(AnimationStage::INFINITE_TIME)
+	RotationStage(float speed, Mesh* mesh) :
+		AnimationStage(AnimationStage::INFINITE_TIME)
 	{
-		cube = new Cube(0.2f, Position3(0, 1, 0));
-	}
-
-	~RotationStage()
-	{
-		delete cube;
+		this->speed = speed;
+		this->mesh = mesh;
+		centre = mesh->getCentre();
 	}
 
 	void draw()
 	{
-		static Position3 c = cube->getCentre();
 		glPushMatrix();
-			glTranslatef(c.x, c.y, c.z);
+			glTranslatef(centre.x, centre.y, centre.z);
 			glRotatef(rotation, 0.f, 0.f, 1.f);
-			drawMesh(cube);
+			glRotatef(rotation * 0.3f, 0.f, 1.f, 0.f);
+			drawMesh(mesh);
 		glPopMatrix();
 	}
 
 	void animate()
 	{
-		rotation = 300.f * timeElapsed;
+		rotation = speed * timeElapsed;
 	}
 };
 
 class RotatingBlock : public Animatable
 {
+private:
+
+	Mesh* cube;
 public:
-	RotatingBlock() : Animatable()
+	RotatingBlock(float speed, float size, Position3 position) : Animatable()
 	{
-		stages.push_back(new RotationStage());
+		cube = new Cube(size, position);
+		stages.push_back(new RotationStage(speed, cube));
 		startAnimation();
+	}
+	~RotatingBlock()
+	{
+		delete cube;
 	}
 };
 
