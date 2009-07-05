@@ -6,6 +6,7 @@
 
 #include "../Graphics/Animation/Animator.h"
 #include "../Graphics/Animation/Animatable.h"
+#include "../Graphics/Materials.h"
 #include "../Graphics/Animation/RotatingBlock.h"
 #include "../SceneObjects/Maps/Map.h"
 
@@ -54,6 +55,7 @@ public:
 		{
 			Position3 c = meshes[i]->getCentre();
 			glPushMatrix();
+				Materials::none();
 				glTranslatef(c.x, c.y, c.z);
 				drawMesh(meshes[i]);
 			glPopMatrix();
