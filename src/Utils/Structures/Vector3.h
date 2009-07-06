@@ -78,6 +78,15 @@ public:
 		z = v.z;
 	}
 
+	float angle(Vector3& other)
+	{
+		normalize();
+		other.normalize();
+		return acosf(this->dot(other));
+	}
+
+
+
 	Vector3 operator-(const Vector3& other)
 	{
 		return Vector3(x - other.x, y - other.y, z - other.z);

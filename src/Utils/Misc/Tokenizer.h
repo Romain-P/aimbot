@@ -8,6 +8,7 @@
 #define tokenizer_h
 
 #include <string>
+#include <cstdlib>
 
 using std::string;
 
@@ -52,6 +53,16 @@ public:
 		offset = end;
 		return text.substr(start, end - start);
 
+	}
+
+	float nextInt()
+	{
+		return atoi(nextToken().c_str());
+	}
+
+	float nextFloat()
+	{
+		return atof(nextToken().c_str());
 	}
 
 	bool hasMoreTokens()

@@ -20,7 +20,7 @@ float SceneObject::getMass()
 	return mass;
 }
 
-Mesh SceneObject::getObjectMesh()
+const Mesh& SceneObject::getObjectMesh()
 {
 	return objectMesh;
 }

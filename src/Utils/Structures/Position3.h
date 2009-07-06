@@ -36,11 +36,19 @@ public:
 		return Position3(x + other.x, y + other.y, z + other.z);
 	}
 
+	/* for physical operations, like d = v·dt */
 	void operator+=(const Vector3& vect)
 	{
 		x += vect.x;
 		y += vect.y;
 		z += vect.z;
+	}
+
+	void operator+=(const Position3& pos)
+	{
+		x += pos.x;
+		y += pos.y;
+		z += pos.z;
 	}
 
 	void operator*=(float ratio)

@@ -3,7 +3,8 @@
 
 #include <vector>
 
-#include "../SceneObjects/Mesh.h"
+#include "../SceneObjects/Meshes/Mesh.h"
+#include "../SceneObjects/Meshes/MeshOFF.h"
 
 using std::vector;
 

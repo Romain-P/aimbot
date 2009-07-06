@@ -10,7 +10,7 @@
 
 #include <math.h>
 #include "../Utils/Structures/Vector2.h"
-#include "Mesh.h"
+#include "Meshes/Mesh.h"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ public:
 	Vector2 getMomentum();
 	float getMass();
 	float getDensity();
-	Mesh getObjectMesh();
+	const Mesh& getObjectMesh();
 
 	void setMass(float m);
 	void setDensity(float d);
