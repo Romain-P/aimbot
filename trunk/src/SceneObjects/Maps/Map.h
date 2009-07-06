@@ -5,10 +5,8 @@
 
 #include "MapObject.h"
 #include "../SceneObject.h"
-#include "../Mesh.h"
-#include "../DestroyableMesh.h"
-#include "../ImmutableMesh.h"
-#include "../Hitbox.h"
+#include "../Meshes/Mesh.h"
+#include "../Meshes/Hitbox.h"
 
 class MapPool;
 

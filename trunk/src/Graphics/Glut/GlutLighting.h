@@ -7,11 +7,11 @@ namespace GlutLighting
 {
 	void initLight()
 	{
-		float aPos[] = { 0.0, 6.0, 3.0, 1.0 };
+		float aPos[] = { -2.0, 3.0, -2.0, 1.0 };
 		float aAmb[] = { 0.1, 0.1, 0.1, 1.0 };
 		float aDif[] = { 0.5, 0.5, 0.4, 1.0 };
 
-		float bPos[] = {-8.0, 6.0, 18.0, 1.0 };
+		float bPos[] = { 2.0, 3.0, 2.0, 1.0 };
 		float bDif[] = { 0.6, 0.6, 0.6, 1.0 };
 		float bAmb[] = { 0.1, 0.1, 0.1, 1.0 };
 

@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "Entity.h"
-#include "../Hitbox.h"
+#include "../Meshes/Mesh.h"
+#include "../Meshes/Hitbox.h"
 #include "../Weapons/Weapon.h"
-#include "../Mesh.h"
 
 using std::vector;
 

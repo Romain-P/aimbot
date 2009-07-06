@@ -19,7 +19,6 @@ public:
 		this->y = y;
 	}
 
-
 };
 
 #endif

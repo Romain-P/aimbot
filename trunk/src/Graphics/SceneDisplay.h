@@ -15,13 +15,12 @@ class SceneDisplay : public Drawable, public MeshRenderer
 private:
 	Animator* animator;
 	Animatable** blocks;
-	Mesh** meshes;
+	MeshOFF* mesh;
 
 	void initSceneObjects()
 	{
-		meshes = new Mesh*[1];
-		meshes[0] = new Mesh("D:/CS/Workspace/AIm/data/meshes/test.off");
-		meshes[0]->setCentre(Position3(0, -0.5f, 0));
+		mesh = new MeshOFF("D:/CS/Workspace/AIm/data/meshes/test.off");
+		mesh ->setCentre(Position3(0, -0.5f, 0));
 
 		blocks = new Animatable*[3];
 		blocks[0] = new RotatingBlock(50, 0.3f, Position3(0, 0.25f, 0));
@@ -40,9 +39,7 @@ public:
 
 	virtual ~SceneDisplay()
 	{
-		for(int i = 0; i < 1; i++)
-			delete meshes[i];
-		delete [] meshes;
+		delete mesh;
 
 		for(int i = 0; i < 3; i++)
 			delete blocks[i];
@@ -53,11 +50,11 @@ public:
 	{
 		for(int i = 0; i < 1; i++)
 		{
-			Position3 c = meshes[i]->getCentre();
+			Position3 c = mesh->getCentre();
 			glPushMatrix();
 				Materials::none();
 				glTranslatef(c.x, c.y, c.z);
-				drawMesh(meshes[i]);
+				drawMesh(mesh);
 			glPopMatrix();
 		}
 

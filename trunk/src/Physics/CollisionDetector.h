@@ -3,9 +3,9 @@
 
 #include <vector>
 #include "../Utils/Structures/Position3.h"
-#include "../SceneObjects/Mesh.h"
+#include "../SceneObjects/Meshes/Mesh.h"
+#include "../SceneObjects/Meshes/Hitbox.h"
 #include "../Utils/Structures/KDTree.h"
-#include  "../SceneObjects/Hitbox.h"
 
 class CollisionDetector
 {

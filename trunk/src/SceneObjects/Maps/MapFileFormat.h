@@ -3,7 +3,7 @@
 
 #include "../../Utils/Structures/FileFormat.h"
 #include "../Maps/Map.h"
-#include "../Mesh.h"
+#include "../Meshes/Mesh.h"
 
 class MapFileFormat : public FileFormat
 {
