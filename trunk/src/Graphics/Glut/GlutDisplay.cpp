@@ -24,8 +24,8 @@ void GlutDisplay::initGraphicsOptions()
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.1, 0.16, 0.26, 0);
 	glutSetCursor(GLUT_CURSOR_NONE);
-
-	GlutLighting::initLight();
+	glEnable(GL_TEXTURE_2D);
+	//GlutLighting::initLight();
 }
 
 void GlutDisplay::displayFunction()

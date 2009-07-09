@@ -61,28 +61,9 @@ public:
 
 	std::string print()
 	{
-		float nums[] =
-		{
-			int(1000*x)/1000.f,
-			int(1000*y)/1000.f,
-			int(1000*z)/1000.f
-		};
-
-		std::string s[3];
-		std::string final = "";
-		std::stringstream ss;
-
-		for(int i = 0; i < 3; i++)
-		{
-			ss << nums[i];
-			ss >> s[i];
-			ss.clear();
-			final += nums[i] < 0 ? "" : " ";
-			final += s[i];
-			for(unsigned int j = 0; j < 8 - (s[i].length() - int(nums[i] < 0)); j++)
-				final += " ";
-		}
-		return final;
+		char buf[30];
+		sprintf(buf, "%3.3f %3.3f %3.3f", x, y, z);
+		return std::string(buf);
 	}
 };
 

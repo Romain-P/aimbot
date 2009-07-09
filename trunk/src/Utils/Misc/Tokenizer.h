@@ -9,7 +9,9 @@
 
 #include <string>
 #include <cstdlib>
+#include <vector>
 
+using std::vector;
 using std::string;
 
 class Tokenizer
@@ -55,7 +57,7 @@ public:
 
 	}
 
-	float nextInt()
+	int nextInt()
 	{
 		return atoi(nextToken().c_str());
 	}
@@ -65,11 +67,27 @@ public:
 		return atof(nextToken().c_str());
 	}
 
+	vector<string> getStrings()
+	{
+		vector<string> tokens;
+
+		while(hasMoreTokens())
+			tokens.push_back(nextToken());
+		return tokens;
+	}
+
+	vector<int> getInts()
+	{
+		vector<int> tokens;
+		while(hasMoreTokens())
+			tokens.push_back(nextInt());
+		return tokens;
+	}
+
 	bool hasMoreTokens()
 	{
 		unsigned int start = text.find_first_not_of(delimiters, offset);
-		unsigned int end = text.find_first_of(delimiters, start);
-		return start != string::npos && end != string::npos;
+		return start != string::npos;
 	}
 };
 
