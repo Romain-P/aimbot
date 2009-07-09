@@ -92,7 +92,6 @@ void GlutDisplay::removeDrawable(Drawable* drawable)
 void GlutDisplay::enterOrthoProjection()
 {
 	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_LIGHTING);
 
 	// fix blending problems with overlapping lines
 	glDepthMask(GL_FALSE);
@@ -121,7 +120,6 @@ void GlutDisplay::exitOrthoProjection()
 	glPopMatrix();
 	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
 	glDisable(GL_LINE_SMOOTH);
 	glLineWidth(2.0);
 }

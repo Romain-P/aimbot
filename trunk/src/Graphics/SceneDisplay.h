@@ -63,15 +63,12 @@ public:
 
 	void draw()
 	{
-		for(int i = 0; i < 1; i++)
-		{
-			Position3 c = textured->getCentre();
-			glPushMatrix();
-				//Materials::none();
-				glTranslatef(c.x, c.y, c.z);
-				drawTexturedMesh(textured);
-			glPopMatrix();
-		}
+		Position3 c = textured->getCentre();
+		glPushMatrix();
+			//Materials::none();
+			glTranslatef(c.x, c.y, c.z);
+			drawTexturedMesh(textured);
+		glPopMatrix();
 
 		for(int i = 0; i < 3; i++)
 			blocks[i]->draw();

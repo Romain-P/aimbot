@@ -25,7 +25,8 @@ public:
 
 	void draw()
 	{
-		Materials::glowing(1.f, 0.6f, 0.2f);
+		//Materials::glowing(1.f, 0.6f, 0.2f);
+		glColor3f(0.3f, 0.6f, 0.2f);
 		glPushMatrix();
 			glTranslatef(centre.x, centre.y, centre.z);
 			glRotatef(rotation, 0.f, 0.f, 1.f);
