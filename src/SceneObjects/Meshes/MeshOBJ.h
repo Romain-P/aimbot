@@ -6,14 +6,40 @@
 #define meshobj_h
 
 #include <string>
+#include <sstream>
 #include "Mesh.h"
+#include "../../Input/ImageReader.h"
 #include "../../Utils/Misc/Tokenizer.h"
 #include "../../Utils/Structures/Position2.h"
 #include "../../Utils/Structures/Vector3.h"
 
 using std::string;
 using std::fstream;
+using std::stringstream;
 
+// obj files indices start from 1 :C
+class TexFace : public Face
+{
+public:
+	int texIndices[4];
+
+	TexFace(int a, int b, int c, int d,
+			int e, int f, int g, int h) : Face(a -1, b - 1, c - 1, d - 1)
+	{
+		texIndices[0] = e - 1;
+		texIndices[1] = f - 1;
+		texIndices[2] = g - 1;
+		texIndices[3] = h - 1;
+	}
+
+	TexFace(int a, int b, int c,
+			int d, int e, int f) : Face(a - 1, b - 1, c - 1 )
+	{
+		texIndices[0] = d - 1;
+		texIndices[1] = e - 1;
+		texIndices[2] = f - 1;
+	}
+};
 
 
 class MeshOBJ : public Mesh
@@ -21,7 +47,7 @@ class MeshOBJ : public Mesh
 private:
 	vector<Position2> texCoords;
 	vector<Vector3> normals;
-	vector<Face> texFaces;
+	vector<TexFace> texFaces;
 	vector<int> normIndices;
 
 	float tx, ty;
@@ -30,114 +56,129 @@ private:
 	bool haveNormals;
 	bool haveTexCoords;
 
-
-	// TODO: this is quick and fuckin dirty, if there are any regex libs,
-	// 		 they would clean this up with supernatural vigour.
-	void processLine(const fstream& in, const string& str)
+	void processLine(const string& str)
 	{
 		string first;
-		in >> first;
+		stringstream ss;
+
+		ss << str;
+		ss >> first;
 
 		if (first == "v")
 		{
-			in >> x >> y >> z;
+			ss >> x >> y >> z;
 			vertices.push_back(Position3(x, y, z));
 		}
 		else if (first == "vt")
 		{
 			haveTexCoords = true;
-			in >> tx >> ty;
+			ss >> tx >> ty;
 			texCoords.push_back(Position2(tx, ty));
 		}
 		else if (first == "vn")
 		{
 			haveNormals = true;
-			in >> x >> y >> z;
+			ss >> x >> y >> z;
 			normals.push_back(Vector3(x, y, z));
 		}
 		else if(first == "f")
 		{
 			static int num = 1 + int(haveNormals) + int(haveTexCoords);
-			parseIndices(in, str, num);
+			parseIndices(str, num);
 		}
 	}
 
-	// face indices are in format: f v1/t1/n1 v2/t2/n2 v3/t3/n3 ...
-	void parseIndices(const fstream& in, const string& str, int num)
+	// face indices are in format: f v1/t1/n v2/t2/n v3/t3/n ... vi/ti/n
+	void parseIndices(const string& str, int numCoordTypes)
 	{
-		vector<int> ind;
-		Tokenizer tkn(str, " /");
-		tkn.nextToken(); // remove the 'f'
+		Tokenizer tokens(str, " /");
 
-		while(tkn.hasMoreTokens())
+		//absorb the 'f'
+		tokens.nextToken();
+
+		vector<int> ind = tokens.getInts();
+
+		int numVerts = ind.size() / numCoordTypes;
+		if(numVerts == 3)
 		{
-			for(int n = 0; n < num; n++)
-				ind.push_back(tkn.nextInt());
-		}
-		int verts = ind.size() / numIndices;
-		if(verts == 3)
-		{
-			faces.push_back(Face(
-					ind.at(num * 0),
-					ind.at(num * 1),
-					ind.at(num * 2)));
-			texFaces.push_back(Face(
-					ind.at(num * 0) + 1,
-					ind.at(num * 1) + 1,
-					ind.at(num * 2) + 1));
+			texFaces.push_back(TexFace(
+					ind.at(numCoordTypes * 0),
+					ind.at(numCoordTypes * 1),
+					ind.at(numCoordTypes * 2),
+					ind.at(numCoordTypes * 0 + 1),
+					ind.at(numCoordTypes * 1 + 1),
+					ind.at(numCoordTypes * 2 + 1)));
 			normIndices.push_back(ind.at(2));
 		}
-		else if(verts == 4)
+		else if(numVerts == 4)
 		{
-			faces.push_back(Face(
-					ind.at(num * 0),
-					ind.at(num * 1),
-					ind.at(num * 2),
-					ind.at(num * 3)));
-			texFaces.push_back(Face(
-					ind.at(num * 0) + 1,
-					ind.at(num * 1) + 1,
-					ind.at(num * 2) + 1,
-					ind.at(num * 3) + 1));
+			texFaces.push_back(TexFace(
+					ind.at(numCoordTypes * 0),
+					ind.at(numCoordTypes * 1),
+					ind.at(numCoordTypes * 2),
+					ind.at(numCoordTypes * 3),
+					ind.at(numCoordTypes * 0 + 1),
+					ind.at(numCoordTypes * 1 + 1),
+					ind.at(numCoordTypes * 2 + 1),
+					ind.at(numCoordTypes * 3 + 1)));
 			normIndices.push_back(ind.at(2));
+		}
+		else
+		{
+			cout << "Irregular polygon of order " << numVerts << endl;
 		}
 	}
 
 public:
-	MeshOBJ(const string& filename)
+	int textureID;
+
+	MeshOBJ()
 	{
 		haveNormals = false;
 		haveTexCoords = false;
-
-		read(filename);
 	}
 
 	void read(const string& filename)
 	{
 		fstream in;
-		int numVertices, numFaces, numEdges;
-		string format;
 
 		try
 		{
 
 			in.open(filename.c_str(), std::ios::in);
-			if (in.fail() || in.eof())
-			{
+			if (in.fail() || in.eof()) {
 				cout << "Opening " << filename << " failed." << endl;
 				return;
 			}
 
 			string line;
-			while(getline(in, line))
-			{
-				processLine(in, line);
+			while (getline(in, line)) {
+				processLine(line);
 			}
 
-		} catch (exception& e) {
+
+		} catch (exception& e)
+		{
 			cout << e.what() << endl;
 		}
+
 	}
+
+	void loadTexture(const string& filename)
+	{
+		textureID = ImageReader::loadTexture(filename);
+	}
+
+	vector<TexFace>& getTexFaces()
+	{
+		return texFaces;
+	}
+
+	vector<Position2>& getTexCoords()
+	{
+		return texCoords;
+	}
+
 };
 
 #endif

@@ -19,6 +19,18 @@ public:
 		this->y = y;
 	}
 
+	Position2(const Position2& other)
+	{
+		x = other.x;
+		y = other.y;
+	}
+
+	std::string print()
+	{
+		char buff[20];
+		sprintf(buff, "%3.3f %3.3f", x, y);
+		return std::string(buff);
+	}
 };
 
 #endif
