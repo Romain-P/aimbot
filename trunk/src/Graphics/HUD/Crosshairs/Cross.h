@@ -12,7 +12,7 @@ public:
 
 	void draw()
 	{
-		glColor3f(colour.r, colour.g, colour.b);
+		glColor4f(colour.r, colour.g, colour.b, 1.0f);
 		glDisable(GL_BLEND);
 		glBegin(GL_LINES);
 		glVertex2f(halfWidth, halfHeight);
