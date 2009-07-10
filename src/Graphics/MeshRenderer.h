@@ -38,22 +38,39 @@ protected:
 		const vector<Position3>& vertices = mesh->getVertices();
 		vector<TexFace>::const_iterator it;
 
+		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 		glBegin(GL_QUADS);
 
 		for (it = texFaces.begin(); it != texFaces.end(); ++it)
 		{
-			for(int i = 0; i < it->order; i++)
+			if(it->order == 4)
 			{
-				const Position3& p = vertices.at(it->indices[i]);
-				const Position2& t = texCoords.at(it->texIndices[i]);
-				glTexCoord2f(t.x, t.y);
-				glVertex3f(p.x, p.y, p.z);
+				for(int i = 0; i < it->order; i++)
+				{
+					const Position3& p = vertices.at(it->indices[i]);
+					const Position2& t = texCoords.at(it->texIndices[i]);
+					glTexCoord2f(t.x, t.y);
+					glVertex3f(p.x, p.y, p.z);
+				}
+			}
+			else if(it->order == 3)
+			{
+				glEnd();
+				glBegin(GL_TRIANGLES);
+				for(int i = 0; i < it->order; i++)
+				{
+					const Position3& p = vertices.at(it->indices[i]);
+					const Position2& t = texCoords.at(it->texIndices[i]);
+					glTexCoord2f(t.x, t.y);
+					glVertex3f(p.x, p.y, p.z);
+				}
+				glEnd();
+				glBegin(GL_QUADS);
 			}
 		}
 
 		glEnd();
-
 	}
 };
 

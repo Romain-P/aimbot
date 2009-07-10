@@ -11,15 +11,17 @@ class RotationStage : public AnimationStage, public MeshRenderer
 {
 private:
 	Position3 centre;
-	Mesh* mesh;
+	MeshOBJ* mesh;
 	float rotation;
 	float speed;
+	float size;
 public:
-	RotationStage(float speed, Mesh* mesh) :
+	RotationStage(float speed, float size, MeshOBJ* mesh) :
 		AnimationStage(AnimationStage::INFINITE_TIME)
 	{
 		this->speed = speed;
 		this->mesh = mesh;
+		this->size = size;
 		centre = mesh->getCentre();
 	}
 
@@ -29,9 +31,10 @@ public:
 		glColor3f(0.3f, 0.6f, 0.2f);
 		glPushMatrix();
 			glTranslatef(centre.x, centre.y, centre.z);
+			glScalef(size, size, size);
 			glRotatef(rotation, 0.f, 0.f, 1.f);
 			glRotatef(rotation * 0.3f, 0.f, 1.f, 0.f);
-			drawMesh(mesh);
+			//drawTexturedMesh(mesh);
 		glPopMatrix();
 
 	}
@@ -46,12 +49,16 @@ class RotatingBlock : public Animatable
 {
 private:
 
-	Mesh* cube;
+	MeshOBJ* cube;
 public:
 	RotatingBlock(float speed, float size, Position3 position) : Animatable()
 	{
-		cube = new Cube(size, position);
-		stages.push_back(new RotationStage(speed, cube));
+		cube = new MeshOBJ();
+		cube->read("D:/CS/Workspace/AIm/data/meshes/gold.obj");
+		cube->loadTexture("D:/CS/Workspace/AIm/data/textures/gold.png");
+		cube->setCentre(position);
+
+		stages.push_back(new RotationStage(speed, size, cube));
 		startAnimation();
 	}
 	~RotatingBlock()

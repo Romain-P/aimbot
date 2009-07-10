@@ -82,7 +82,7 @@ void DevConsole::draw()
 		glVertex2f(width, h2);
 	glEnd();
 
-	glColor3f(0.8f, 0.82f, 0.84f);
+	glColor4f(0.8f, 0.82f, 0.84f, 1.0f);
 	drawString(currentMessage, 0.1f, 5, h2 - 4);
 
 	int i = 1;

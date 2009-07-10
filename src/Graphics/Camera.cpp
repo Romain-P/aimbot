@@ -3,9 +3,9 @@
 
 Camera::Camera()
 {
-	theta = 3.14;
+	theta = 0;
 	phi = 0;
-	start = Position3(0, 0, 1);
+	start = Position3(0, 0, 0);
 	up  = Vector3(0, 1, 0);
 	calcLook(0, 0);
 }
