@@ -4,9 +4,8 @@ ConfigMap::ConfigMap()
 {
 	file.open(Filenames::config.c_str(), std::ios::in);
 	if(!file)
-	{
 		cout << "Opening " << Filenames::config << " failed." << endl;
-	}
+
 	int eqIndex;
 	string line;
 	string key;
@@ -22,7 +21,7 @@ ConfigMap::ConfigMap()
 	}
 }
 
-const string& ConfigMap::getConfigValue(const string& key)
+const string& ConfigMap::get(const string& key)
 {
 	return config[key];
 }

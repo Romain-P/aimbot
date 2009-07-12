@@ -18,6 +18,7 @@ void Camera::setDisplay(GlutDisplay* display)
 void Camera::updateView()
 {
 	Position3 eye = this->getPosition();
+
 	gluLookAt(eye.x, eye.y, eye.z,
 			eye.x - look.x, eye.y - look.y, eye.z - look.z,
 			up.x, up.y, up.z);

@@ -8,7 +8,8 @@ InputHandler::InputHandler(
 		GameState* gameState,
 		Camera* camera,
 		Player* player) :
-	ScreenBoundsUser()
+	ScreenBoundsUser(),
+	MovementController()
 {
 	this->coordinator = coordinator;
 	this->camera = camera;
@@ -18,8 +19,7 @@ InputHandler::InputHandler(
 	inputHandler = this;
 	mouseEvent.firstEvent = true;
 
-	string sensitivity = ConfigMap::Instance().getConfigValue("mouse.sensitivity");
-	sens = StringCaster<float>::cast(sensitivity);
+	sens = StringCaster<float>::cast(ConfigMap::Instance().get("mouse.sensitivity"));
 
 	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 }
@@ -31,26 +31,16 @@ void InputHandler::keyboardFunction(unsigned char key)
 		case GameState::PLAYING:
 		{
 			key = tolower(key);
-			switch(key)
+			if(key == fore || key == back || key == right ||
+				key == left || key == up || key == down)
 			{
-				case MovementControls::FORWARD:
-				case MovementControls::RIGHT:
-				case MovementControls::BACKWARD:
-				case MovementControls::LEFT:
-				case MovementControls::UP:
-				case MovementControls::DOWN:
-				{
-					controls.push(key);
-					camera->updateVelocity(controls.getDirection());
-					break;
-				}
-				case 27:
-					exit(0);
-					break;
-				case '`':
-					coordinator->toggleConsoleVisibility();
-					break;
+				push(key);
+				camera->updateVelocity(getDirection());
 			}
+			else if(key == 27)
+				exit(0);
+			else if(key == '`')
+				coordinator->toggleConsoleVisibility();
 			break;
 		}
 		case GameState::IN_DEV_CONSOLE:
@@ -77,21 +67,13 @@ void InputHandler::keyUpFunction(unsigned char key)
 		return;
 
 	key = tolower(key);
-
-	switch (key)
+	if(key == fore || key == back || key == right ||
+		key == left || key == up || key == down)
 	{
-		case MovementControls::FORWARD:
-		case MovementControls::RIGHT:
-		case MovementControls::BACKWARD:
-		case MovementControls::LEFT:
-		case MovementControls::UP:
-		case MovementControls::DOWN:
-		{
-			controls.pop(key);
-			camera->updateVelocity(controls.getDirection());
-			break;
-		}
+		push(key);
+		camera->updateVelocity(getDirection());
 	}
+
 	glutPostRedisplay();
 }
 

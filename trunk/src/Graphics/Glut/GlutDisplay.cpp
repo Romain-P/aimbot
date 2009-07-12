@@ -25,6 +25,8 @@ void GlutDisplay::initGraphicsOptions()
 	glClearColor(0.1, 0.16, 0.26, 0);
 	glutSetCursor(GLUT_CURSOR_NONE);
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	//GlutLighting::initLight();
 }
 
@@ -38,9 +40,7 @@ void GlutDisplay::displayFunction()
 	static vector<Drawable*>::const_iterator orthoIter;
 
 	for(drawIter = drawables.begin(); drawIter != drawables.end(); ++drawIter)
-	{
 		(*drawIter)->draw();
-	}
 
 	enterOrthoProjection();
 	for(orthoIter = orthographics.begin(); orthoIter != orthographics.end(); ++orthoIter)
@@ -54,7 +54,6 @@ void GlutDisplay::reshapeFunction(int w, int h)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
 	camera->updateView();
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_MODELVIEW);
@@ -63,7 +62,7 @@ void GlutDisplay::reshapeFunction(int w, int h)
 void GlutDisplay::updateCamera()
 {
 	glLoadIdentity();
-	gluPerspective(fieldOfView, screenAspect, 0.01, 1000);
+	gluPerspective(fieldOfView, screenAspect, 0.01, 100);
 	camera->updateView();
 }
 

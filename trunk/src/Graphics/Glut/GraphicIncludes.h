@@ -12,6 +12,8 @@
 		#include <OpenGL/glu.h>
 	#else
 		#include <GL/glut.h>
+		#define GL_GLEXT_PROTOTYPES
+		#include <GL/glext.h>
 	#endif
 
 #endif

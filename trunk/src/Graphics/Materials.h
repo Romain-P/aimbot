@@ -6,8 +6,6 @@
 namespace Materials
 {
 
-
-	/*
 	static void glowing(float r, float g, float b)
 	{
 		float em[] = { r, g, b, 1.f };
@@ -22,7 +20,6 @@ namespace Materials
 		glMaterialfv(GL_FRONT, GL_EMISSION, em);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, col);
 	}
-	*/
 }
 
 #endif

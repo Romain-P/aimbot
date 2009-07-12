@@ -67,7 +67,6 @@ public:
 			drawTexturedMesh(textured);
 		glPopMatrix();
 
-
 		for(int i = 0; i < 3; i++)
 			blocks[i]->draw();
 	}
