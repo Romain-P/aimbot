@@ -26,13 +26,8 @@ private:
 	{
 		textured = new MeshOBJ();
 		textured->setCentre(Position3(0, -0.5f, 0));
-		textured->read("D:/CS/Workspace/AIm/data/meshes/testmap.obj");
-		textured->loadTexture("D:/CS/Workspace/AIm/data/textures/testmap.png");
-
-		signature = new MeshOBJ();
-		signature->setCentre(Position3(0, 0.0, 3.3f));
-		signature->read("D:/CS/Workspace/AIm/data/meshes/signature.obj");
-		signature->loadTexture("D:/CS/Workspace/AIm/data/textures/signature.png");
+		textured->read("testmap.obj");
+		textured->loadTexture("testmap.png");
 
 		blocks = new Animatable*[3];
 		blocks[0] = new RotatingBlock(50, 0.15f, Position3(0, 0.25f, 0));
@@ -60,7 +55,7 @@ public:
 		delete [] blocks;
 
 		delete textured;
-		delete signature;
+		//delete signature;
 	}
 
 	void draw()
@@ -72,12 +67,6 @@ public:
 			drawTexturedMesh(textured);
 		glPopMatrix();
 
-		c = signature->getCentre();
-		glPushMatrix();
-			glTranslatef(c.x, c.y, c.z);
-			glScalef(-0.2f, 0.2f, 0.2f);
-			drawTexturedMesh(signature);
-		glPopMatrix();
 
 		for(int i = 0; i < 3; i++)
 			blocks[i]->draw();

@@ -44,6 +44,20 @@ protected:
 
 		for (it = texFaces.begin(); it != texFaces.end(); ++it)
 		{
+			for(int i = 0; i < it->order; i++)
+			{
+				const Position3& p = vertices[it->indices[i]];
+				const Position2& t = texCoords[it->texIndices[i]];
+				glTexCoord2f(t.x, t.y);
+				glVertex3f(p.x, p.y, p.z);
+			}
+		}
+
+		glEnd();
+	}
+
+
+	/*
 			if(it->order == 4)
 			{
 				for(int i = 0; i < it->order; i++)
@@ -68,10 +82,8 @@ protected:
 				glEnd();
 				glBegin(GL_QUADS);
 			}
-		}
 
-		glEnd();
-	}
+	 */
 };
 
 #endif

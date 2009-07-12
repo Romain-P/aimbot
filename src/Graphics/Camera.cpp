@@ -25,19 +25,25 @@ void Camera::updateView()
 
 void Camera::calcLook(float dx, float dy)
 {
-	static float c;
 	theta += dx;
 	phi += dy;
 
-	c = cosf(phi);
-	look.x = sinf(theta) * c;
-	look.y = sinf(phi);
-	look.z = -cosf(theta) * c;
+	if(phi < -1.57f) phi = -1.57f;
+	if(phi > 1.57f) phi = 1.57f;
+
+	cphi = cosf(phi);
+	ctheta = cosf(theta);
+	sphi = sinf(phi);
+	stheta = sinf(theta);
+
+	look.x = stheta * cphi;
+	look.y = sphi;
+	look.z = -ctheta * cphi;
 }
 
 // TODO: rethink where the camera's position is controlled, involving the player object
 void Camera::updateVelocity(const Vector3& direction)
 {
-	velocity.x = 3 * (cos(theta) * direction.x - sin(theta) * direction.z);
-	velocity.z = 3 * (sin(theta) * direction.x + cos(theta) * direction.z);
+	velocity.x = 3 * (ctheta * direction.x - stheta * direction.z);
+	velocity.z = 3 * (stheta * direction.x + ctheta * direction.z);
 }

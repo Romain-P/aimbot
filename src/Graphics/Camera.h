@@ -17,6 +17,12 @@ public:
 	float theta;
 	float phi;
 
+	// for reusing angle calculations
+	float cphi;
+	float sphi;
+	float ctheta;
+	float stheta;
+
 	Vector3 up;
 	Vector3 look;
 

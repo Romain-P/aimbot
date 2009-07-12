@@ -17,6 +17,11 @@ InputHandler::InputHandler(
 
 	inputHandler = this;
 	mouseEvent.firstEvent = true;
+
+	string sensitivity = ConfigMap::Instance().getConfigValue("mouse.sensitivity");
+	sens = StringCaster<float>::cast(sensitivity);
+
+	glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 }
 
 void InputHandler::keyboardFunction(unsigned char key)
@@ -93,15 +98,18 @@ void InputHandler::keyUpFunction(unsigned char key)
 void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
 	if (state == GLUT_DOWN) {
-		if (button == GLUT_LEFT_BUTTON) {
+		if (button == GLUT_LEFT_BUTTON)
+		{
 			std::cout << "firing" << std::endl;
 			player->firePrimary();
 		}
 		else if (button == GLUT_RIGHT_BUTTON)
 			player->fireSecondary();
 	}
-	else if (state == GLUT_UP) {
-		if (button == GLUT_LEFT_BUTTON) {
+	else if (state == GLUT_UP)
+	{
+		if (button == GLUT_LEFT_BUTTON)
+		{
 			std::cout << "releasing" << std::endl;
 			player->releasePrimary();
 		}
@@ -119,7 +127,6 @@ void InputHandler::motionFunction(int x, int y)
 
 void InputHandler::passiveMotionFunction(int x, int y)
 {
-	static float sens = 0.002f;
 	static bool warped = false;
 
 	// prevents a major jump on the first mouse movement
@@ -131,8 +138,8 @@ void InputHandler::passiveMotionFunction(int x, int y)
 	else
 	{
 		// reset mouse pointer to centre if it's about to go off screen
-		if(x + 2 * mouseEvent.deltaX > width || x + 2 * mouseEvent.deltaX < 0 ||
-			y + 2 * mouseEvent.deltaY > height || y + 2 * mouseEvent.deltaY < 0)
+		if(x + mouseEvent.deltaX > width || x + mouseEvent.deltaX < 0 ||
+			y + mouseEvent.deltaY > height || y + mouseEvent.deltaY < 0)
 		{
 			glutWarpPointer(halfWidth, halfHeight);
 			warped = true;
@@ -140,6 +147,7 @@ void InputHandler::passiveMotionFunction(int x, int y)
 
 		mouseEvent.deltaX = (x - mouseEvent.lastX);
 		mouseEvent.deltaY = (y - mouseEvent.lastY);
+
 		camera->calcLook(sens * mouseEvent.deltaX, sens * mouseEvent.deltaY);
 	}
 

@@ -28,13 +28,13 @@ public:
 	void draw()
 	{
 		//Materials::glowing(1.f, 0.6f, 0.2f);
-		glColor3f(0.3f, 0.6f, 0.2f);
+		glColor4f(0.3f, 0.6f, 0.2f, 1.0f);
 		glPushMatrix();
 			glTranslatef(centre.x, centre.y, centre.z);
 			glScalef(size, size, size);
 			glRotatef(rotation, 0.f, 0.f, 1.f);
 			glRotatef(rotation * 0.3f, 0.f, 1.f, 0.f);
-			//drawTexturedMesh(mesh);
+			drawTexturedMesh(mesh);
 		glPopMatrix();
 
 	}
@@ -54,8 +54,8 @@ public:
 	RotatingBlock(float speed, float size, Position3 position) : Animatable()
 	{
 		cube = new MeshOBJ();
-		cube->read("D:/CS/Workspace/AIm/data/meshes/gold.obj");
-		cube->loadTexture("D:/CS/Workspace/AIm/data/textures/gold.png");
+		cube->read("gold.obj");
+		cube->loadTexture("gold.png");
 		cube->setCentre(position);
 
 		stages.push_back(new RotationStage(speed, size, cube));
