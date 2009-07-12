@@ -30,12 +30,16 @@ public:
 		return displacement + start;
 	}
 
+	virtual void updateVelocity(const Vector3& v)
+	{
+		velocity = v;
+	}
+
 	virtual void move(float timeStep)
 	{
 		if(timeStep <= 0) return;
 		displacement += velocity * timeStep;
 	}
-	//virtual void move(float timeStep) = 0;
 };
 
 #endif
