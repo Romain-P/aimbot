@@ -20,17 +20,20 @@ private:
 	Mesh* mesh;
 	//Hitbox* hitbox;
 
-	Position3 closest;
 
 	void initializeMesh()
 	{
 		//do it
 	}
 
+protected:
+	float speed;
+
 public:
 	Player() :
 		Entity(""),
 		health(100),
+		speed(3),
 		currentWeapon(0)
 	{
 	}

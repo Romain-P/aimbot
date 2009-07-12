@@ -29,11 +29,12 @@ void InputHandler::keyboardFunction(unsigned char key)
 		case GameState::PLAYING:
 		{
 			key = tolower(key);
-			if(key == fore || key == back || key == right ||
-				key == left || key == up || key == down)
+			if( key == fore  || key == back ||
+				key == right ||	key == left ||
+				key == up    || key == down)
 			{
 				push(key);
-				camera->updateVelocity(getDirection());
+				CurrentPlayer::Instance().updateVelocity(getVelocity());
 			}
 			else if(key == 27)
 				exit(0);
@@ -65,11 +66,12 @@ void InputHandler::keyUpFunction(unsigned char key)
 		return;
 
 	key = tolower(key);
-	if(key == fore || key == back || key == right ||
-		key == left || key == up || key == down)
+	if( key == fore  || key == back ||
+		key == right ||	key == left ||
+		key == up    || key == down)
 	{
 		pop(key);
-		camera->updateVelocity(getDirection());
+		CurrentPlayer::Instance().updateVelocity(getVelocity());
 	}
 
 	glutPostRedisplay();
@@ -114,7 +116,7 @@ void InputHandler::passiveMotionFunction(int x, int y)
 	if(mouseEvent.firstEvent)
 	{
 		mouseEvent.firstEvent = false;
-		camera->calcLook(0, 0);
+		CurrentPlayer::Instance().calcLook(0, 0);
 	}
 	else
 	{
@@ -129,7 +131,7 @@ void InputHandler::passiveMotionFunction(int x, int y)
 		mouseEvent.deltaX = (x - mouseEvent.lastX);
 		mouseEvent.deltaY = (y - mouseEvent.lastY);
 
-		camera->calcLook(sens * mouseEvent.deltaX, sens * mouseEvent.deltaY);
+		CurrentPlayer::Instance().calcLook(sens * mouseEvent.deltaX, sens * mouseEvent.deltaY);
 	}
 
 	if(warped)
@@ -153,7 +155,7 @@ void InputHandler::setKDTree(KDTree* tree)
 
 Position3& InputHandler::getClosestPoint()
 {
-	return tree->closestPoint(camera->getPosition());
+	return tree->closestPoint(CurrentPlayer::Instance().getPosition());
 }
 
 

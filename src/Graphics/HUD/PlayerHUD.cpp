@@ -92,7 +92,7 @@ void PlayerHUD::drawPosition()
 
 	if(updater->getFrames() % 60 == 0)
 	{
-		position = coordinator->getCameraPosition();
+		position = coordinator->getPlayerPosition();
 		closest = coordinator->getClosestPoint();
 	}
 
@@ -113,8 +113,7 @@ void PlayerHUD::drawAngles()
 
 	if(updater->getFrames() % 60 == 0)
 	{
-		theta = coordinator->getCameraTheta();
-		phi = coordinator->getCameraPhi();
+		coordinator->getPlayerAngles(theta, phi);
 	}
 
 	sprintf(str, "%3.2f %3.2f", theta, phi);

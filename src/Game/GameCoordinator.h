@@ -51,6 +51,7 @@ public:
 
 		CurrentPlayer::Instance().addWeapon(laser);
 		CurrentPlayer::Instance().setCamera(camera);
+		CurrentPlayer::Instance().calcLook(0, 0);
 
 		envUpdater = new EnvironmentUpdater();
 		animator = new Animator();
@@ -127,9 +128,9 @@ public:
 		console->putChar(ch);
 	}
 
-	const Position3& getCameraPosition()
+	const Position3& getPlayerPosition()
 	{
-		return camera->getPosition();
+		return CurrentPlayer::Instance().getPosition();
 	}
 
 	const Position3 getClosestPoint()
@@ -137,14 +138,10 @@ public:
 		return inputHandler->getClosestPoint();
 	}
 
-	float getCameraTheta()
+	void getPlayerAngles(float& theta, float& phi)
 	{
-		return camera->theta;
-	}
-
-	float getCameraPhi()
-	{
-		return camera->phi;
+		theta = CurrentPlayer::Instance().theta;
+		phi = CurrentPlayer::Instance().phi;
 	}
 };
 

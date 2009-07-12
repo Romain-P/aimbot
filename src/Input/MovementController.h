@@ -71,18 +71,21 @@ public:
 		}
 	}
 
-	Vector3 getDirection()
+	Vector3 getVelocity()
 	{
 		int sum = int(first) + int(second);
 
-		if(sum == fore)				return Vector3( 0, 0,  1);
-		else if(sum == left)		return Vector3( 1, 0,  0);
-		else if(sum == back) 		return Vector3( 0, 0, -1);
-		else if(sum == right)		return Vector3(-1, 0,  0);
-		else if(sum == fore + left)	return Vector3( 0.7071f, 0,  0.7071f);
-		else if(sum == fore + right)return Vector3(-0.7071f, 0,  0.7071f);
-		else if(sum == back + left)	return Vector3( 0.7071f, 0, -0.7071f);
-		else if(sum == back + right)return Vector3(-0.7071f, 0, -0.7071f);
+		     if(sum == fore)		return Vector3( 0,  0,  1);
+		else if(sum == left)		return Vector3( 1,  0,  0);
+		else if(sum == back) 		return Vector3( 0,  0, -1);
+		else if(sum == right)		return Vector3(-1,  0,  0);
+		else if(sum == up)			return Vector3( 0,  1,  0);
+		else if(sum == down)		return Vector3( 0, -1,  0);
+
+		else if(sum == fore + left)	return Vector3( 0.7071f, 0, 0.7071f);
+		else if(sum == fore + right)return Vector3(-0.7071f, 0, 0.7071f);
+		else if(sum == back + left)	return Vector3( 0.7071f, 0,-0.7071f);
+		else if(sum == back + right)return Vector3(-0.7071f, 0,-0.7071f);
 
 		return Vector3(0, 0, 0);
 	}
