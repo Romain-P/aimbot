@@ -2,6 +2,7 @@
 #define inputhandler_h
 
 #include "MovementControls.h"
+#include "ConfigMap.h"
 #include "../Game/GameState.h"
 #include "../Graphics/Glut/GraphicIncludes.h"
 #include "../Graphics/ScreenBoundsUser.h"
@@ -9,6 +10,7 @@
 #include "../Physics/EnvironmentUpdater.h"
 #include "../SceneObjects/Entities/Player.h"
 #include "../Utils/Structures/Vector3.h"
+#include "../Utils/Misc/StringCaster.h"
 
 class GameCoordinator;
 
@@ -44,6 +46,8 @@ private:
 	Player* player;
 
 	Camera* camera;
+
+	float sens;
 public:
 
 	InputHandler(GameCoordinator* coordinator,

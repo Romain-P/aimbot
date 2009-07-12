@@ -15,8 +15,10 @@ private:
 	Singleton(const Singleton& other);
 	Singleton& operator=(const Singleton& other);
 
+protected:
+	Singleton() {}
+	virtual ~Singleton() {}
 public:
-	Singleton()	{}
 	static T& Instance()
 	{
 		static T instance;

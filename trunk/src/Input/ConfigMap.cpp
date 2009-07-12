@@ -2,24 +2,27 @@
 
 ConfigMap::ConfigMap()
 {
-	file.open(Filenames::config, std::ios::in);
+	file.open(Filenames::config.c_str(), std::ios::in);
+	if(!file)
+	{
+		cout << "Opening " << Filenames::config << " failed." << endl;
+	}
 	int eqIndex;
 	string line;
 	string key;
 	string value;
 
-	// TODO: probably an off-by-one here for the index
 	while(file >> line)
 	{
 		eqIndex = line.find_first_of("=", 0);
 		key = line.substr(0, eqIndex);
-		value = line.substr(eqIndex, line.length());
+		value = line.substr(eqIndex + 1);
 
 		config[key] = value;
 	}
 }
 
-string ConfigMap::getConfigValue(string key)
+const string& ConfigMap::getConfigValue(const string& key)
 {
 	return config[key];
 }

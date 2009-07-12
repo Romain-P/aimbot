@@ -8,6 +8,7 @@
 #include <string>
 #include <sstream>
 #include "Mesh.h"
+#include "../../Input/Filenames.h"
 #include "../../Input/ImageReader.h"
 #include "../../Utils/Misc/Tokenizer.h"
 #include "../../Utils/Structures/Position2.h"
@@ -141,32 +142,23 @@ public:
 	void read(const string& filename)
 	{
 		fstream in;
+		string absFilename = Filenames::meshes + filename;
 
-		try
+		in.open(absFilename.c_str(), std::ios::in);
+		if (in.fail() || in.eof())
 		{
-
-			in.open(filename.c_str(), std::ios::in);
-			if (in.fail() || in.eof()) {
-				cout << "Opening " << filename << " failed." << endl;
-				return;
-			}
-
-			string line;
-			while (getline(in, line)) {
-				processLine(line);
-			}
-
-
-		} catch (exception& e)
-		{
-			cout << e.what() << endl;
+			cout << "Opening " << absFilename << " failed." << endl;
+			return;
 		}
 
+		string line;
+		while (getline(in, line))
+			processLine(line);
 	}
 
 	void loadTexture(const string& filename)
 	{
-		textureID = ImageReader::loadTexture(filename);
+		textureID = ImageReader::loadTexture(Filenames::textures + filename);
 	}
 
 	vector<TexFace>& getTexFaces()
