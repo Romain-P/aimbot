@@ -2,10 +2,13 @@
 #define stringcaster_h
 
 #include <string>
+#include <sstream>
 #include <cstdlib>
 #include <typeinfo>
+#include <iostream>
 
 using std::string;
+using std::stringstream;
 
 template <class T>
 class StringCaster
@@ -19,6 +22,16 @@ private:
 public:
 	static T cast(const string& str)
 	{
+		/*
+		T temp;
+		stringstream ss;
+		ss << str;
+		ss >> temp;
+		std::cout << temp << std::endl;
+		return temp;
+		*/
+
+
 		if(typeid(T) == typeid(floatType))
 			return T(atof(str.c_str()));
 		else if(typeid(T) == typeid(doubleType))

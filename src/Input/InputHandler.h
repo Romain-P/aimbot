@@ -1,7 +1,7 @@
 #ifndef inputhandler_h
 #define inputhandler_h
 
-#include "MovementControls.h"
+#include "MovementController.h"
 #include "ConfigMap.h"
 #include "../Game/GameState.h"
 #include "../Graphics/Glut/GraphicIncludes.h"
@@ -34,11 +34,10 @@ public:
 	bool firstEvent;
 };
 
-class InputHandler : public ScreenBoundsUser
+class InputHandler : public ScreenBoundsUser, public MovementController
 {
 private:
 	MouseEvent mouseEvent;
-	MovementControls controls;
 
 	GameState* gameState;
 	EnvironmentUpdater* updater;

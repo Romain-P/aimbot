@@ -9,9 +9,9 @@ namespace Filenames
 {
 	const static string base = "D:/CS/Workspace/AIm/";
 	const static string config = base + "conf/config.ini";
-	const static string dataDir = base + "data/";
-	const static string meshes = dataDir + "meshes/";
-	const static string textures = dataDir + "textures/";
+	const static string data = base + "data/";
+	const static string meshes = data + "meshes/";
+	const static string textures = data + "textures/";
 }
 
 #endif

@@ -15,6 +15,7 @@ private:
 	float rotation;
 	float speed;
 	float size;
+	float currSize;
 public:
 	RotationStage(float speed, float size, MeshOBJ* mesh) :
 		AnimationStage(AnimationStage::INFINITE_TIME)
@@ -22,6 +23,7 @@ public:
 		this->speed = speed;
 		this->mesh = mesh;
 		this->size = size;
+		currSize = size;
 		centre = mesh->getCentre();
 	}
 
@@ -31,7 +33,7 @@ public:
 		glColor4f(0.3f, 0.6f, 0.2f, 1.0f);
 		glPushMatrix();
 			glTranslatef(centre.x, centre.y, centre.z);
-			glScalef(size, size, size);
+			glScalef(currSize, currSize, currSize);
 			glRotatef(rotation, 0.f, 0.f, 1.f);
 			glRotatef(rotation * 0.3f, 0.f, 1.f, 0.f);
 			drawTexturedMesh(mesh);
@@ -42,6 +44,7 @@ public:
 	void animate()
 	{
 		rotation = speed * timeElapsed;
+		currSize = size * (0.75f + 0.25f * sinf(timeElapsed));
 	}
 };
 

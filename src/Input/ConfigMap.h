@@ -4,6 +4,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 #include "Filenames.h"
@@ -13,6 +14,7 @@ using std::cout;
 using std::endl;
 using std::map;
 using std::fstream;
+using std::stringstream;
 using std::string;
 
 class ConfigMap : public Singleton<ConfigMap>
@@ -26,7 +28,7 @@ protected:
 	ConfigMap();
 
 public:
-	const string& getConfigValue(const string& key);
+	const string& get(const string& key);
 };
 
 #endif
