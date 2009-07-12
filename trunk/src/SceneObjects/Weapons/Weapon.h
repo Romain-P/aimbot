@@ -63,6 +63,16 @@ public:
 	{
 		primaryShotAnimation->expireStage();
 	}
+
+	Animatable* getPrimaryShotAnimation()
+	{
+		return primaryShotAnimation;
+	}
+
+	Animatable* getSecondaryShotAnimation()
+	{
+		return secondaryShotAnimation;
+	}
 };
 
 

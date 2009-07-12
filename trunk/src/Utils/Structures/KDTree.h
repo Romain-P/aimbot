@@ -29,14 +29,36 @@ public:
 class KDTree
 {
 private:
+	vector<Position3>* localPoints;
 	enum { X, Y, Z };
+
+	static bool sortX(const Position3& a, const Position3& b)
+	{
+		return a.x < b.x;
+	}
+
+	static bool sortY(const Position3& a, const Position3& b)
+	{
+		return a.y < b.y;
+	}
+
+	static bool sortZ(const Position3& a, const Position3& b)
+	{
+		return a.z < b.z;
+	}
+
 
 public:
 	KDNode* root;
 
-	KDTree(vector<Position3>& points)
+	KDTree(const vector<Position3>& points)
 	{
-		root = constructTree(points, 0);
+		localPoints = new vector<Position3>(points.begin(), points.end());
+		root = constructTree(*localPoints, 0);
+	}
+	~KDTree()
+	{
+		destroy();
 	}
 
 	KDNode* constructTree(vector<Position3>& points, int depth)
@@ -69,19 +91,32 @@ public:
 		return node;
 	}
 
-	static bool sortX(const Position3& a, const Position3& b)
+	Position3& closestPoint(const Position3& point)
 	{
-		return a.x < b.x;
-	}
+		KDNode* node = root;
 
-	static bool sortY(const Position3& a, const Position3& b)
-	{
-		return a.y < b.y;
-	}
+		float distance = 0;
+		float leftDist = 0;
+		float rightDist = 0;
 
-	static bool sortZ(const Position3& a, const Position3& b)
-	{
-		return a.z < b.z;
+		while(true)
+		{
+			distance = node->position.dist(point);
+			if(node->leftChild != NULL && node->rightChild != NULL)
+			{
+				leftDist = node->leftChild->position.dist(point);
+				rightDist = node->rightChild->position.dist(point);
+
+				if(leftDist < distance)
+					node = node->leftChild;
+				else if(rightDist < distance)
+					node = node->rightChild;
+				else
+					return node->position;
+			}
+			else
+				return node->position;
+		}
 	}
 
 	void destroy()
@@ -89,10 +124,10 @@ public:
 		struct local {
 			static void deleteNode(KDNode* node) { delete node; }
 		};
-		traverse(&local::deleteNode, root);
+		traverse(local::deleteNode, root);
 	}
 
-	vector<Position3>& getTraversal()
+	vector<Position3> getTraversal()
 	{
 		static vector<Position3> temp;
 		temp.clear();
@@ -131,16 +166,13 @@ public:
 		cout << "x: ";
 		for(unsigned int i = 0; i < points.size(); i++)
 			cout << points.at(i).x << " ";
-		cout << endl;
-		cout << "y: ";
+		cout << endl << "y: ";
 		for(unsigned int i = 0; i < points.size(); i++)
 			cout << points.at(i).y << " ";
-		cout << endl;
-		cout << "z: ";
+		cout << endl << "z: ";
 		for(unsigned int i = 0; i < points.size(); i++)
 			cout << points.at(i).z << " ";
-		cout << endl;
-		cout << "\n\n";
+		cout << endl << endl << endl;
 	}
 };
 

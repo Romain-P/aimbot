@@ -58,6 +58,12 @@ public:
 		z *= ratio;
 	}
 
+	float dist(const Position3& other)
+	{
+		return sqrtf((x - other.x) * (x - other.x) +
+				(y - other.y) * (y - other.y) +
+				(z - other.z) * (z - other.z));
+	}
 
 	std::string print()
 	{

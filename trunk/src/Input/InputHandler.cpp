@@ -6,15 +6,13 @@ InputHandler* inputHandler;
 InputHandler::InputHandler(
 		GameCoordinator* coordinator,
 		GameState* gameState,
-		Camera* camera,
-		Player* player) :
+		Camera* camera) :
 	ScreenBoundsUser(),
 	MovementController()
 {
 	this->coordinator = coordinator;
 	this->camera = camera;
 	this->gameState = gameState;
-	this->player = player;
 
 	inputHandler = this;
 	mouseEvent.firstEvent = true;
@@ -70,7 +68,7 @@ void InputHandler::keyUpFunction(unsigned char key)
 	if(key == fore || key == back || key == right ||
 		key == left || key == up || key == down)
 	{
-		push(key);
+		pop(key);
 		camera->updateVelocity(getDirection());
 	}
 
@@ -79,7 +77,8 @@ void InputHandler::keyUpFunction(unsigned char key)
 
 void InputHandler::mouseFunction(int button, int state, int x, int y)
 {
-	if (state == GLUT_DOWN) {
+	if (state == GLUT_DOWN)
+	{
 		if (button == GLUT_LEFT_BUTTON)
 		{
 			std::cout << "firing" << std::endl;
@@ -146,6 +145,17 @@ void InputHandler::passiveMotionFunction(int x, int y)
 	}
 	glutPostRedisplay();
 }
+
+void InputHandler::setKDTree(KDTree* tree)
+{
+	this->tree = tree;
+}
+
+Position3& InputHandler::getClosestPoint()
+{
+	return tree->closestPoint(camera->getPosition());
+}
+
 
 
 void InputHandler::specialKeyFunction(int key)
