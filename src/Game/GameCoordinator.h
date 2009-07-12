@@ -4,18 +4,17 @@
 #include "GameState.h"
 #include "Updater.h"
 
-#include "../Input/InputHandler.h"
 #include "../Graphics/Glut/GraphicIncludes.h"
 #include "../Graphics/Glut/GlutDisplay.h"
 #include "../Graphics/HUD/PlayerHUD.h"
 #include "../Graphics/HUD/DevConsole.h"
 #include "../Graphics/SceneDisplay.h"
 #include "../Graphics/Animation/Animator.h"
-#include "../Graphics/Animation/LaserShotAnimation.h"
+#include "../Input/InputHandler.h"
 #include "../Physics/EnvironmentUpdater.h"
-#include "../Utils/Structures/FileFormat.h"
-#include "../SceneObjects/Entities/Player.h"
+#include "../SceneObjects/Entities/CurrentPlayer.h"
 #include "../SceneObjects/Weapons/Laser.h"
+#include "../Utils/Structures/FileFormat.h"
 
 class GameCoordinator
 {
@@ -34,44 +33,43 @@ private:
 	Animator* animator;
 	EnvironmentUpdater* envUpdater;
 
-	LaserShotAnimation* laserShot;
 	Laser* laser;
 	Player* player;
 
 public:
 	GameCoordinator()
 	{
-		camera = new Camera();
 		gameState = new GameState(GameState::GAME_IN_SESSION, GameState::PLAYING);
+
+		camera = new Camera();
 		display = new GlutDisplay(camera);
-
-		player = new Player();
-		laserShot = new LaserShotAnimation();
-		laser = new Laser(laserShot);
-
-		player->addWeapon(laser);
-
-		inputHandler = new InputHandler(this, gameState, camera, player);
-
 		camera->setDisplay(display);
+
+		inputHandler = new InputHandler(this, gameState, camera);
+
+		laser = new Laser();
+
+		CurrentPlayer::Instance().addWeapon(laser);
+		CurrentPlayer::Instance().setCamera(camera);
 
 		envUpdater = new EnvironmentUpdater();
 		animator = new Animator();
 		updater = new Updater(display, envUpdater, animator);
 
-		hud = new PlayerHUD(gameState, updater, this);
+		hud = new PlayerHUD(this, gameState, updater);
 		console = new DevConsole(hud, display);
 
 		scene = new SceneDisplay(animator);
+		inputHandler->setKDTree(scene->getKDTree());
 
 		display->addOrthographic(console);
 		display->addOrthographic(hud);
-		display->addOrthographic(laserShot);
+		display->addOrthographic(laser->getPrimaryShotAnimation());
 		display->addDrawable(scene);
 
-		envUpdater->addMovable(camera);
+		envUpdater->addMovable(&CurrentPlayer::Instance());
 
-		animator->addAnimatable(laserShot);
+		animator->addAnimatable(laser->getPrimaryShotAnimation());
 	}
 
 	void initialize()
@@ -94,7 +92,6 @@ public:
 		delete player;
 		delete animator;
 		delete laser;
-		delete laserShot;
 	}
 
 	void setFunctionCallbacks()
@@ -133,6 +130,11 @@ public:
 	const Position3& getCameraPosition()
 	{
 		return camera->getPosition();
+	}
+
+	const Position3 getClosestPoint()
+	{
+		return inputHandler->getClosestPoint();
 	}
 
 	float getCameraTheta()

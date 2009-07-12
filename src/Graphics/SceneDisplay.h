@@ -8,7 +8,8 @@
 #include "../Graphics/Animation/Animatable.h"
 #include "../Graphics/Materials.h"
 #include "../Graphics/Animation/RotatingBlock.h"
-#include "../SceneObjects/Maps/Map.h"
+//#include "../SceneObjects/Maps/Map.h"
+#include "../Utils/Structures/KDTree.h"
 
 using std::cout;
 using std::endl;
@@ -22,12 +23,16 @@ private:
 	MeshOBJ* textured;
 	MeshOBJ* signature;
 
+	KDTree* tree;
+
 	void initSceneObjects()
 	{
 		textured = new MeshOBJ();
 		textured->setCentre(Position3(0, -0.5f, 0));
 		textured->read("testmap.obj");
 		textured->loadTexture("testmap.png");
+
+		tree = new KDTree(textured->getVertices());
 
 		blocks = new Animatable*[3];
 		blocks[0] = new RotatingBlock(50, 0.15f, Position3(0, 0.25f, 0));
@@ -69,6 +74,24 @@ public:
 
 		for(int i = 0; i < 3; i++)
 			blocks[i]->draw();
+
+		/*
+		// just a hack to debug tree
+		static long frames = 0;
+		static Position3 closest;
+		if(frames++ % 100 == 0)
+		{
+			closest = tree->closestPoint()
+			glBegin(GL_POINTS);
+			glVertex3f(
+			glEnd();
+		}
+		*/
+	}
+
+	KDTree* getKDTree()
+	{
+		return tree;
 	}
 };
 

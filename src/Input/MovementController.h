@@ -13,6 +13,17 @@
 
 class MovementController
 {
+private:
+	char getConfigKey(const string& key)
+	{
+		string value = ConfigMap::Instance().get(key);
+
+		if(value == "ctrl")			return 19;
+		else if(value == "space")	return ' ';
+
+		return value[0];
+	}
+
 protected:
 	char fore, back, left, right, up, down;
 	int oppoH, oppoV;
@@ -26,12 +37,12 @@ public:
 		first = 0;
 		second = 0;
 
-		fore  = StringCaster<char>::cast(ConfigMap::Instance().get("movement.forward"));
-		back  = StringCaster<char>::cast(ConfigMap::Instance().get("movement.backward"));
-		left  = StringCaster<char>::cast(ConfigMap::Instance().get("movement.left"));
-		right = StringCaster<char>::cast(ConfigMap::Instance().get("movement.right"));
-		up 	  = StringCaster<char>::cast(ConfigMap::Instance().get("movement.upward"));
-		down  = StringCaster<char>::cast(ConfigMap::Instance().get("movement.downward"));
+		fore  = getConfigKey("movement.forward");
+		back  = getConfigKey("movement.backward");
+		left  = getConfigKey("movement.left");
+		right = getConfigKey("movement.right");
+		up 	  = getConfigKey("movement.upward");
+		down  = getConfigKey("movement.downward");
 	}
 
 	void push(char ch)

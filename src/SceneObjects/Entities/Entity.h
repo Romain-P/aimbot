@@ -29,23 +29,6 @@ public:
 	{
 		return name;
 	}
-
-	const Vector3& getLookDirection()
-	{
-		return lookDirection;
-	}
-
-	void setName(const string& nom)
-	{
-		name = nom;
-	}
-
-	void setLookDirection(const Vector3& look)
-	{
-		lookDirection = look;
-	}
-
-
 };
 
 #endif

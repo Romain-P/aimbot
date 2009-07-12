@@ -30,7 +30,7 @@ private:
 	GameCoordinator* coordinator;
 
 public:
-	PlayerHUD(GameState* gameState, Updater* gameUpdater, GameCoordinator* coordinator);
+	PlayerHUD(GameCoordinator* coordinator, GameState* gameState, Updater* gameUpdater);
 	virtual ~PlayerHUD();
 	void drawText(string& text, float leftX, float topY);
 	void draw();

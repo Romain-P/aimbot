@@ -5,7 +5,7 @@
 
 #include "Entity.h"
 #include "../Meshes/Mesh.h"
-#include "../Meshes/Hitbox.h"
+//#include "../Meshes/Hitbox.h"
 #include "../Weapons/Weapon.h"
 
 using std::vector;
@@ -18,7 +18,9 @@ private:
 	vector<Weapon*> weapons;
 	Weapon* currentWeapon;
 	Mesh* mesh;
-	Hitbox* hitbox;
+	//Hitbox* hitbox;
+
+	Position3 closest;
 
 	void initializeMesh()
 	{
@@ -26,15 +28,15 @@ private:
 	}
 
 public:
-	Player() : Entity("")
+	Player() :
+		Entity(""),
+		health(100),
+		currentWeapon(0)
 	{
-		health = 100;
-		currentWeapon = NULL;
 	}
 
 	~Player()
 	{
-
 		//delete mesh;
 		//delete hitbox;
 	}

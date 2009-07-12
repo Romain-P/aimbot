@@ -2,9 +2,10 @@
 #include "../../Game/Updater.h"
 #include "../../Game/GameCoordinator.h"
 
-PlayerHUD::PlayerHUD(GameState* gameState,
-		Updater* gameUpdater,
-		GameCoordinator* coordinator) :
+PlayerHUD::PlayerHUD(
+		GameCoordinator* coordinator,
+		GameState* gameState,
+		Updater* gameUpdater) :
 	Drawable(300)
 {
 	state = gameState;
@@ -87,13 +88,21 @@ void PlayerHUD::drawPosition()
 {
 	static char str[22];
 	static Position3 position;
+	static Position3 closest;
 
 	if(updater->getFrames() % 60 == 0)
+	{
 		position = coordinator->getCameraPosition();
+		closest = coordinator->getClosestPoint();
+	}
 
 	sprintf(str, "%3.2f %3.2f %3.2f", position.x, position.y, position.z);
 	glColor3f(0.9f, 0.9f, 0.9f);
 	drawString(string(str), 0.1f, width - 400, 20.f);
+
+	sprintf(str, "%3.2f %3.2f %3.2f", closest.x, closest.y, closest.z);
+	glColor3f(0.9f, 0.9f, 0.9f);
+	drawString(string(str), 0.1f, width - 400, 60.f);
 }
 
 void PlayerHUD::drawAngles()
