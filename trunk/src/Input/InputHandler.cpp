@@ -44,6 +44,10 @@ void InputHandler::keyboardFunction(unsigned char key)
 		}
 		case GameState::IN_DEV_CONSOLE:
 		{
+			clearMovementKeys();
+
+			int mods = glutGetModifiers();
+
 			switch(key)
 			{
 				case 27:
@@ -51,7 +55,12 @@ void InputHandler::keyboardFunction(unsigned char key)
 					coordinator->toggleConsoleVisibility();
 					break;
 				default:
-					coordinator->putCharToConsole(key);
+				{
+					if(key == 127 && mods & GLUT_ACTIVE_CTRL)
+						coordinator->eraseWordFromConsole();
+					else
+						coordinator->putCharToConsole(key);
+				}
 			}
 			break;
 		}
@@ -110,6 +119,9 @@ void InputHandler::motionFunction(int x, int y)
 
 void InputHandler::passiveMotionFunction(int x, int y)
 {
+	if(gameState->getIngameState() == GameState::IN_DEV_CONSOLE)
+		return;
+
 	static bool warped = false;
 
 	// prevents a major jump on the first mouse movement

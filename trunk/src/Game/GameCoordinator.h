@@ -128,6 +128,11 @@ public:
 		console->putChar(ch);
 	}
 
+	void eraseWordFromConsole()
+	{
+		console->eraseWord();
+	}
+
 	const Position3& getPlayerPosition()
 	{
 		return CurrentPlayer::Instance().getPosition();
@@ -136,6 +141,11 @@ public:
 	const Position3 getClosestPoint()
 	{
 		return inputHandler->getClosestPoint();
+	}
+
+	float getPlayerHealth()
+	{
+		return CurrentPlayer::Instance().getHealth();
 	}
 
 	void getPlayerAngles(float& theta, float& phi)

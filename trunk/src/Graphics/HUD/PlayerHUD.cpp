@@ -59,6 +59,7 @@ void PlayerHUD::drawFooterBar()
 	glEnd();
 
 	glColor3f(0.3f, 0.3f, 0.3f);
+	glLineWidth(1.0f);
 	glBegin(GL_LINE_STRIP);
 		glVertex2f(0, 	  height - 60.f);
 		glVertex2f(110.f, height - 60.f);
@@ -66,10 +67,13 @@ void PlayerHUD::drawFooterBar()
 		glVertex2f(width, height - 20.f);
 	glEnd();
 
+	static char health[5];
+	if(updater->getFrames() % 60 == 0)
+		sprintf(health, "%3.f", coordinator->getPlayerHealth());
+
 	glColor3f(0.1f, 0.1f, 0.1f);
 	glLineWidth(2.0f);
-	drawString("100", 0.28f, 9.f, height - 15.f);
-	glLineWidth(1.0f);
+	drawString(string(health), 0.28f, 9.f, height - 15.f);
 }
 
 void PlayerHUD::drawFPS()
@@ -78,15 +82,19 @@ void PlayerHUD::drawFPS()
 	static float fps;
 
 	if(updater->getFrames() % 200 == 0)
+	{
 		fps = updater->getFPS();
-	sprintf(str, "%4.1f", fps);
+		sprintf(str, "%4.1f", fps);
+	}
+
 	glColor3f(0.9f, 0.9f, 0.9f);
 	drawString(string(str), 0.1f, width - 100, 20.f);
 }
 
 void PlayerHUD::drawPosition()
 {
-	static char str[22];
+	static char str1[22];
+	static char str2[22];
 	static Position3 position;
 	static Position3 closest;
 
@@ -94,15 +102,15 @@ void PlayerHUD::drawPosition()
 	{
 		position = coordinator->getPlayerPosition();
 		closest = coordinator->getClosestPoint();
+		sprintf(str1, "%3.2f %3.2f %3.2f", position.x, position.y, position.z);
+		sprintf(str2, "%3.2f %3.2f %3.2f", closest.x, closest.y, closest.z);
 	}
 
-	sprintf(str, "%3.2f %3.2f %3.2f", position.x, position.y, position.z);
 	glColor3f(0.9f, 0.9f, 0.9f);
-	drawString(string(str), 0.1f, width - 400, 20.f);
+	drawString(string(str1), 0.1f, width - 400, 20.f);
 
-	sprintf(str, "%3.2f %3.2f %3.2f", closest.x, closest.y, closest.z);
 	glColor3f(0.9f, 0.9f, 0.9f);
-	drawString(string(str), 0.1f, width - 400, 60.f);
+	drawString(string(str2), 0.1f, width - 400, 60.f);
 }
 
 void PlayerHUD::drawAngles()
@@ -114,9 +122,9 @@ void PlayerHUD::drawAngles()
 	if(updater->getFrames() % 60 == 0)
 	{
 		coordinator->getPlayerAngles(theta, phi);
+		sprintf(str, "%2.3f %2.3f", theta, phi);
 	}
 
-	sprintf(str, "%3.2f %3.2f", theta, phi);
 	glColor3f(0.9f, 0.9f, 0.9f);
 	drawString(string(str), 0.1f, width - 600, 20.f);
 }

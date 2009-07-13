@@ -9,7 +9,10 @@ using std::string;
 class TextRenderer
 {
 protected:
-	void drawString(const string& text, float size, float leftX, float topY)
+	void drawString(const string& text,
+			float size,
+			float leftX,
+			float topY)
 	{
 		glPushMatrix();
 			glTranslatef(leftX, topY, 0);

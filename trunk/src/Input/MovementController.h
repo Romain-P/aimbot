@@ -71,6 +71,12 @@ public:
 		}
 	}
 
+	void clearMovementKeys()
+	{
+		first = second = 0;
+	}
+
+
 	Vector3 getVelocity()
 	{
 		int sum = int(first) + int(second);

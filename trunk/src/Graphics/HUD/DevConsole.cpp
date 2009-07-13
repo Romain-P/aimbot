@@ -10,7 +10,7 @@ DevConsole::DevConsole(PlayerHUD* hud, GlutDisplay* display) :
 {
 }
 
-void DevConsole::pushMessage(const string& message)
+void DevConsole::pushMessage(Message message)
 {
 	messages.push_back(message);
 
@@ -45,11 +45,11 @@ void DevConsole::executeCommand(string& command)
 		messages.clear();
 	else if (command == "now folks")
 	{
-		pushMessage("Some of you might already know... what this car is.");
-		pushMessage("And some of you do not.");
+		pushMessage(Message("Some of you might already know... what this car is.", Colour(0.4f, 0.7f, 0.2f)));
+		pushMessage(Message("And some of you do not.", Colour(0.4f, 0.7f, 0.2f)));
 	}
 	else
-		pushMessage("Huh?\n");
+		pushMessage(Message("Huh?\n", Colour(0.4f, 0.7f, 0.2f)));
 }
 
 void DevConsole::draw()
@@ -83,14 +83,15 @@ void DevConsole::draw()
 	glEnd();
 
 	glColor4f(0.8f, 0.82f, 0.84f, 1.0f);
-	drawString(currentMessage, 0.1f, 5, h2 - 4);
+	drawString(">" + currentText + "_", 0.1f, 5, h2 - 4);
 
 	int i = 1;
-	list<string>::reverse_iterator it = messages.rbegin();
+	list<Message>::reverse_iterator it = messages.rbegin();
 
 	while(it != messages.rend())
 	{
-		drawString(*it, 0.1f, 5, 190 - i * 18);
+		glColor3f(it->colour.r, it->colour.g, it->colour.b);
+		drawString(it->text, 0.1f, 5, 190 - i * 18);
 		++it;
 		++i;
 	}
@@ -110,17 +111,25 @@ void DevConsole::putChar(unsigned char ch)
 {
 	if(ch == '\n' || ch == '\r')
 	{
-		pushMessage(currentMessage);
-		executeCommand(currentMessage);
-		currentMessage = "";
+		pushMessage(Message(currentText, Colour(0.9f, 0.9f, 0.9f)));
+		executeCommand(currentText);
+		currentText = "";
 	}
 	else if(ch == '\b')
 	{
-		if(currentMessage.length() > 0)
-			currentMessage = currentMessage.substr(0, currentMessage.length() - 1);
+		if(currentText.length() > 0)
+			currentText = currentText.substr(0, currentText.length() - 1);
 	}
 	else
 	{
-		currentMessage += ch;
+		currentText += ch;
 	}
+}
+
+void DevConsole::eraseWord()
+{
+	if(currentText.find(' ') == string::npos)
+		currentText = "";
+	else
+		currentText = currentText.substr(0, currentText.find_last_of(' '));
 }

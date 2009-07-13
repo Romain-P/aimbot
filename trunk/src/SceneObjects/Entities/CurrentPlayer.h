@@ -65,7 +65,6 @@ public:
 	{
 		if(timeStep <= 0) return;
 		displacement += velocity * timeStep;
-
 		camera->setEye(displacement);
 	}
 };
