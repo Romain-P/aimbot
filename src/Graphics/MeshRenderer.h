@@ -38,14 +38,12 @@ protected:
 		const vector<Position3>& vertices = mesh->getVertices();
 		vector<TexFace>::const_iterator it;
 
-		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 		glBegin(GL_QUADS);
 
-		for (it = texFaces.begin(); it != texFaces.end(); ++it)
-		{
-			for(int i = 0; i < it->order; i++)
-			{
+		for (it = texFaces.begin(); it != texFaces.end(); ++it) {
+			for (int i = 0; i < it->order; i++) {
 				const Position3& p = vertices[it->indices[i]];
 				const Position2& t = texCoords[it->texIndices[i]];
 				glTexCoord2f(t.x, t.y);
@@ -53,6 +51,17 @@ protected:
 			}
 		}
 
+		glEnd();
+
+		glPointSize(4.0);
+		glColor4f(1.0f, 0.0f, 1.0f, 1.0f);
+		glBegin(GL_POINTS);
+		for (it = texFaces.begin(); it != texFaces.end(); ++it) {
+			for (int i = 0; i < it->order; i++) {
+				const Position3& p = vertices[it->indices[i]];
+				glVertex3f(p.x, p.y, p.z);
+			}
+		}
 		glEnd();
 	}
 

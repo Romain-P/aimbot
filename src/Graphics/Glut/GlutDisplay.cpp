@@ -110,6 +110,10 @@ void GlutDisplay::enterOrthoProjection()
 	glTranslatef(0, -height, 0);
 
 	glEnable(GL_LINE_SMOOTH);
+
+	// prevents unpredictable color replacement from textures
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
+
 	glLineWidth(1.0);
 }
 
@@ -120,6 +124,7 @@ void GlutDisplay::exitOrthoProjection()
 	glDepthMask(GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_LINE_SMOOTH);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glLineWidth(2.0);
 }
 
