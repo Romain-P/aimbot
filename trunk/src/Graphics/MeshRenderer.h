@@ -38,7 +38,7 @@ protected:
 		const vector<Position3>& vertices = mesh->getVertices();
 		vector<TexFace>::const_iterator it;
 
-		//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+		glColor4f(1.0f, 1.0f, 1.0f, 0.75f);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 		glBegin(GL_QUADS);
 
@@ -53,8 +53,8 @@ protected:
 
 		glEnd();
 
-		glPointSize(4.0);
-		glColor4f(1.0f, 0.0f, 1.0f, 1.0f);
+		glPointSize(8.0);
+		glColor3f(1.0f, 0.0f, 1.0f);
 		glBegin(GL_POINTS);
 		for (it = texFaces.begin(); it != texFaces.end(); ++it) {
 			for (int i = 0; i < it->order; i++) {

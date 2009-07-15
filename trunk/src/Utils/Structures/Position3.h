@@ -19,11 +19,18 @@ public:
 		this->z = z;
 	}
 
-	void operator=(const Position3& other)
+	Position3(const Position3& other)
 	{
 		this->x = other.x;
 		this->y = other.y;
 		this->z = other.z;
+	}
+
+	void operator=(const Position3& other)
+	{
+		x = other.x;
+		y = other.y;
+		z = other.z;
 	}
 
 	Position3 operator*(const float value)

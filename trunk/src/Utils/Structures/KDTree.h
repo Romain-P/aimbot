@@ -91,32 +91,36 @@ public:
 		return node;
 	}
 
-	Position3& closestPoint(const Position3& point)
+	Position3 closestPoint(const Position3& point)
 	{
-		KDNode* node = root;
 
+		Position3 closest;
+		float minDist = 100000.f;
 		float distance = 0;
-		float leftDist = 0;
-		float rightDist = 0;
 
+		KDNode* node = root;
 		while(true)
 		{
 			distance = node->position.dist(point);
-			if(node->leftChild != NULL && node->rightChild != NULL)
-			{
-				leftDist = node->leftChild->position.dist(point);
-				rightDist = node->rightChild->position.dist(point);
 
-				if(leftDist < distance)
-					node = node->leftChild;
-				else if(rightDist < distance)
-					node = node->rightChild;
-				else
-					return node->position;
+			if(distance < minDist)
+			{
+				minDist = distance;
+				closest = node->position;
 			}
+
+			if(node->leftChild == NULL && node->rightChild == NULL)
+				break;
+			else if(node->leftChild == NULL)
+				node = node->rightChild;
+			else if(node->rightChild == NULL)
+				node = node->leftChild;
+			else if(node->leftChild->position.dist(point) < node->rightChild->position.dist(point))
+				node = node->leftChild;
 			else
-				return node->position;
+				node = node->rightChild;
 		}
+		return closest;
 	}
 
 	void destroy()
