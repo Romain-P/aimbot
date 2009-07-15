@@ -60,7 +60,7 @@ public:
 		hud = new PlayerHUD(this, gameState, updater);
 		console = new DevConsole(hud, display);
 
-		scene = new SceneDisplay(animator);
+		scene = new SceneDisplay(this, animator);
 		inputHandler->setKDTree(scene->getKDTree());
 
 		display->addOrthographic(console);
@@ -133,7 +133,7 @@ public:
 		console->eraseWord();
 	}
 
-	const Position3& getPlayerPosition()
+	const Position3 getPlayerPosition()
 	{
 		return CurrentPlayer::Instance().getPosition();
 	}

@@ -63,7 +63,7 @@ public:
 	void passiveMotionFunction(int x, int y);
 	void moveCamera(unsigned char key);
 	void setKDTree(KDTree* tree);
-	Position3& getClosestPoint();
+	Position3 getClosestPoint();
 
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
