@@ -20,10 +20,8 @@ protected:
 		vector<Face>::const_iterator it;
 
 		glBegin(GL_QUADS);
-		for (it = faces.begin(); it != faces.end(); ++it)
-		{
-			for(int i = 0; i < it->order; i++)
-			{
+		for (it = faces.begin(); it != faces.end(); ++it) {
+			for (int i = 0; i < it->order; i++) {
 				const Position3& p = vertices[it->indices[i]];
 				glVertex3f(p.x, p.y, p.z);
 			}
@@ -38,7 +36,7 @@ protected:
 		const vector<Position3>& vertices = mesh->getVertices();
 		vector<TexFace>::const_iterator it;
 
-		glColor4f(1.0f, 1.0f, 1.0f, 0.75f);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 		glBegin(GL_QUADS);
 

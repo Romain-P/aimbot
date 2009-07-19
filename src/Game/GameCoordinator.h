@@ -143,6 +143,11 @@ public:
 		return inputHandler->getClosestPoint();
 	}
 
+	const Position3 getClosestPoint2()
+	{
+		return inputHandler->getClosestPoint2();
+	}
+
 	float getPlayerHealth()
 	{
 		return CurrentPlayer::Instance().getHealth();

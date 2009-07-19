@@ -25,6 +25,18 @@ public:
 	}
 };
 
+class KDPair
+{
+public:
+	KDNode* node;
+	float dist;
+
+	KDPair(KDNode* n, float d) : node(n), dist(d) {}
+	bool operator<(const KDPair& other) const
+	{
+		return dist < other.dist;
+	}
+};
 
 class KDTree
 {
@@ -91,36 +103,67 @@ public:
 		return node;
 	}
 
-	Position3 closestPoint(const Position3& point)
+	vector<KDPair> findNearest(
+		const Position3& target,
+		int kNearest)
 	{
+		static vector<KDPair> nearest;
+		nearest.clear();
 
-		Position3 closest;
-		float minDist = 100000.f;
-		float distance = 0;
-
-		KDNode* node = root;
-		while(true)
-		{
-			distance = node->position.dist(point);
-
-			if(distance < minDist)
+		struct local {
+			static void checkNearest(
+				KDNode* node,
+				const Position3& target,
+				unsigned int kNearest)
 			{
-				minDist = distance;
-				closest = node->position;
-			}
+				float dist = target.dist2(node->position);
+				if(nearest.size() < kNearest || dist < nearest.back().dist)
+				{
+					nearest.push_back(KDPair(node, dist));
+					sort(nearest.begin(), nearest.end());
 
-			if(node->leftChild == NULL && node->rightChild == NULL)
-				break;
-			else if(node->leftChild == NULL)
-				node = node->rightChild;
-			else if(node->rightChild == NULL)
-				node = node->leftChild;
-			else if(node->leftChild->position.dist(point) < node->rightChild->position.dist(point))
-				node = node->leftChild;
-			else
-				node = node->rightChild;
-		}
-		return closest;
+					if(nearest.size() > kNearest)
+						nearest.pop_back();
+				}
+			}
+			static void nearestNode(
+				KDNode* node,
+				const Position3& target,
+				int kNearest,
+				int depth)
+			{
+				int axis = depth % 3;
+				KDNode* nearer, *further;
+				if(node->leftChild == NULL && node->rightChild == NULL) {
+					checkNearest(node, target, kNearest);
+					return;
+				}
+				if(node->rightChild == NULL ||
+					node->leftChild != NULL &&
+					target[axis] <= node->position[axis])
+				{
+					nearer = node->leftChild;
+					further = node->rightChild;
+				} else {
+					nearer = node->rightChild;
+					further = node->leftChild;
+				}
+
+				nearestNode(nearer, target, kNearest, depth + 1);
+
+				if(further != NULL)
+				{
+					float dist = target[axis] - node->position[axis];
+					if(nearest.size() < kNearest || dist * dist < nearest.back().dist)
+						nearestNode(further, target, kNearest, depth + 1);
+				}
+				checkNearest(node, target, kNearest);
+			}
+		};
+
+		local::nearestNode(root, target, kNearest, 0);
+
+		return nearest;
 	}
 
 	void destroy()
