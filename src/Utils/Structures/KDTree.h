@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Position3.h"
 
 using std::vector;
@@ -35,6 +36,10 @@ public:
 	bool operator<(const KDPair& other) const
 	{
 		return dist < other.dist;
+	}
+	inline bool operator==(const KDPair& other) const
+	{
+		return node == other.node;
 	}
 };
 
@@ -119,7 +124,11 @@ public:
 				float dist = target.dist2(node->position);
 				if(nearest.size() < kNearest || dist < nearest.back().dist)
 				{
-					nearest.push_back(KDPair(node, dist));
+					KDPair pair(node, dist);
+					vector<KDPair>::iterator it = find(nearest.begin(), nearest.end(), pair);
+					if(it == nearest.end() || nearest.size() == 0)
+						nearest.push_back(pair);
+
 					sort(nearest.begin(), nearest.end());
 
 					if(nearest.size() > kNearest)
@@ -129,7 +138,7 @@ public:
 			static void nearestNode(
 				KDNode* node,
 				const Position3& target,
-				int kNearest,
+				unsigned int kNearest,
 				int depth)
 			{
 				int axis = depth % 3;

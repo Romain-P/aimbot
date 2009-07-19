@@ -138,9 +138,9 @@ public:
 		return CurrentPlayer::Instance().getPosition();
 	}
 
-	const Position3 getClosestPoint()
+	vector<KDPair> getClosestPoints()
 	{
-		return inputHandler->getClosestPoint();
+		return inputHandler->getClosestPoints();
 	}
 
 	const Position3 getClosestPoint2()
