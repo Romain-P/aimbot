@@ -63,7 +63,7 @@ public:
 	void passiveMotionFunction(int x, int y);
 	void moveCamera(unsigned char key);
 	void setKDTree(KDTree* tree);
-	Position3 getClosestPoint();
+	vector<KDPair> getClosestPoints();
 	Position3 getClosestPoint2();
 
 

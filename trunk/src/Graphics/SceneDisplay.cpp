@@ -51,25 +51,28 @@ void SceneDisplay::draw()
 		blocks[i]->draw();
 
 
-	static long frames = 0;
 	static Position3 position;
-	static Position3 closest;
-	static Position3 closest2;
-
 	position = coordinator->getPlayerPosition();
+	static vector<KDPair> closest;
 
+	static long frames = 0;
 	if(frames++ % 100 == 0)
 	{
-		closest = Position3(textured->getCentre()) + Position3(coordinator->getClosestPoint());
-		closest2 = closest;
-		//closest2 = Position3(textured->getCentre()) + Position3(coordinator->getClosestPoint2());
+		closest = coordinator->getClosestPoints();
 	}
 
-	glLineWidth(10.f);
-	glColor3f(1.0f, 0.5f, 0.0f);
+	glLineWidth(3.f);
 	glBegin(GL_LINES);
-		glVertex3f(position.x, c.y+0.2f, position.z);
-		glVertex3f(closest.x, closest.y, closest.z);
+
+	for(unsigned int i = 0; i < closest.size(); i++)
+	{
+		Position3 p = closest[i].node->position + c;
+		glColor3f(0.2f * i, 1 - 0.2f * i, 0.5f);
+		glVertex3f(position.x+c.y * 0.04f, c.y+0.1f, position.z+c.y * 0.04f);
+		glVertex3f(p.x, p.y, p.z);
+
+	}
+
 	glEnd();
 
 	/*

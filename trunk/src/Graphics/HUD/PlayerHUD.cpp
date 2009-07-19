@@ -94,25 +94,25 @@ void PlayerHUD::drawFPS()
 void PlayerHUD::drawPosition()
 {
 	static char str1[22];
-	static char str2[22];
+	//static char str2[22];
 	static char str3[8];
 	static Position3 position;
-	static Position3 closest;
+	//static Position3 closest;
 	static float dist;
 
 	if(updater->getFrames() % 60 == 0)
 	{
 		position = coordinator->getPlayerPosition();
-		closest = coordinator->getClosestPoint();
-		dist = position.dist(closest);
+		//closest = coordinator->getClosestPoint();
+		//dist = position.dist(closest);
 		sprintf(str1, "%3.2f %3.2f %3.2f", position.x, position.y, position.z);
-		sprintf(str2, "%3.2f %3.2f %3.2f", closest.x, closest.y, closest.z);
+		//sprintf(str2, "%3.2f %3.2f %3.2f", closest.x, closest.y, closest.z);
 		sprintf(str3, "%3.3f", dist);
 	}
 
 	glColor3f(0.9f, 0.9f, 0.9f);
 	drawString(string(str1), 0.1f, width - 400, 20.f);
-	drawString(string(str2), 0.1f, width - 400, 50.f);
+	//drawString(string(str2), 0.1f, width - 400, 50.f);
 	drawString(string(str3), 0.1f, width - 400, 80.f);
 }
 
