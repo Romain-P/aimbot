@@ -54,24 +54,35 @@ void SceneDisplay::draw()
 	static long frames = 0;
 	static Position3 position;
 	static Position3 closest;
+	static Position3 closest2;
 
 	position = coordinator->getPlayerPosition();
 
 	if(frames++ % 100 == 0)
 	{
 		closest = Position3(textured->getCentre()) + Position3(coordinator->getClosestPoint());
+		closest2 = closest;
+		//closest2 = Position3(textured->getCentre()) + Position3(coordinator->getClosestPoint2());
 	}
 
-	glColor3f(0.0f, 1.0f, 0.0f);
+	glLineWidth(10.f);
+	glColor3f(1.0f, 0.5f, 0.0f);
 	glBegin(GL_LINES);
 		glVertex3f(position.x, c.y+0.2f, position.z);
 		glVertex3f(closest.x, closest.y, closest.z);
 	glEnd();
-	glLineWidth(10.f);
+
+	/*
+		glColor3f(0.0f, 1.0f, 0.5f);
+		glLineWidth(4.f);
+		glVertex3f(position.x, c.y+0.2f, position.z);
+		glVertex3f(closest2.x, closest2.y, closest2.z);
+	glEnd();
 	glBegin(GL_POINTS);
 		glVertex3f(position.x, c.y + 0.2f, position.z);
 		glVertex3f(closest.x, closest.y, closest.z);
 	glEnd();
+	*/
 }
 
 KDTree* SceneDisplay::getKDTree()

@@ -65,11 +65,25 @@ public:
 		z *= ratio;
 	}
 
-	float dist(const Position3& other)
+	float operator[](int index) const
 	{
-		return sqrtf((x - other.x) * (x - other.x) +
-				(y - other.y) * (y - other.y) +
-				(z - other.z) * (z - other.z));
+		switch(index) {
+		case 0: return x;
+		case 1: return y;
+		case 2: return z;
+		}
+	}
+
+	float dist(const Position3& point) const
+	{
+		return sqrtf(dist2(point));
+	}
+
+	float dist2(const Position3& point) const
+	{
+		return (x - point.x) * (x - point.x) +
+			   (y - point.y) * (y - point.y) +
+			   (z - point.z) * (z - point.z);
 	}
 
 	std::string print()

@@ -64,6 +64,7 @@ public:
 	void moveCamera(unsigned char key);
 	void setKDTree(KDTree* tree);
 	Position3 getClosestPoint();
+	Position3 getClosestPoint2();
 
 
 	static void keyboardDelegate(unsigned char key, int x, int y);
