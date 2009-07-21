@@ -30,6 +30,11 @@ public:
 		return displacement + start;
 	}
 
+	Position3 getProjectedPosition(float timeAhead)
+	{
+		return getPosition() + velocity * timeAhead;
+	}
+
 	virtual void updateVelocity(const Vector3& v)
 	{
 		velocity = v;
