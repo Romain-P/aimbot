@@ -43,6 +43,11 @@ public:
 		return Position3(x + other.x, y + other.y, z + other.z);
 	}
 
+	const Position3 operator+(const Vector3& vect)
+	{
+		return Position3(x + vect.x, y + vect.y, z + vect.z);
+	}
+
 	/* for physical operations, like d = v·dt */
 	void operator+=(const Vector3& vect)
 	{

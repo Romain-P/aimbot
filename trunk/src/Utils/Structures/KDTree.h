@@ -35,11 +35,11 @@ public:
 	KDPair(KDNode* n, float d) : node(n), dist(d) {}
 	bool operator<(const KDPair& other) const
 	{
-		return dist < other.dist;
+		return dist <= other.dist;
 	}
 	inline bool operator==(const KDPair& other) const
 	{
-		return node == other.node;
+		return dist == other.dist || node == other.node;
 	}
 };
 
@@ -70,6 +70,7 @@ public:
 
 	KDTree(const vector<Position3>& points)
 	{
+		cout << points.size() << endl;
 		localPoints = new vector<Position3>(points.begin(), points.end());
 		root = constructTree(*localPoints, 0);
 	}
@@ -80,8 +81,14 @@ public:
 
 	KDNode* constructTree(vector<Position3>& points, int depth)
 	{
-		if (points.size() <= 1)
+		if(points.size() == 1)
+		{
+			return new KDNode(points[0]);
+		}
+		if(points.size() == 0)
+		{
 			return NULL;
+		}
 
 		switch (depth % 3)
 		{
@@ -102,6 +109,15 @@ public:
 		vector<Position3> left(points.begin(), points.begin() + half);
 		vector<Position3> right(points.begin() + half, points.end());
 
+		/*
+		for(int i = 0; i < left.size(); i++)
+			cout << "#";
+		cout << endl;
+		for(int i = 0; i < right.size(); i++)
+			cout << "$";
+		cout << endl;
+		*/
+
 		node->leftChild = constructTree(left, depth + 1);
 		node->rightChild = constructTree(right, depth + 1);
 
@@ -113,7 +129,6 @@ public:
 		int kNearest)
 	{
 		static vector<KDPair> nearest;
-		nearest.clear();
 
 		struct local {
 			static void checkNearest(
@@ -122,11 +137,11 @@ public:
 				unsigned int kNearest)
 			{
 				float dist = target.dist2(node->position);
-				if(nearest.size() < kNearest || dist < nearest.back().dist)
+				if(nearest.size() < kNearest or dist < nearest.back().dist)
 				{
 					KDPair pair(node, dist);
 					vector<KDPair>::iterator it = find(nearest.begin(), nearest.end(), pair);
-					if(it == nearest.end() || nearest.size() == 0)
+					if(it == nearest.end() or nearest.size() == 0)
 						nearest.push_back(pair);
 
 					sort(nearest.begin(), nearest.end());
@@ -135,21 +150,25 @@ public:
 						nearest.pop_back();
 				}
 			}
-			static void nearestNode(
+			static void nearestNodes(
 				KDNode* node,
 				const Position3& target,
 				unsigned int kNearest,
 				int depth)
 			{
+				//cout << node->position.print() << "\t" << target.dist2(node->position) << endl;
+
 				int axis = depth % 3;
-				KDNode* nearer, *further;
-				if(node->leftChild == NULL && node->rightChild == NULL) {
+				KDNode *nearer = NULL;
+				KDNode *further = NULL;
+
+				if(node->leftChild == NULL and node->rightChild == NULL) {
 					checkNearest(node, target, kNearest);
 					return;
 				}
-				if(node->rightChild == NULL ||
-					node->leftChild != NULL &&
-					target[axis] <= node->position[axis])
+				if(node->rightChild == NULL or
+					(node->leftChild != NULL and
+					target[axis] <= node->position[axis]))
 				{
 					nearer = node->leftChild;
 					further = node->rightChild;
@@ -158,19 +177,22 @@ public:
 					further = node->leftChild;
 				}
 
-				nearestNode(nearer, target, kNearest, depth + 1);
+				nearestNodes(nearer, target, kNearest, depth + 1);
+
 
 				if(further != NULL)
 				{
 					float dist = target[axis] - node->position[axis];
-					if(nearest.size() < kNearest || dist * dist < nearest.back().dist)
-						nearestNode(further, target, kNearest, depth + 1);
+					if(nearest.size() < kNearest or dist * dist < nearest.back().dist)
+						nearestNodes(further, target, kNearest, depth + 1);
 				}
 				checkNearest(node, target, kNearest);
 			}
 		};
 
-		local::nearestNode(root, target, kNearest, 0);
+		nearest.clear();
+		//nearest.push_back(KDPair(root, target.dist2(root->position)));
+		local::nearestNodes(root, target, kNearest, 0);
 
 		return nearest;
 	}
@@ -210,6 +232,8 @@ public:
 			return;
 		}
 
+		if(node != NULL)
+			(*operate)(node);
 		if(node->leftChild != NULL)
 			traverse(operate, node->leftChild);
 		if(node->rightChild != NULL)

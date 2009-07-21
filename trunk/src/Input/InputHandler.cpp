@@ -165,9 +165,9 @@ void InputHandler::setKDTree(KDTree* tree)
 	this->tree = tree;
 }
 
-vector<KDPair> InputHandler::getClosestPoints()
+vector<KDPair> InputHandler::getClosestPoints(int n)
 {
-	return tree->findNearest(CurrentPlayer::Instance().getPosition(), 5);
+	return tree->findNearest(CurrentPlayer::Instance().getPosition(), n);
 }
 
 void InputHandler::specialKeyFunction(int key)

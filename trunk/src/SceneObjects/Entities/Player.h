@@ -33,8 +33,8 @@ public:
 	Player() :
 		Entity(""),
 		health(100),
-		speed(3),
-		currentWeapon(0)
+		currentWeapon(0),
+		speed(3)
 	{
 	}
 

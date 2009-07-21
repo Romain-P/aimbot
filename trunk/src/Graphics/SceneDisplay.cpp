@@ -58,9 +58,10 @@ void SceneDisplay::draw()
 	static long frames = 0;
 	if(frames++ % 100 == 0)
 	{
-		closest = coordinator->getClosestPoints();
+		closest = coordinator->getClosestPoints(1);
 	}
 
+	glDisable(GL_DEPTH_TEST);
 	glLineWidth(3.f);
 	glBegin(GL_LINES);
 
@@ -68,12 +69,11 @@ void SceneDisplay::draw()
 	{
 		Position3 p = closest[i].node->position + c;
 		glColor3f(0.2f * i, 1 - 0.2f * i, 0.5f);
-		glVertex3f(position.x+c.y * 0.04f, c.y+0.1f, position.z+c.y * 0.04f);
+		glVertex3f(position.x, c.y + 0.1f, position.z);
 		glVertex3f(p.x, p.y, p.z);
-
 	}
-
 	glEnd();
+	glEnable(GL_DEPTH_TEST);
 
 	/*
 		glColor3f(0.0f, 1.0f, 0.5f);
